@@ -1,78 +1,78 @@
-import { createContext,useEffect,useState } from "react";
-import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
-export const StoreContext = createContext(null)
+export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-   
-    const [cartItems, setCartItem] = useState({})
-    const url = "http://localhost:4000"
-    const [token, setToken] = useState("")
-    const [food_list, setFoodList] = useState([])
-    const addToCart = async(itemId) => {
-         if(!cartItems[itemId]){
-            setCartItem((prev) => ({...prev, [itemId]:1}))
-         }else{
-            setCartItem((prev) => ({...prev, [itemId]:prev[itemId]+1}))
-         }
-         if(token){
-            await axios.post(url+"/api/cart/add",{itemId},{headers:{token}})
-         }
-    }
+  const [cartItems, setCartItems] = useState(() => {
+    // Load cart from localStorage if available
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : {};
+  });
 
-    const removeFromCart = async(itemId) => {
-      setCartItem((prev) => ({...prev, [itemId]:prev[itemId]-1}))
-      if(token){
-         await axios.post(url+"/api/cart/remove",{itemId},{headers:{token}})
+  // Add item to cart
+  const addToCart = (product) => {
+    setCartItems((prev) => {
+      const updatedCart = { ...prev };
+      if (updatedCart[product._id]) {
+        updatedCart[product._id].quantity += 1;
+      } else {
+        updatedCart[product._id] = { ...product, quantity: 1 };
       }
-    }
-     const getTotalCartAmount = () => {
-         let totalAmount = 0;
-         for(const item in cartItems){
-            if(cartItems[item]>0){
-               let itemInfo = food_list.find((product) => product._id ===item);
-               totalAmount += itemInfo.price * cartItems[item];
-            }
-         }
-         return totalAmount;
-     }
-     const fetchFoodList = async() => {
-      const response = await axios.get(url+"/api/food/list");
-      setFoodList(response.data.data)
-     }
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
+      return updatedCart;
+    });
+  };
 
-     const loadCartData = async(token) => {
-      const response = await axios.post(url+"/api/cart/get",{},{headers:{token}});
-      setCartItem(response.data.cartData)
-     }
-     useEffect(() => {
-      
-      async function loadData(){
-         fetchFoodList()
-         if(localStorage.getItem("token")){
-            setToken(localStorage.getItem("token"));
-            await loadCartData(localStorage.getItem("token"))
-         }
+  // Remove item from cart
+  const removeFromCart = (productId) => {
+    setCartItems((prev) => {
+      const updatedCart = { ...prev };
+      if (updatedCart[productId].quantity > 1) {
+        updatedCart[productId].quantity -= 1;
+      } else {
+        delete updatedCart[productId];
       }
-      loadData();
-     },[])
-   const contextValue = {
-        food_list,
-        cartItems,
-        setCartItem,
-        addToCart,
-        removeFromCart,
-        getTotalCartAmount,
-        url,
-        token,
-        setToken
-    }
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
+      return updatedCart;
+    });
+  };
 
-    return (
-       <StoreContext.Provider value={contextValue}>
-        {props.children}
-       </StoreContext.Provider>
-    )
-}
+  // Get total cart amount
+  const getTotalCartAmount = () => {
+    return Object.values(cartItems).reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
 
-export default StoreContextProvider
+  // Get total item count in the cart
+  const getTotalItemCount = () => {
+    return Object.values(cartItems).reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+  };
+
+  // Clear the cart
+  const clearCart = () => {
+    setCartItems({});
+    localStorage.removeItem("cart");
+  };
+
+  const contextValue = {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    getTotalCartAmount,
+    getTotalItemCount,
+    clearCart,
+  };
+
+  return (
+    <StoreContext.Provider value={contextValue}>
+      {props.children}
+    </StoreContext.Provider>
+  );
+};
+
+export default StoreContextProvider;

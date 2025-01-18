@@ -1,0 +1,45 @@
+.meet-our-team {
+  background-color: #fff;
+  padding: 40px 8vw;
+  text-align: center;
+}
+
+.meet-our-team h2 {
+  font-size: 2rem;
+  color: #49577e;
+  margin-bottom: 30px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.team-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.team-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.team-card h3 {
+  font-size: 1.2rem;
+  color: #49577e;
+  margin-bottom: 10px;
+}
+
+.team-card p {
+  font-size: 1rem;
+  color: #555;
+}

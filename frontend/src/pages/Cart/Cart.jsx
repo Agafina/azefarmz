@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
-  const {  cartItems, food_list, removeFromCart, getTotalCartAmount,url } =
+  const { cartItems, removeFromCart, getTotalCartAmount } =
     useContext(StoreContext);
   const navigate = useNavigate();
+
   return (
     <div className="cart">
+      {/* Cart Items */}
       <div className="cart-items">
         <div className="cart-items-title">
           <p>Items</p>
@@ -19,54 +22,62 @@ const Cart = () => {
         </div>
         <br />
         <hr />
-        {food_list.map((item, index) => {
-          if (cartItems[item._id] > 0) {
-            return (
-              <div>
-                <div className="cart-items-title cart-items-item">
-                  <img src={url+"/images/"+item.image} alt="" />
-                  <p>{item.name}</p>
-                  <p>${item.price}</p>
-                  <p>{cartItems[item._id]}</p>
-                  <p>${item.price * cartItems[item._id]}</p>
-                  <p onClick={() => removeFromCart(item._id)} className="cross">
-                    x
-                  </p>
-                </div>
-                <hr />
-              </div>
-            );
-          }
-        })}
+        {Object.values(cartItems).map((item) => (
+          <div key={item._id}>
+            <div className="cart-items-title cart-items-item">
+              <img src={item.image} alt={item.name} />
+              <p>{item.name}</p>
+              <p>${item.price.toFixed(2)}</p>
+              <p>{item.quantity}</p>
+              <p>${(item.price * item.quantity).toFixed(2)}</p>
+              <p onClick={() => removeFromCart(item._id)} className="cross">
+                x
+              </p>
+            </div>
+            <hr />
+          </div>
+        ))}
       </div>
+
+      {/* Cart Summary */}
       <div className="cart-bottom">
         <div className="cart-total">
           <h2>Cart Total</h2>
           <div className="">
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>${getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() === 0 ? 0 :  getTotalCartAmount()}</b>
+              <b>
+                $
+                {getTotalCartAmount() === 0
+                  ? 0
+                  : (getTotalCartAmount() + 2.0).toFixed(2)}
+              </b>
             </div>
           </div>
-          <button onClick={() => navigate("/order")}>
-            PROCEES TO CHECKOUT
+          <button
+            onClick={() => navigate("/order")}
+            disabled={getTotalCartAmount() === 0}
+          >
+            PROCEED TO CHECKOUT
           </button>
         </div>
+
+        {/* Promo Code Section */}
         <div className="cart-promocode">
           <div className="">
-            <p>if you have a promo code enter it here</p>
+            <p>If you have a promo code, enter it here:</p>
             <div className="cart-promocode-input">
-              <input type="text" placeholder="promo code" />
+              <input type="text" placeholder="Promo code" />
               <button>Submit</button>
             </div>
           </div>

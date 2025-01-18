@@ -1,0 +1,144 @@
+/* General Styles */
+.contact-page {
+  padding: 40px 8vw;
+  text-align: center;
+}
+
+.contact-page h1 {
+  font-size: 2.5rem;
+  color: #49577e;
+  margin-bottom: 20px;
+}
+
+.contact-page p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Contact Information Section */
+.contact-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.contact-details,
+.social-links {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.contact-details h2,
+.social-links h2 {
+  font-size: 1.5rem;
+  color: #49577e;
+  margin-bottom: 10px;
+}
+
+.contact-details p {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.contact-details a {
+  color: tomato;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-details a:hover {
+  color: #ff6347;
+}
+
+.social-links a {
+  display: block;
+  text-decoration: none;
+  color: tomato;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 5px 0;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #ff6347;
+}
+
+/* Contact Form Section */
+.contact-form {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form h2 {
+  font-size: 1.5rem;
+  color: #49577e;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #49577e;
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+.contact-form button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #ff6347;
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .contact-details,
+  .social-links {
+    text-align: center;
+  }
+
+  .contact-form {
+    width: 100%;
+    padding: 20px;
+  }
+}

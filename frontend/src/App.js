@@ -8,17 +8,25 @@ import { useState } from "react";
 import LoginPopUp from "./components/LoginPopup/LoginPopUp";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import Products from "./components/Products/Products";
+import ShopOnlinePage from "./pages/ShopOnline/ShopOnline";
+import AboutPage from "./pages/About/About";
+import ContactPage from "./components/Contact/Contact";
 
 
 function App() {
   const [showLogin, setShowLogin] = useState(false)
   return (
     <>
-    {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
+      {showLogin ? <LoginPopUp setShowLogin={setShowLogin} /> : <></>}
       <div className="app">
-        <Navbar setShowLogin={setShowLogin}/>
+        <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/shop" element={<ShopOnlinePage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/verify" element={<Verify />} />
