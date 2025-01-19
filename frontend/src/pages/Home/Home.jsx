@@ -8,11 +8,13 @@ import Introduction from "../../components/Introduction/Introduction";
 import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import CTA from "../../components/CTA/CTA";
 import ShopOnlinePage from "../ShopOnline/ShopOnline";
+import Products from "../../components/Products/Products";
 const Home = () => {
   const [category, setCategory] = useState("All");
   return (
     <div>
       <Header />
+      <Products />
       <Introduction />
       <ShopOnlinePage />
       <CTA />

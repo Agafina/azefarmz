@@ -1,12 +1,12 @@
 .products-section {
-  padding: 60px 8vw;
+  padding: 40px 8vw;
   text-align: center;
 }
 
 .products-section h2 {
   font-size: 2.5rem;
   color: #49577e;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .categories {
