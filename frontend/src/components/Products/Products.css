@@ -105,7 +105,7 @@
   text-decoration: none;
   padding: 15px 30px;
   border-radius: 50px;
-  background-color: tomato;
+  background-color: #ff6347;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -113,7 +113,7 @@
 }
 
 .products-cta .cta-button:hover {
-  background-color: #ff6347;
+  background-color: #f9806a;
   transform: scale(1.05);
 }
 
@@ -126,21 +126,21 @@
 
 .product-actions .details-link {
   text-decoration: none;
-  color: tomato;
+  color: #26c160;
   font-weight: bold;
   padding: 10px 15px;
-  border: 2px solid tomato;
+  border: 2px solid #26c160;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .product-actions .details-link:hover {
-  background-color: tomato;
+  background-color: #26c160;
   color: white;
 }
 
 .product-actions button {
-  background-color: tomato;
+  background-color: #26c160;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -151,7 +151,7 @@
 }
 
 .product-actions button:hover {
-  background-color: #ff6347;
+  background-color: #75eca1;
 }
 
 

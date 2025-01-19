@@ -35,23 +35,24 @@
 }
 
 .cta-button.primary {
-  background-color: tomato;
+  background-color: #26c160;
   color: #ffffff;
 }
 
 .cta-button.primary:hover {
-  background-color: #ff6347;
+  background-color: #26c160;
   transform: scale(1.05);
 }
 
 .cta-button.secondary {
   background-color: #ffffff;
-  color: tomato;
-  border: 2px solid tomato;
+  color: #00a63d;
+  border: 2px solid #26c160;
 }
 
 .cta-button.secondary:hover {
-  background-color: #fff4f2;
+  background-color: #26c160;
+  color: #fff;
   transform: scale(1.05);
 }
 

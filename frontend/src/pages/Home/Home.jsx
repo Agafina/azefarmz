@@ -14,13 +14,14 @@ const Home = () => {
   return (
     <div>
       <Header />
+      
       <Products />
-      <Introduction />
-      <ShopOnlinePage />
+      {/* <Introduction /> */}
+      {/* <ShopOnlinePage /> */}
       <CTA />
       {/* <ExploreMenu category={category} setCategory={setCategory} />
       <FoodDisplay category={category}/> */}
-      <AppDownload />
+      {/* <AppDownload /> */}
     </div>
   );
 };

@@ -9,6 +9,7 @@ const CompanyHistory = () => {
       {companyHistory.content.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}
+      
     </div>
   );
 };
