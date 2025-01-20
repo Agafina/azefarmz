@@ -53,7 +53,7 @@
 }
 
 .contact-details a:hover {
-  color: #26c160;
+  color: #228b22;
 }
 
 .social-links a {
@@ -67,7 +67,7 @@
 }
 
 .social-links a:hover {
-  color: #26c160;
+  color: #228b22;
 }
 
 /* Contact Form Section */
@@ -121,7 +121,7 @@
 }
 
 .contact-form button:hover {
-  background-color: #26c160;
+  background-color: #228b22;
   transform: scale(1.05);
 }
 
