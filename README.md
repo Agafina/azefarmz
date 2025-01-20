@@ -4,3 +4,4 @@
 3. Display all the catergories of food
 4. Display all the food available 
 5. Create a page where the food can be viewed before added to cart
+6.
