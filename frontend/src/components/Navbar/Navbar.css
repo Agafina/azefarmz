@@ -31,7 +31,7 @@
 }
 
 .navbar .navbar-menu li:hover {
-  background-color: #4eda82;
+  background-color: #36bc36;
   color: white;
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
@@ -54,7 +54,8 @@
 }
 
 .navbar button:hover {
-  background: #4eda82;
+  background: #36bc36;
+  color: #fff;
   border: none;
 }
 

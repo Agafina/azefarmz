@@ -50,7 +50,7 @@
 .product-card .product-link {
   text-decoration: none;
   color: white;
-  background-color: tomato;
+  background-color: #228b22;
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 1rem;
@@ -58,7 +58,7 @@
 }
 
 .product-card .product-link:hover {
-  background-color: #ff6347;
+  background-color: #36bc36;
 }
 
 .product-card:hover {
