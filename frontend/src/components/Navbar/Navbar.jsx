@@ -4,10 +4,12 @@ import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { navbarItems } from "../../assets/data";
+import { Search, ShoppingCart, Menu, X } from "lucide-react";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItemCount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -21,7 +23,13 @@ const Navbar = ({ setShowLogin }) => {
       <Link to="/">
         <img src={assets.logo} className="logo" alt="Aze Farms Logo" />
       </Link>
-      <ul className="navbar-menu">
+      <button
+        className="menu-toggle"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+      <ul className={`navbar-menu ${isMenuOpen ? "open" : ""}`}>
         {navbarItems.map((item) => (
           <li key={item.id}>
             {item.external ? (
@@ -45,12 +53,19 @@ const Navbar = ({ setShowLogin }) => {
         ))}
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="Search" />
-        <div className="navbar-search-icon">
-          <Link to="/cart">
-            <img src={assets.basket_icon} alt="Cart" />
-          </Link>
-          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <Search size={20} className="search-icon" />
+        </div>
+        <div className="navbar-cart">
+          {getTotalItemCount() > 0 && (
+            <>
+              <Link to="/cart">
+                <ShoppingCart size={24} />
+              </Link>
+              <div className="dot">{getTotalItemCount()}</div>
+            </>
+          )}
         </div>
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign in</button>

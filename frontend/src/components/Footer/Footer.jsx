@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { socialMediaLinks, contact, footerLinks } from "../../assets/data";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { assets } from "../../assets/assets";
 
 function Footer() {
   return (
@@ -9,7 +9,7 @@ function Footer() {
       <div className="footer-content">
         {/* Left Section */}
         <div className="footer-content-left">
-          <img src="/path/to/logo.png" alt="Aze Farms Logo" />
+          <img src={assets.logo} alt="Aze Farms Logo" />
           <p>
             At Aze Farms, we are committed to sustainable and eco-friendly
             agriculture. Our mission is to deliver fresh and nutritious farm
@@ -54,7 +54,7 @@ function Footer() {
             {contact.map((item) => (
               <li key={item.type}>
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  {item.icon} <span>{item.value}</span>
+                  {item.icon} {item.value}
                 </a>
               </li>
             ))}
