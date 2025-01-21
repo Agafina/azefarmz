@@ -67,9 +67,10 @@ const Products = () => {
               <p>{product.description}</p>
               <p className="price">${product.price.toFixed(2)}</p>
               <div className="product-actions">
-                <Link to={`/products/${product.id}`} className="details-link">
+               <div> <Link to={`/products/${product.id}`} className="details-link">
                   {t("products.viewDetails")} {/* Translate "View Details" */}
                 </Link>
+                </div>
                 <button onClick={() => addToCart(product)}>
                   {t("products.addToCart")} {/* Translate "Add to Cart" */}
                 </button>
