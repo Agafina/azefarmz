@@ -1,33 +1,32 @@
 import React from "react";
 import "./Footer.css";
-import { socialMediaLinks, contact, footerLinks } from "../../assets/data";
+import { footer } from "../../assets/data"; // Import footer data
 import { assets } from "../../assets/assets";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation(); // Initialize useTranslation
+
   return (
     <div className="footer" id="footer">
       <div className="footer-content">
         {/* Left Section */}
         <div className="footer-content-left">
           <img src={assets.logo} alt="Aze Farms Logo" />
-          <p>
-            At Aze Farms, we are committed to sustainable and eco-friendly
-            agriculture. Our mission is to deliver fresh and nutritious farm
-            produce while fostering environmental stewardship and community
-            growth.
-          </p>
+          <p>{t(footer.description)}</p> {/* Translated description */}
           <div className="footer-social-icons">
-            <h2>FOLLOW US</h2>
+            <h2>{t(footer.titles.followUs)}</h2> {/* Translated "Follow Us" */}
             <ul>
-              {socialMediaLinks.map((social) => (
-                <li key={social.name}>
+              {footer.socialMediaLinks.map((social, index) => (
+                <li key={index}>
                   <a
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     title={social.name}
                   >
-                    {social.icon}
+                    {social.icon}{" "}
+                    {/* This will be a placeholder for social media icon */}
                   </a>
                 </li>
               ))}
@@ -37,11 +36,12 @@ function Footer() {
 
         {/* Center Section */}
         <div className="footer-content-center">
-          <h2>COMPANY</h2>
+          <h2>{t(footer.titles.company)}</h2> {/* Translated "Company" */}
           <ul>
-            {footerLinks.map((link) => (
+            {footer.footerLinks.map((link) => (
               <li key={link.name}>
-                <a href={link.path}>{link.name}</a>
+                <a href={link.path}>{t(link.name)}</a>{" "}
+                {/* Translated footer links */}
               </li>
             ))}
           </ul>
@@ -49,12 +49,14 @@ function Footer() {
 
         {/* Right Section */}
         <div className="footer-content-right">
-          <h2>GET IN TOUCH</h2>
+          <h2>{t(footer.titles.getInTouch)}</h2>{" "}
+          {/* Translated "Get in Touch" */}
           <ul>
-            {contact.map((item) => (
+            {footer.contact.map((item) => (
               <li key={item.type}>
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  {item.icon} {item.value}
+                  {item.icon} {t(item.label)}: {item.value}{" "}
+                  {/* Translated contact labels */}
                 </a>
               </li>
             ))}

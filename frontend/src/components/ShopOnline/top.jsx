@@ -1,15 +1,14 @@
 import React from "react";
 import "./top.css";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const ShopOnlineHeader = () => {
+  const { t } = useTranslation(); // Initialize the translation hook
+
   return (
     <div className="shop-online-header">
-      <h1>Bring the Farm to Your Doorstep!</h1>
-      <p>
-        Browse our online store to purchase fresh produce and value-added
-        products. Experience the goodness of farm-fresh products delivered with
-        care!
-      </p>
+      <h1>{t("shopOnlineHeader.title")}</h1> {/* Translate title */}
+      <p>{t("shopOnlineHeader.description")}</p> {/* Translate description */}
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React from "react";
 import "./Header.css";
+import { useTranslation } from "react-i18next";
 import { banner } from "../../assets/data";
 
 const Header = () => {
+  const { t } = useTranslation(); // useTranslation hook for translations
+
   return (
     <div className="header">
       <div
@@ -14,20 +17,22 @@ const Header = () => {
         <div className="header-overlay"></div>
       </div>
       <div className="header-contents">
-        <h1 className="header-title">{banner.title}</h1>
-        <p className="header-description">{banner.description}</p>
+        <h1 className="header-title">{t(banner.title)}</h1>{" "}
+        {/* Translated title */}
+        <p className="header-description">{t(banner.description)}</p>{" "}
+        {/* Translated description */}
         <div className="header-buttons">
           {banner.buttons.map((button) => (
             <a
               key={button.text}
               href={button.link}
               className={`header-button ${
-                button.text === "Get Started"
+                button.text === "banner.buttons.getStarted"
                   ? "get-started-button"
                   : "explore-button"
               }`}
             >
-              {button.text}
+              {t(button.text)} {/* Translated button text */}
             </a>
           ))}
         </div>

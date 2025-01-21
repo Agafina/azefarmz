@@ -1,0 +1,197 @@
+{
+  "banner": {
+    "title": "Your Gateway to Sustainable and Nutritious Agricultural Products!",
+    "description": "Experience the best of eco-friendly farming. From fresh produce to value-added products, we deliver quality and sustainability for a healthier tomorrow.",
+    "buttons": {
+      "explore": "Explore Products",
+      "getStarted": "Get Started"
+    }
+  },
+  "navbarItems": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "products": "Products",
+    "shop": "Shop",
+    "contact": "Contact"
+  },
+  "profile": {
+    "orders": "Orders",
+    "logout": "Logout"
+  },
+  "auth": {
+    "signIn": "Sign in"
+  },
+  "contact": {
+    "header": {
+      "title": "Contact Us",
+      "description": "Get in touch with us for any inquiries, support, or feedback."
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+237 677583458"
+    },
+    "email": {
+      "label": "Email",
+      "value": "info@azefarms.com"
+    },
+    "address": {
+      "label": "Address",
+      "value": "Republic of Cameroon"
+    },
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "submit": "Submit"
+    },
+    "followUs": "Follow Us"
+  },
+  "footer": {
+    "description": "At Aze Farms, we are committed to sustainable and eco-friendly agriculture. Our mission is to deliver fresh and nutritious farm produce while fostering environmental stewardship and community growth.",
+    "followUs": "Follow Us",
+    "company": "Company",
+    "getInTouch": "Get in Touch",
+    "contact": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address"
+    },
+    "footerLinks": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "products": "Products",
+      "shop": "Shop",
+      "privacyPolicy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
+  },
+  "contactInfo": {
+    "header": {
+      "title": "Contact Us",
+      "description": "Get in touch with us for any inquiries, support, or feedback."
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+237 677583458"
+    },
+    "email": {
+      "label": "Email",
+      "value": "info@azefarms.com"
+    },
+    "address": {
+      "label": "Address",
+      "value": "Republic of Cameroon"
+    },
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message"
+    }
+  },
+  "introduction": {
+    "title": "Our Mission & Values",
+    "mission": "At Aze Farms, we are committed to sustainable agriculture that balances profitability with environmental stewardship. Our mission is to deliver eco-friendly, nutritious produce while fostering food security and community development. Join us in creating a healthier planet and a brighter future.",
+    "valuesTitle": "Our Core Values",
+    "values": {
+      "sustainability": {
+        "title": "Sustainability",
+        "description": "We prioritize eco-friendly farming practices to preserve our environment for future generations."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Our produce is crafted with care and adheres to the highest standards of freshness and nutrition."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We embrace modern agricultural techniques to enhance productivity and efficiency while maintaining sustainability."
+      },
+      "communityDevelopment": {
+        "title": "Community Development",
+        "description": "We aim to support local communities by creating jobs, fostering growth, and contributing to food security."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We operate with transparency and honesty in all our dealings, ensuring trust with our stakeholders."
+      }
+    }
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "members": {
+      "jane": {
+        "name": "Jane Doe",
+        "role": "CEO"
+      },
+      "john": {
+        "name": "John Smith",
+        "role": "Farm Manager"
+      },
+      "emily": {
+        "name": "Emily Davis",
+        "role": "Marketing Head"
+      },
+      "michael": {
+        "name": "Michael Brown",
+        "role": "Operations Lead"
+      }
+    }
+  },
+  "companyHistory": {
+    "title": "Our Journey",
+    "content": {
+      "paragraph1": "Since its inception, Aze Farms has been at the forefront of sustainable agriculture. From humble beginnings as a small family farm, we have grown into a trusted name in providing fresh and eco-friendly produce.",
+      "paragraph2": "Over the years, we have embraced innovation and community-focused practices, ensuring that our operations benefit both the environment and the people we serve. Join us as we continue our journey toward a greener, healthier future."
+    }
+  },
+  "cta": {
+    "title": "Your Farm-Fresh Favorites Await!",
+    "description": "Discover a variety of sustainable, nutritious, and delicious products directly from our farm. Shop now or explore our offerings!",
+    "buttons": {
+      "shopOnline": {
+        "text": "Shop Online"
+      },
+      "exploreProducts": {
+        "text": "Explore Products"
+      }
+    },
+    "shopCTA": {
+      "title": "Enjoy Easy Checkout and Secure Payment Options",
+      "description": "Shop now to experience the goodness of farm-fresh products delivered with care.",
+      "buttonText": "Shop Now"
+    },
+    "exploreNow": "Explore Now"
+  },
+  "products": {
+    "title": "Featured Products",
+    "honeyJars": {
+      "name": "Honey Jars",
+      "description": "Available in various sizes, our pure, raw honey is packed with nutrients to support your health."
+    },
+    "cassavaFlour": {
+      "name": "Cassava Flour",
+      "description": "High-quality packaged cassava flour, perfect for creating traditional and modern dishes."
+    },
+    "seasonalVegetableBaskets": {
+      "name": "Seasonal Vegetable Baskets",
+      "description": "Freshly harvested seasonal vegetables, delivered in beautifully curated baskets."
+    },
+    "purePalmOilBottles": {
+      "name": "Pure Palm Oil Bottles",
+      "description": "Sustainably produced, our pure palm oil is perfect for cooking and more."
+    },
+    "maintitle": "Our Products",
+    "subtitle": "Explore our premium range of farm-fresh and value-added products:",
+    "cta": {
+      "text": "Shop online today and enjoy the convenience of having farm-fresh goodness delivered to your doorstep!",
+      "buttonText": "Shop Online"
+    },
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details",
+    "noProductsFound": "No products found.",
+    "searchPlaceholder": "Search products..."
+  },
+  "shopOnlineHeader": {
+    "title": "Bring the Farm to Your Doorstep!",
+    "description": "Browse our online store to purchase fresh produce and value-added products. Experience the goodness of farm-fresh products delivered with care!"
+  }
+}

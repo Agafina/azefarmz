@@ -3,11 +3,13 @@ import "./Products.css";
 import { productCategories, products } from "../../assets/data";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const { addToCart } = useContext(StoreContext);
+  const { t } = useTranslation(); // Initialize the translation hook
 
   // Filtered products based on category and search term
   const filteredProducts = products.filter((product) => {
@@ -21,9 +23,8 @@ const Products = () => {
 
   return (
     <div className="products-section">
-      <h2>Our Products</h2>
-
-      <h1>Explore our premium range of farm-fresh and value-added products:</h1>
+      <h2>{t("products.maintitle")}</h2> {/* Translate title */}
+      <h1>{t("products.subtitle")}</h1> {/* Translate subtitle */}
 
       <br />
 
@@ -33,7 +34,7 @@ const Products = () => {
           className={selectedCategory === "All" ? "active" : ""}
           onClick={() => setSelectedCategory("All")}
         >
-          All
+          {t("All")}
         </button>
         {productCategories.map((category) => (
           <button
@@ -50,7 +51,7 @@ const Products = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder={t("products.searchPlaceholder")} 
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -67,27 +68,24 @@ const Products = () => {
               <p className="price">${product.price.toFixed(2)}</p>
               <div className="product-actions">
                 <Link to={`/products/${product.id}`} className="details-link">
-                  View Details
+                  {t("products.viewDetails")} {/* Translate "View Details" */}
                 </Link>
                 <button onClick={() => addToCart(product)}>
-                  Add to Cart
+                  {t("products.addToCart")} {/* Translate "Add to Cart" */}
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <p>No products found.</p>
+          <p>{t("products.noProductsFound")}</p> 
         )}
       </div>
 
       {/* Call-to-Action */}
       <div className="products-cta">
-        <p>
-          Shop online today and enjoy the convenience of having farm-fresh
-          goodness delivered to your doorstep!
-        </p>
+        <p>{t("products.cta.text")}</p> {/* Translate CTA text */}
         <Link to="/shop" className="cta-button">
-          Shop Online
+          {t("products.cta.buttonText")} {/* Translate CTA button text */}
         </Link>
       </div>
     </div>

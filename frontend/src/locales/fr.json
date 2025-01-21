@@ -1,0 +1,197 @@
+{
+  "banner": {
+    "title": "Votre passerelle vers des produits agricoles durables et nutritifs !",
+    "description": "Découvrez le meilleur de l'agriculture écologique. Des produits frais aux produits transformés, nous offrons qualité et durabilité pour un avenir plus sain.",
+    "buttons": {
+      "explore": "Explorer les produits",
+      "getStarted": "Commencer"
+    }
+  },
+  "navbarItems": {
+    "home": "Accueil",
+    "aboutUs": "À propos de nous",
+    "products": "Produits",
+    "shop": "Magasin",
+    "contact": "Contact"
+  },
+  "profile": {
+    "orders": "Commandes",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "signIn": "Se connecter"
+  },
+  "contact": {
+    "header": {
+      "title": "Contactez-nous",
+      "description": "Contactez-nous pour toute demande, assistance ou retour."
+    },
+    "phone": {
+      "label": "Téléphone",
+      "value": "+237 677583458"
+    },
+    "email": {
+      "label": "Email",
+      "value": "info@azefarms.com"
+    },
+    "address": {
+      "label": "Adresse",
+      "value": "République du Cameroun"
+    },
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "message": "Votre message",
+      "submit": "Soumettre"
+    },
+    "followUs": "Suivez-nous"
+  },
+  "footer": {
+    "description": "Chez Aze Farms, nous nous engageons pour une agriculture durable et respectueuse de l'environnement. Notre mission est de fournir des produits agricoles frais et nutritifs tout en favorisant la gestion de l'environnement et la croissance de la communauté.",
+    "followUs": "Suivez-nous",
+    "company": "Entreprise",
+    "getInTouch": "Contactez-nous",
+    "contact": {
+      "phone": "Téléphone",
+      "email": "Email",
+      "address": "Adresse"
+    },
+    "footerLinks": {
+      "home": "Accueil",
+      "aboutUs": "À propos de nous",
+      "products": "Produits",
+      "shop": "Magasin",
+      "privacyPolicy": "Politique de confidentialité",
+      "terms": "Termes et conditions"
+    }
+  },
+  "contactInfo": {
+    "header": {
+      "title": "Contactez-nous",
+      "description": "Contactez-nous pour toute demande, assistance ou retour."
+    },
+    "phone": {
+      "label": "Téléphone",
+      "value": "+237 677583458"
+    },
+    "email": {
+      "label": "Email",
+      "value": "info@azefarms.com"
+    },
+    "address": {
+      "label": "Adresse",
+      "value": "République du Cameroun"
+    },
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "message": "Votre message"
+    }
+  },
+  "introduction": {
+    "title": "Notre Mission & Nos Valeurs",
+    "mission": "Chez Aze Farms, nous nous engageons pour une agriculture durable qui équilibre rentabilité et gestion environnementale. Notre mission est de fournir des produits alimentaires écologiques et nutritifs tout en favorisant la sécurité alimentaire et le développement des communautés. Rejoignez-nous pour créer une planète plus saine et un avenir plus prometteur.",
+    "valuesTitle": "Nos Valeurs Fondamentales",
+    "values": {
+      "sustainability": {
+        "title": "Durabilité",
+        "description": "Nous privilégions les pratiques agricoles écologiques pour préserver notre environnement pour les générations futures."
+      },
+      "quality": {
+        "title": "Qualité",
+        "description": "Nos produits sont élaborés avec soin et respectent les normes les plus élevées de fraîcheur et de nutrition."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Nous adoptons des techniques agricoles modernes pour améliorer la productivité et l'efficacité tout en maintenant la durabilité."
+      },
+      "communityDevelopment": {
+        "title": "Développement Communautaire",
+        "description": "Nous visons à soutenir les communautés locales en créant des emplois, en favorisant la croissance et en contribuant à la sécurité alimentaire."
+      },
+      "integrity": {
+        "title": "Intégrité",
+        "description": "Nous opérons avec transparence et honnêteté dans toutes nos transactions, garantissant la confiance avec nos parties prenantes."
+      }
+    }
+  },
+  "team": {
+    "title": "Rencontrez Notre Équipe",
+    "members": {
+      "jane": {
+        "name": "Jane Doe",
+        "role": "PDG"
+      },
+      "john": {
+        "name": "John Smith",
+        "role": "Responsable de la ferme"
+      },
+      "emily": {
+        "name": "Emily Davis",
+        "role": "Responsable Marketing"
+      },
+      "michael": {
+        "name": "Michael Brown",
+        "role": "Responsable des opérations"
+      }
+    }
+  },
+  "companyHistory": {
+    "title": "Notre Parcours",
+    "content": {
+      "paragraph1": "Depuis sa création, Aze Farms a été à l'avant-garde de l'agriculture durable. D'un modeste début en tant que petite ferme familiale, nous sommes devenus un nom de confiance dans la fourniture de produits frais et écologiques.",
+      "paragraph2": "Au fil des ans, nous avons adopté l'innovation et des pratiques axées sur la communauté, en veillant à ce que nos opérations profitent à la fois à l'environnement et aux personnes que nous servons. Rejoignez-nous alors que nous poursuivons notre parcours vers un avenir plus vert et plus sain."
+    }
+  },
+  "cta": {
+    "title": "Vos produits frais de la ferme vous attendent!",
+    "description": "Découvrez une variété de produits durables, nutritifs et délicieux directement de notre ferme. Achetez maintenant ou explorez nos offres!",
+    "buttons": {
+      "shopOnline": {
+        "text": "Acheter en ligne"
+      },
+      "exploreProducts": {
+        "text": "Explorer les produits"
+      }
+    },
+    "shopCTA": {
+      "title": "Profitez de la commande facile et des options de paiement sécurisé",
+      "description": "Achetez maintenant pour découvrir la qualité des produits frais de la ferme livrés avec soin.",
+      "buttonText": "Achetez maintenant"
+    },
+    "exploreNow": "Explorer maintenant"
+  },
+  "products": {
+    "title": "Produits Vedettes",
+    "honeyJars": {
+      "name": "Bocaux de Miel",
+      "description": "Disponible en différentes tailles, notre miel pur et cru est riche en nutriments pour soutenir votre santé."
+    },
+    "cassavaFlour": {
+      "name": "Farine de Manioc",
+      "description": "Farine de manioc de qualité supérieure, parfaite pour créer des plats traditionnels et modernes."
+    },
+    "seasonalVegetableBaskets": {
+      "name": "Paniers de Légumes Saisonniers",
+      "description": "Des légumes de saison fraîchement récoltés, livrés dans de magnifiques paniers soigneusement préparés."
+    },
+    "purePalmOilBottles": {
+      "name": "Bouteilles d'Huile de Palme Pure",
+      "description": "Produit de manière durable, notre huile de palme pure est idéale pour la cuisine et plus encore."
+    },
+    "maintitle": "Nos Produits",
+    "subtitle": "Explorez notre gamme premium de produits frais de la ferme et à valeur ajoutée :",
+    "cta": {
+      "text": "Achetez en ligne aujourd'hui et profitez de la commodité de recevoir des produits frais de la ferme livrés à votre porte !",
+      "buttonText": "Achetez en ligne"
+    },
+    "addToCart": "Ajouter au Panier",
+    "viewDetails": "Voir les Détails",
+    "noProductsFound": "Aucun produit trouvé.",
+    "searchPlaceholder": "Rechercher des produits..."
+  },
+  "shopOnlineHeader": {
+    "title": "Apportez la ferme à votre porte!",
+    "description": "Parcourez notre boutique en ligne pour acheter des produits frais et des produits à valeur ajoutée. Découvrez la qualité des produits frais de la ferme livrés avec soin!"
+  }
+}

@@ -3,14 +3,16 @@ import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
-import { navbarItems } from "../../assets/data";
+import { navbar } from "../../assets/data";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";  // Import useTranslation
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItemCount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  const { t } = useTranslation(); // Use translation hook
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -30,7 +32,7 @@ const Navbar = ({ setShowLogin }) => {
         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
       <ul className={`navbar-menu ${isMenuOpen ? "open" : ""}`}>
-        {navbarItems.map((item) => (
+        {navbar.items.map((item) => (
           <li key={item.id}>
             {item.external ? (
               <a
@@ -38,7 +40,7 @@ const Navbar = ({ setShowLogin }) => {
                 onClick={() => setMenu(item.id)}
                 className={menu === item.id ? "active" : ""}
               >
-                {item.name}
+                {t(item.name)}  {/* Use translation here */}
               </a>
             ) : (
               <Link
@@ -46,7 +48,7 @@ const Navbar = ({ setShowLogin }) => {
                 onClick={() => setMenu(item.id)}
                 className={menu === item.id ? "active" : ""}
               >
-                {item.name}
+                {t(item.name)}  {/* Use translation here */}
               </Link>
             )}
           </li>
@@ -68,17 +70,17 @@ const Navbar = ({ setShowLogin }) => {
           )}
         </div>
         {!token ? (
-          <button onClick={() => setShowLogin(true)}>Sign in</button>
+          <button onClick={() => setShowLogin(true)}>{t("auth.signIn")}</button> 
         ) : (
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="Profile" />
             <ul className="nav-profile-dropdown">
               <li onClick={() => navigate("/myorders")}>
-                <img src={assets.bag_icon} alt="Orders" /> <p>Orders</p>
+                <img src={assets.bag_icon} alt="Orders" /> <p>{t("profile.orders")}</p>  {/* Translate "Orders" */}
               </li>
               <hr />
               <li onClick={logout}>
-                <img src={assets.logout_icon} alt="Logout" /> <p>Logout</p>
+                <img src={assets.logout_icon} alt="Logout" /> <p>{t("profile.logout")}</p>  {/* Translate "Logout" */}
               </li>
             </ul>
           </div>

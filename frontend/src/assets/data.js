@@ -1,155 +1,238 @@
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
-import { assets, menu_list } from "./assets";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
+import { assets } from "./assets";
 
-export const navbarItems = [
-  { name: "Home", path: "/", id: "home" },
-  { name: "About Us", path: "/about-us", id: "about-us" },
-  { name: "Products", path: "/products", id: "products" },
-  { name: "Shop", path: "/shop", id: "shop-online" },
-  { name: "Contact", path: "/contact", id: "contact-us", external: true },
-];
+export const navbar = {
+  items: [
+    { name: "navbarItems.home", path: "/", id: "home" },
+    { name: "navbarItems.aboutUs", path: "/about-us", id: "about-us" },
+    { name: "navbarItems.products", path: "/products", id: "products" },
+    { name: "navbarItems.shop", path: "/shop", id: "shop-online" },
+    {
+      name: "navbarItems.contact",
+      path: "/contact",
+      id: "contact-us",
+      external: true,
+    },
+  ],
+  profile: [
+    { name: "profile.orders", path: "/myorders", id: "orders" },
+    { name: "profile.logout", action: "logout", id: "logout" },
+  ],
+  auth: [{ name: "auth.signIn", path: "/signin", id: "signin" }],
+};
+
+export const contactInfo = {
+  header: {
+    title: "contact.header.title",
+    description: "contact.header.description",
+  },
+  address: "contact.address.value", // This will be translated from en.json or fr.json
+  phone: "contact.phone.value",
+  email: "contact.email.value",
+  socialLinks: [
+    {
+      platform: "Facebook",
+      url: "https://www.facebook.com",
+    },
+    {
+      platform: "Twitter",
+      url: "https://www.twitter.com",
+    },
+    {
+      platform: "Instagram",
+      url: "https://www.instagram.com",
+    },
+  ],
+  formInputs: [
+    {
+      type: "text",
+      placeholder: "contact.form.name",
+      required: true,
+    },
+    {
+      type: "email",
+      placeholder: "contact.form.email",
+      required: true,
+    },
+    {
+      type: "textarea",
+      placeholder: "contact.form.message",
+      rows: 4,
+      required: true,
+    },
+  ],
+};
 
 export const contact = [
   {
     type: "phone",
+    label: "contact.phone.label",
     value: "+237 677583458",
     icon: <Phone size={20} />,
     link: `tel:+237677583458`,
   },
   {
     type: "email",
+    label: "contact.email.label",
     value: "info@azefarms.com",
     icon: <Mail size={20} />,
     link: `mailto:info@azefarms.com`,
   },
   {
     type: "address",
+    label: "contact.address.label",
     value: "Republic of Cameroon",
     icon: <MapPin size={20} />,
     link: `https://www.google.com/maps/search/?api=1&query=Republic+of+Cameroon`,
   },
 ];
 
-export const footerLinks = [
-  { name: "Home", path: "/" },
-  { name: "About Us", path: "/about-us" },
-  { name: "Products", path: "/products" },
-  { name: "Shop Online", path: "/shop" },
-  { name: "Privacy Policy", path: "/privacy-policy" },
-  { name: "Terms & Conditions", path: "/terms" },
-];
-
-export const socialMediaLinks = [
-  {
-    name: "Facebook",
-    icon: <Facebook size={24} />,
-    link: "https://facebook.com/azefarms",
+export const footer = {
+  description: "footer.description",
+  socialMediaLinks: [
+    {
+      name: "Facebook",
+      link: "https://www.facebook.com",
+      icon: <Facebook size={24} />,
+    },
+    {
+      name: "Twitter",
+      link: "https://www.twitter.com",
+      icon: <Twitter size={24} />,
+    },
+    {
+      name: "Instagram",
+      link: "https://www.instagram.com",
+      icon: <Instagram size={24} />,
+    },
+  ],
+  footerLinks: [
+    { name: "footer.footerLinks.home", path: "/" },
+    { name: "footer.footerLinks.aboutUs", path: "/about-us" },
+    { name: "footer.footerLinks.products", path: "/products" },
+    { name: "footer.footerLinks.shop", path: "/shop" },
+    { name: "footer.footerLinks.privacyPolicy", path: "/privacy-policy" },
+    { name: "footer.footerLinks.terms", path: "/terms" },
+  ],
+  contact: [
+    {
+      type: "phone",
+      label: "footer.contact.phone",
+      value: "+237 677583458",
+      link: "tel:+237677583458",
+    },
+    {
+      type: "email",
+      label: "footer.contact.email",
+      value: "info@azefarms.com",
+      link: "mailto:info@azefarms.com",
+    },
+    {
+      type: "address",
+      label: "footer.contact.address",
+      value: "Republic of Cameroon",
+      link: "https://www.google.com/maps",
+    },
+  ],
+  titles: {
+    followUs: "footer.followUs",
+    company: "footer.company",
+    getInTouch: "footer.getInTouch",
   },
-  {
-    name: "Twitter",
-    icon: <Twitter size={24} />,
-    link: "https://twitter.com/azefarms",
-  },
-  {
-    name: "LinkedIn",
-    icon: <Linkedin size={24} />,
-    link: "https://linkedin.com/company/azefarms",
-  },
-];
+};
 
 export const banner = {
-  title: "Your Gateway to Sustainable and Nutritious Agricultural Products!",
-  description:
-    "Experience the best of eco-friendly farming. From fresh produce to value-added products, we deliver quality and sustainability for a healthier tomorrow.",
+  title: "banner.title",
+  description: "banner.description",
   buttons: [
-    { text: "Explore Products", link: "/products" },
-    { text: "Get Started", link: "/get-started" },
+    { text: "banner.buttons.explore", link: "/products" },
+    { text: "banner.buttons.getStarted", link: "/get-started" },
   ],
   image: assets.header_img,
 };
 
 export const introduction = {
-  title: "Our Mission & Values",
-  mission:
-    "At Aze Farms, we are committed to sustainable agriculture that balances profitability with environmental stewardship. Our mission is to deliver eco-friendly, nutritious produce while fostering food security and community development. Join us in creating a healthier planet and a brighter future.",
+  title: "introduction.title",
+  mission: "introduction.mission",
   image: assets.logo1,
+  valuesTitle: "introduction.valuesTitle",
   values: [
     {
-      title: "Sustainability",
-      description:
-        "We prioritize eco-friendly farming practices to preserve our environment for future generations.",
+      title: "introduction.values.sustainability.title",
+      description: "introduction.values.sustainability.description",
     },
     {
-      title: "Quality",
-      description:
-        "Our produce is crafted with care and adheres to the highest standards of freshness and nutrition.",
+      title: "introduction.values.quality.title",
+      description: "introduction.values.quality.description",
     },
     {
-      title: "Innovation",
-      description:
-        "We embrace modern agricultural techniques to enhance productivity and efficiency while maintaining sustainability.",
+      title: "introduction.values.innovation.title",
+      description: "introduction.values.innovation.description",
     },
     {
-      title: "Community Development",
-      description:
-        "We aim to support local communities by creating jobs, fostering growth, and contributing to food security.",
+      title: "introduction.values.communityDevelopment.title",
+      description: "introduction.values.communityDevelopment.description",
     },
     {
-      title: "Integrity",
-      description:
-        "We operate with transparency and honesty in all our dealings, ensuring trust with our stakeholders.",
+      title: "introduction.values.integrity.title",
+      description: "introduction.values.integrity.description",
     },
   ],
 };
 
 export const featuredProducts = [
   {
-    name: "Honey Jars",
-    description:
-      "Available in various sizes, our pure, raw honey is packed with nutrients to support your health.",
+    name: "products.honeyJars.name",
+    description: "products.honeyJars.description",
     image: assets.menu_1,
     link: "/shop/honey",
   },
   {
-    name: "Cassava Flour",
-    description:
-      "High-quality packaged cassava flour, perfect for creating traditional and modern dishes.",
+    name: "products.cassavaFlour.name",
+    description: "products.cassavaFlour.description",
     image: assets.menu_2,
     link: "/shop/cassava",
   },
   {
-    name: "Seasonal Vegetable Baskets",
-    description:
-      "Freshly harvested seasonal vegetables, delivered in beautifully curated baskets.",
+    name: "products.seasonalVegetableBaskets.name",
+    description: "products.seasonalVegetableBaskets.description",
     image: assets.menu_3,
     link: "/shop/vegetables",
   },
   {
-    name: "Pure Palm Oil Bottles",
-    description:
-      "Sustainably produced, our pure palm oil is perfect for cooking and more.",
+    name: "products.purePalmOilBottles.name",
+    description: "products.purePalmOilBottles.description",
     image: assets.menu_4,
     link: "/shop/palm-oil",
   },
 ];
 
+
 export const ctaContent = {
-  title: "Your Farm-Fresh Favorites Await!",
-  description:
-    "Discover a variety of sustainable, nutritious, and delicious products directly from our farm. Shop now or explore our offerings!",
+  title: "cta.title",
+  description: "cta.description",
   buttons: [
     {
-      text: "Shop Online",
+      text: "cta.buttons.shopOnline.text",
       link: "/shop",
       style: "primary",
     },
     {
-      text: "Explore Products",
+      text: "cta.buttons.exploreProducts.text",
       link: "/products",
       style: "secondary",
     },
   ],
 };
+
 
 export const productCategories = [
   "Honey",
@@ -302,55 +385,36 @@ export const products = [
   },
 ];
 
-
 export const companyHistory = {
-  title: "Our Journey",
+  title: "companyHistory.title",
   content: [
-    "Since its inception, Aze Farms has been at the forefront of sustainable agriculture. From humble beginnings as a small family farm, we have grown into a trusted name in providing fresh and eco-friendly produce.",
-    "Over the years, we have embraced innovation and community-focused practices, ensuring that our operations benefit both the environment and the people we serve. Join us as we continue our journey toward a greener, healthier future.",
+    "companyHistory.content.paragraph1",
+    "companyHistory.content.paragraph2",
   ],
 };
 
-export const teamMembers = [
-  {
-    name: "Jane Doe",
-    role: "CEO",
-    image: "https://i.pravatar.cc/150?img=12",
-  },
-  {
-    name: "John Smith",
-    role: "Farm Manager",
-    image: "https://i.pravatar.cc/150?img=18",
-  },
-  {
-    name: "Emily Davis",
-    role: "Marketing Head",
-    image: "https://i.pravatar.cc/150?img=32",
-  },
-  {
-    name: "Michael Brown",
-    role: "Operations Lead",
-    image: "https://i.pravatar.cc/150?img=47",
-  },
-];
-
-export const contactInfo = {
-  address: "123 Aze Farms Lane, Greenfield",
-  phone: "(123) 456-7890",
-  email: "contact@azefarms.com",
-  socialLinks: [
-    { platform: "Facebook", url: "https://facebook.com" },
-    { platform: "Instagram", url: "https://instagram.com" },
-    { platform: "Twitter", url: "https://twitter.com" },
-  ],
-  header: {
-    title: "Contact Us",
-    description:
-      "Have questions or need assistance? Reach out to us using the information below or fill out the contact form.",
-  },
-  formInputs: [
-    { type: "text", placeholder: "Your Name", required: true },
-    { type: "email", placeholder: "Your Email", required: true },
-    { type: "textarea", placeholder: "Your Message", rows: 5, required: true },
+export const team = {
+  title: "team.title",
+  members: [
+    {
+      name: "team.members.jane.name",
+      role: "team.members.jane.role",
+      image: "https://i.pravatar.cc/150?img=12",
+    },
+    {
+      name: "team.members.john.name",
+      role: "team.members.john.role",
+      image: "https://i.pravatar.cc/150?img=18",
+    },
+    {
+      name: "team.members.emily.name",
+      role: "team.members.emily.role",
+      image: "https://i.pravatar.cc/150?img=32",
+    },
+    {
+      name: "team.members.michael.name",
+      role: "team.members.michael.role",
+      image: "https://i.pravatar.cc/150?img=47",
+    },
   ],
 };
