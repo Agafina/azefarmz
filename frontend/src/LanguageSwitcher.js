@@ -1,36 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate and useLocation
+import { useNavigate, useLocation } from "react-router-dom";
+import { Globe } from "lucide-react"; // Import the globe icon from lucide-react
 import "./LanguageSwitcher.css";
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const navigate = useNavigate(); // Get navigate function from react-router
-  const location = useLocation(); // Get the current location (URL) from react-router
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
 
-  // Function to switch language based on selected language
+  // Function to switch language
   const switchLanguage = (lang) => {
-    i18n.changeLanguage(lang); // Change language using i18next
-    // Update the route to reflect the language change
-    navigate(`/${lang}${location.pathname.substring(3)}`); // Retain the rest of the URL after the language part
+    if (lang !== currentLang) {
+      i18n.changeLanguage(lang).then(() => {
+        setCurrentLang(lang);
+        navigate(`/${lang}${location.pathname.substring(3)}`, {
+          replace: true,
+        });
+        setDropdownOpen(false); // Close dropdown after selecting a language
+      });
+    }
   };
 
-  // UseEffect to automatically change language when the URL's language part changes
+  // Effect to synchronize language with URL
   useEffect(() => {
-    const lang = location.pathname.split("/")[1]; // Extract the language from the URL
-    if (lang && lang !== i18n.language) {
-      i18n.changeLanguage(lang); // Change language if it's different from the current language
+    const langFromURL = location.pathname.split("/")[1];
+    if (langFromURL && langFromURL !== currentLang) {
+      i18n.changeLanguage(langFromURL).then(() => setCurrentLang(langFromURL));
     }
-  }, [location, i18n]); // Dependency array: trigger effect when location or i18n changes
+  }, [location.pathname, currentLang, i18n]);
 
   return (
     <div className="language-switcher">
-      <button onClick={() => switchLanguage("en")} className="language-button">
-        English
-      </button>
-      <button onClick={() => switchLanguage("fr")} className="language-button">
-        Français
-      </button>
+      <div
+        className="dropdown-container"
+        onClick={() => setDropdownOpen(!dropdownOpen)} // Toggle dropdown visibility
+      >
+        <Globe className="globe-icon" size={20} />
+        <span className="current-lang">{currentLang.toUpperCase()}</span>
+      </div>
+      {dropdownOpen && (
+        <div className="dropdown-menu">
+          <button
+            onClick={() => switchLanguage("en")}
+            className={`dropdown-item ${currentLang === "en" ? "active" : ""}`}
+          >
+            English
+          </button>
+          <button
+            onClick={() => switchLanguage("fr")}
+            className={`dropdown-item ${currentLang === "fr" ? "active" : ""}`}
+          >
+            Français
+          </button>
+        </div>
+      )}
     </div>
   );
 }

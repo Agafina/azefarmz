@@ -13,22 +13,31 @@ import ShopOnlinePage from "./pages/ShopOnline/ShopOnline";
 import AboutPage from "./pages/About/About";
 import ContactPage from "./components/Contact/Contact";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { i18n } = useTranslation();
 
-  // Automatically add /en or /fr if missing in the URL
   useEffect(() => {
-    const languageInURL = location.pathname.split("/")[1]; // Get the first part of the URL after the '/'
-    const defaultLanguage = "en"; // You can set this to "fr" if you want French to be the default
+    const languageInURL = location.pathname.split("/")[1];
+    const defaultLanguage = "en";
+    const previousLanguage = sessionStorage.getItem("preferredLanguage");
 
-    // If the URL doesn't have a language prefix
     if (!["en", "fr"].includes(languageInURL)) {
-      navigate(`/${defaultLanguage}${location.pathname}`);
+      const newLanguage = previousLanguage || defaultLanguage;
+      i18n.changeLanguage(newLanguage).then(() => {
+        navigate(`/${newLanguage}${location.pathname}`, { replace: true });
+      });
+    } else {
+      sessionStorage.setItem("preferredLanguage", languageInURL);
+      if (languageInURL !== i18n.language) {
+        i18n.changeLanguage(languageInURL);
+      }
     }
-  }, [location, navigate]);
+  }, [location, navigate, i18n]);
 
   return (
     <>
