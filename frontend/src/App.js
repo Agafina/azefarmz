@@ -44,7 +44,7 @@ function App() {
       {showLogin && <LoginPopUp setShowLogin={setShowLogin} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
-        <LanguageSwitcher />
+        
         <Routes>
           <Route path="/:lang" element={<Home />} />
           <Route path="/:lang/about-us" element={<AboutPage />} />

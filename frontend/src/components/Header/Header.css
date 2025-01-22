@@ -99,15 +99,18 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
   .header-buttons {
     flex-direction: column;
     gap: 1vw;
+    justify-content: center;
+    align-items: center;
   }
 
   .header-button {
-    width: 60%;
+    width: 40%;
     padding: 1.5vw 3vw;
+    
   }
 }
 
@@ -137,4 +140,34 @@
   .header-button {
     padding: 1.5vw 3vw;
   }
+}
+@media(max-width: 523px){
+   .header-title{
+    font-size: 20px;
+  }
+  .header-description{
+    font-size: 15px;
+  }
+}
+@media(max-width: 460px){
+  .header-title{
+   font-size: 15px;
+ }
+ .header-description{
+   font-size: 10px;
+ }
+ .header-button{
+  font-size: clamp(0.5rem, 0.4vw, 1rem);
+ }
+}
+@media(max-width: 310px){
+  .header-title{
+   font-size: clamp(0.6rem, 0.4vw, 1rem);
+ }
+ .header-description{
+   font-size: clamp(0.5rem, 0.5vw, 1rem);
+ }
+ .header-button{
+  font-size: clamp(0.4rem, 0.4vw, 1rem);
+ }
 }

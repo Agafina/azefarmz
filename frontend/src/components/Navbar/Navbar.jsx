@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { navbar } from "../../assets/data";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import LanguageSwitcher from "../../LanguageSwitcher";
 import { useTranslation } from "react-i18next";  // Import useTranslation
 
 const Navbar = ({ setShowLogin }) => {
@@ -55,6 +56,7 @@ const Navbar = ({ setShowLogin }) => {
         ))}
       </ul>
       <div className="navbar-right">
+        <LanguageSwitcher />
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
           <Search size={20} className="search-icon" />

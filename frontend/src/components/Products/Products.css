@@ -37,11 +37,14 @@
 }
 
 .search-bar {
-  margin-bottom: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 30px;
 }
 
-.search-bar input {
-  width: 50%;
+.search-bar  input {
+  width: 500px;
   padding: 10px;
   font-size: 1rem;
   border: 2px solid #ccc;
@@ -171,4 +174,21 @@
     padding: 6px 12px;
     font-size: 0.8rem;
   }
+
+  
+}
+
+@media (max-width: 1075px){
+  .product-actions{
+    font-size: 13px;
+  }
+}
+@media(max-width:307px){
+  .product-actions{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+ 
 }
