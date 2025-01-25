@@ -38,15 +38,20 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <div className="navbar" ref={menuRef}>
+      {/* Logo */}
       <Link to="/">
         <img src={assets.logo} className="logo" alt="Aze Farms Logo" />
       </Link>
+
+      {/* Menu Toggle */}
       <button
         className="menu-toggle"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
+
+      {/* Navbar Menu */}
       <ul className={`navbar-menu ${isMenuOpen ? "open" : ""}`}>
         {navbar.items.map((item) => (
           <li
@@ -64,43 +69,33 @@ const Navbar = ({ setShowLogin }) => {
             {t(item.name)}
           </li>
         ))}
-        {/* Add LanguageSwitcher inside the menu for small screens */}
         <li className="language-switcher">
           <LanguageSwitcher />
-          
         </li>
       </ul>
+
+      {/* Navbar Right Section */}
       <div className="navbar-right">
-      <LanguageSwitcher />
+        <LanguageSwitcher />
         <div className="search-bar">
           <input type="text" placeholder={t("search.placeholder", "Search...")} />
           <Search size={20} className="search-icon" />
         </div>
+        <button
+          onClick={() => (token ? logout() : setShowLogin(true))}
+          className="auth-button"
+        >
+          {token ? t("profile.logout") : t("auth.signIn")}
+        </button>
+      </div>
+
+      {/* Always Visible Cart */}
+      <div className="navbar-cart">
+        <Link to="/cart">
+          <ShoppingCart size={35} />
+        </Link>
         {getTotalItemCount() > 0 && (
-          <div className="navbar-cart">
-            <Link to="/cart">
-              <ShoppingCart size={35} />
-            </Link>
-            <div className="dot">{getTotalItemCount()}</div>
-          </div>
-        )}
-        {!token ? (
-          <button onClick={() => setShowLogin(true)}>{t("auth.signIn")}</button>
-        ) : (
-          <div className="navbar-profile">
-            <img src={assets.profile_icon} alt="Profile" />
-            <ul className="nav-profile-dropdown">
-              <li onClick={() => navigate("/myorders")}>
-                <img src={assets.bag_icon} alt="Orders" />{" "}
-                <p>{t("profile.orders")}</p>
-              </li>
-              <hr />
-              <li onClick={logout}>
-                <img src={assets.logout_icon} alt="Logout" />{" "}
-                <p>{t("profile.logout")}</p>
-              </li>
-            </ul>
-          </div>
+          <div className="dot">{getTotalItemCount()}</div>
         )}
       </div>
     </div>
