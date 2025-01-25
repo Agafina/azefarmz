@@ -35,17 +35,41 @@
   border-radius: 4px;
 }
 
-.cart-items-item .cross {
-  cursor: pointer;
-  color: red;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-align: center;
-  transition: color 0.3s;
+.cart-adjust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.cart-items-item .cross:hover {
-  color: darkred;
+.adjust-btn {
+  cursor: pointer;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.adjust-minus {
+  background-color: #ff4d4f; /* Red for the minus button */
+  color: white;
+}
+
+.adjust-minus:hover {
+  background-color: #d42a2d;
+  transform: scale(1.1);
+}
+
+.adjust-plus {
+  background-color: #28a745; /* Green for the plus button */
+  color: white;
+}
+
+.adjust-plus:hover {
+  background-color: #218838;
+  transform: scale(1.1);
 }
 
 .cart hr {

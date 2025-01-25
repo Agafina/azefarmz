@@ -65,14 +65,14 @@ const Products = () => {
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
-              <p className="price">${product.price.toFixed(2)}</p>
+              <p className="price">${product.price.toFixed(2)} {" "} {product.unit}</p>
               <div className="product-actions">
                <div> <Link to={`/products/${product.id}`} className="details-link">
-                  {t("products.viewDetails")} {/* Translate "View Details" */}
+                  {t("products.viewDetails")}
                 </Link>
                 </div>
                 <button onClick={() => addToCart(product)}>
-                  {t("products.addToCart")} {/* Translate "Add to Cart" */}
+                  {t("products.addToCart")}
                 </button>
               </div>
             </div>

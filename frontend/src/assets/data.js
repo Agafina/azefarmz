@@ -215,7 +215,6 @@ export const featuredProducts = [
   },
 ];
 
-
 export const ctaContent = {
   title: "cta.title",
   description: "cta.description",
@@ -232,7 +231,6 @@ export const ctaContent = {
     },
   ],
 };
-
 
 export const productCategories = [
   "Honey",
@@ -252,6 +250,7 @@ export const products = [
     price: 15.99,
     category: "Honey",
     image: assets.menu_1,
+    unit: "500g",
   },
   {
     id: 2,
@@ -261,6 +260,7 @@ export const products = [
       "Sweet and tender ripe plantains, perfect for frying or baking.",
     price: 12.99,
     category: "Plantains",
+    unit: "per bunch",
     image: assets.menu_2,
   },
   {
@@ -270,6 +270,7 @@ export const products = [
     description: "Firm and starchy unripe plantains, ideal for savory dishes.",
     price: 11.99,
     category: "Plantains",
+    unit: "per bunch",
     image: assets.menu_3,
   },
   {
@@ -279,6 +280,7 @@ export const products = [
     description: "Sweet, juicy, and naturally ripened pineapples.",
     price: 10.99,
     category: "Vegetables",
+    unit: "per piece",
     image: assets.menu_3,
   },
   {
@@ -289,6 +291,7 @@ export const products = [
       "High-quality cassava flour, perfect for your favorite dishes.",
     price: 8.99,
     category: "Cassava",
+    unit: "1kg",
     image: assets.menu_4,
   },
   {
@@ -298,6 +301,7 @@ export const products = [
     description: "Premium garri, ideal for traditional meals and snacks.",
     price: 6.99,
     category: "Cassava",
+    unit: "1kg",
     image: assets.menu_1,
   },
   {
@@ -307,6 +311,7 @@ export const products = [
     description: "Freshly picked, ripe tomatoes for your kitchen.",
     price: 2.99,
     category: "Vegetables",
+    unit: "1kg",
     image: assets.menu_2,
   },
   {
@@ -316,6 +321,7 @@ export const products = [
     description: "Crunchy, vibrant carrots, freshly harvested.",
     price: 3.99,
     category: "Vegetables",
+    unit: "1kg",
     image: assets.menu_3,
   },
   {
@@ -325,6 +331,7 @@ export const products = [
     description: "Fresh and nutritious spinach leaves.",
     price: 4.99,
     category: "Vegetables",
+    unit: "per bunch",
     image: assets.menu_4,
   },
   {
@@ -334,6 +341,7 @@ export const products = [
     description: "Tender and flavorful okra, perfect for soups.",
     price: 5.99,
     category: "Vegetables",
+    unit: "1kg",
     image: assets.menu_1,
   },
   {
@@ -343,6 +351,7 @@ export const products = [
     description: "High-quality legumes, packed with protein and fiber.",
     price: 6.99,
     category: "Vegetables",
+    unit: "1kg",
     image: assets.menu_2,
   },
   {
@@ -352,6 +361,7 @@ export const products = [
     description: "Sustainably produced oil for cooking and more.",
     price: 14.99,
     category: "Palm Oil",
+    unit: "1 Litre",
     image: assets.menu_3,
   },
   {
@@ -359,9 +369,10 @@ export const products = [
     _id: "64b6f87a2c4f3a9b6a0e4d1o",
     name: "Eucalyptus Essential Oils",
     description:
-      "Natural essential oils extracted from eucalyptus, perfect for relaxation.",
+    "Natural essential oils extracted from eucalyptus, perfect for relaxation.",
     price: 19.99,
     category: "Eucalyptus",
+    unit: "100ml",
     image: assets.menu_4,
   },
   {
@@ -369,9 +380,10 @@ export const products = [
     _id: "64b6f87a2c4f3a9b6a0e4d1p",
     name: "Handcrafted Furniture",
     description:
-      "Beautifully handcrafted furniture made from sustainable eucalyptus wood.",
+    "Beautifully handcrafted furniture made from sustainable eucalyptus wood.",
     price: 99.99,
     category: "Eucalyptus",
+    unit: "per item",
     image: assets.menu_1,
   },
   {
@@ -381,6 +393,7 @@ export const products = [
     description: "Unique crafts made from eucalyptus materials.",
     price: 24.99,
     category: "Eucalyptus",
+    unit: "per item",
     image: assets.menu_2,
   },
 ];

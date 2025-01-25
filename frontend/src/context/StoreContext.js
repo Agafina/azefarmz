@@ -10,13 +10,15 @@ const StoreContextProvider = (props) => {
   });
 
   // Add item to cart
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1, unit = "unit") => {
     setCartItems((prev) => {
       const updatedCart = { ...prev };
       if (updatedCart[product._id]) {
-        updatedCart[product._id].quantity += 1;
+        // Update quantity if the product is already in the cart
+        updatedCart[product._id].quantity += quantity;
       } else {
-        updatedCart[product._id] = { ...product, quantity: 1 };
+        // Add new product with the given quantity and unit
+        updatedCart[product._id] = { ...product, quantity, unit };
       }
       localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
       return updatedCart;
@@ -24,13 +26,14 @@ const StoreContextProvider = (props) => {
   };
 
   // Remove item from cart
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId, quantity = 1) => {
     setCartItems((prev) => {
       const updatedCart = { ...prev };
-      if (updatedCart[productId].quantity > 1) {
-        updatedCart[productId].quantity -= 1;
-      } else {
-        delete updatedCart[productId];
+      if (updatedCart[productId]) {
+        updatedCart[productId].quantity -= quantity;
+        if (updatedCart[productId].quantity <= 0) {
+          delete updatedCart[productId];
+        }
       }
       localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
       return updatedCart;

@@ -6,7 +6,7 @@ import { StoreContext } from "../../context/StoreContext";
 import { navbar } from "../../assets/data";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import LanguageSwitcher from "../../LanguageSwitcher";
-import { useTranslation } from "react-i18next";  // Import useTranslation
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -41,7 +41,7 @@ const Navbar = ({ setShowLogin }) => {
                 onClick={() => setMenu(item.id)}
                 className={menu === item.id ? "active" : ""}
               >
-                {t(item.name)}  {/* Use translation here */}
+                {t(item.name)} {/* Use translation here */}
               </a>
             ) : (
               <Link
@@ -49,7 +49,7 @@ const Navbar = ({ setShowLogin }) => {
                 onClick={() => setMenu(item.id)}
                 className={menu === item.id ? "active" : ""}
               >
-                {t(item.name)}  {/* Use translation here */}
+                {t(item.name)} {/* Use translation here */}
               </Link>
             )}
           </li>
@@ -61,28 +61,28 @@ const Navbar = ({ setShowLogin }) => {
           <input type="text" placeholder="Search..." />
           <Search size={20} className="search-icon" />
         </div>
-        <div className="navbar-cart">
-          {getTotalItemCount() > 0 && (
-            <>
-              <Link to="/cart">
-                <ShoppingCart size={24} />
-              </Link>
-              <div className="dot">{getTotalItemCount()}</div>
-            </>
-          )}
-        </div>
+        {getTotalItemCount() > 0 && (
+          <div className="navbar-cart">
+            <Link to="/cart">
+              <ShoppingCart size={35} />
+            </Link>
+            <div className="dot">{getTotalItemCount()}</div>
+          </div>
+        )}
         {!token ? (
-          <button onClick={() => setShowLogin(true)}>{t("auth.signIn")}</button> 
+          <button onClick={() => setShowLogin(true)}>{t("auth.signIn")}</button>
         ) : (
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="Profile" />
             <ul className="nav-profile-dropdown">
               <li onClick={() => navigate("/myorders")}>
-                <img src={assets.bag_icon} alt="Orders" /> <p>{t("profile.orders")}</p>  {/* Translate "Orders" */}
+                <img src={assets.bag_icon} alt="Orders" />{" "}
+                <p>{t("profile.orders")}</p> {/* Translate "Orders" */}
               </li>
               <hr />
               <li onClick={logout}>
-                <img src={assets.logout_icon} alt="Logout" /> <p>{t("profile.logout")}</p>  {/* Translate "Logout" */}
+                <img src={assets.logout_icon} alt="Logout" />{" "}
+                <p>{t("profile.logout")}</p> {/* Translate "Logout" */}
               </li>
             </ul>
           </div>

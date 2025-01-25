@@ -4,7 +4,7 @@ import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, getTotalCartAmount } =
+  const { cartItems, removeFromCart, getTotalCartAmount, addToCart } =
     useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Cart = () => {
           <p>Price</p>
           <p>Quantity</p>
           <p>Total</p>
-          <p>Remove</p>
+          <p>Adjust</p>
         </div>
         <br />
         <hr />
@@ -30,9 +30,17 @@ const Cart = () => {
               <p>${item.price.toFixed(2)}</p>
               <p>{item.quantity}</p>
               <p>${(item.price * item.quantity).toFixed(2)}</p>
-              <p onClick={() => removeFromCart(item._id)} className="cross">
-                x
-              </p>
+              <div className="cart-adjust">
+                <span
+                  onClick={() => removeFromCart(item._id, 1)}
+                  className="adjust-btn adjust-minus"
+                >
+                  -
+                </span>
+                <span onClick={() => addToCart(item, 1)} className="adjust-btn adjust-plus">
+                  +
+                </span>
+              </div>
             </div>
             <hr />
           </div>
