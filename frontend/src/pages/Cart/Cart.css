@@ -20,7 +20,7 @@
 
 .cart-items-item {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 1.6fr 1.2fr 1fr 1fr 0.5fr;
   align-items: center;
   color: black;
   font-size: max(1vw, 14px);
@@ -187,3 +187,23 @@
     justify-content: start;
   }
 }
+
+@media(max-width: 550px){
+  .cart-items-title img {
+    display: none;
+    grid-template-columns:  1fr 1fr 1fr 1fr 0.3fr;
+    
+  }
+  @media(max-width: 550px){
+    .cart-items-title  {
+      font-size: 12px;
+    }
+
+  .cart-items-title .itemName{
+    display: none;
+  }
+  .cart-items-title{
+    font-size: 12px;
+  }
+  
+}}

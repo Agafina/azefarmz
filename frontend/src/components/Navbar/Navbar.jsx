@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,14 +6,15 @@ import { StoreContext } from "../../context/StoreContext";
 import { navbar } from "../../assets/data";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import LanguageSwitcher from "../../LanguageSwitcher";
-import { useTranslation } from "react-i18next"; // Import useTranslation
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItemCount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
-  const { t } = useTranslation(); // Use translation hook
+  const { t } = useTranslation();
+  const menuRef = useRef(null);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -21,8 +22,22 @@ const Navbar = ({ setShowLogin }) => {
     navigate("/");
   };
 
+  // Close the menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="navbar">
+    <div className="navbar" ref={menuRef}>
       <Link to="/">
         <img src={assets.logo} className="logo" alt="Aze Farms Logo" />
       </Link>
@@ -34,31 +49,31 @@ const Navbar = ({ setShowLogin }) => {
       </button>
       <ul className={`navbar-menu ${isMenuOpen ? "open" : ""}`}>
         {navbar.items.map((item) => (
-          <li key={item.id}>
-            {item.external ? (
-              <a
-                href={item.path}
-                onClick={() => setMenu(item.id)}
-                className={menu === item.id ? "active" : ""}
-              >
-                {t(item.name)} {/* Use translation here */}
-              </a>
-            ) : (
-              <Link
-                to={item.path}
-                onClick={() => setMenu(item.id)}
-                className={menu === item.id ? "active" : ""}
-              >
-                {t(item.name)} {/* Use translation here */}
-              </Link>
-            )}
+          <li
+            key={item.id}
+            className={`menu-item ${menu === item.id ? "active" : ""}`}
+            onClick={() => {
+              setMenu(item.id);
+              if (item.external) {
+                window.location.href = item.path;
+              } else {
+                navigate(item.path);
+              }
+            }}
+          >
+            {t(item.name)}
           </li>
         ))}
+        {/* Add LanguageSwitcher inside the menu for small screens */}
+        <li className="language-switcher">
+          <LanguageSwitcher />
+          
+        </li>
       </ul>
       <div className="navbar-right">
-        <LanguageSwitcher />
+      <LanguageSwitcher />
         <div className="search-bar">
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder={t("search.placeholder", "Search...")} />
           <Search size={20} className="search-icon" />
         </div>
         {getTotalItemCount() > 0 && (
@@ -77,12 +92,12 @@ const Navbar = ({ setShowLogin }) => {
             <ul className="nav-profile-dropdown">
               <li onClick={() => navigate("/myorders")}>
                 <img src={assets.bag_icon} alt="Orders" />{" "}
-                <p>{t("profile.orders")}</p> {/* Translate "Orders" */}
+                <p>{t("profile.orders")}</p>
               </li>
               <hr />
               <li onClick={logout}>
                 <img src={assets.logout_icon} alt="Logout" />{" "}
-                <p>{t("profile.logout")}</p> {/* Translate "Logout" */}
+                <p>{t("profile.logout")}</p>
               </li>
             </ul>
           </div>

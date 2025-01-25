@@ -9,7 +9,7 @@
   },
   "navbarItems": {
     "home": "Accueil",
-    "aboutUs": "À propos de nous",
+    "aboutUs": "À propos ",
     "products": "Produits",
     "shop": "Magasin",
     "contact": "Contact"
@@ -19,7 +19,7 @@
     "logout": "Déconnexion"
   },
   "auth": {
-    "signIn": "Se connecter"
+    "signIn": " connecter"
   },
   "contact": {
     "header": {
@@ -185,8 +185,8 @@
       "text": "Achetez en ligne aujourd'hui et profitez de la commodité de recevoir des produits frais de la ferme livrés à votre porte !",
       "buttonText": "Achetez en ligne"
     },
-    "addToCart": "Ajouter au Panier",
-    "viewDetails": "Voir les Détails",
+    "addToCart": "Ajouter ",
+    "viewDetails": "Détails",
     "noProductsFound": "Aucun produit trouvé.",
     "searchPlaceholder": "Rechercher des produits..."
   },

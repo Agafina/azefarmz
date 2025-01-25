@@ -13,7 +13,7 @@ const Cart = () => {
       {/* Cart Items */}
       <div className="cart-items">
         <div className="cart-items-title">
-          <p>Items</p>
+          <p className="itemName">Items</p>
           <p>Title</p>
           <p>Price</p>
           <p>Quantity</p>
