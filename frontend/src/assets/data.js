@@ -355,7 +355,6 @@ export const products = [
     image: assets.menu_2,
   },
   {
-    id: 11,
     _id: "64b6f87a2c4f3a9b6a0e4d1n",
     name: "Pure Palm Oil",
     description: "Sustainably produced oil for cooking and more.",

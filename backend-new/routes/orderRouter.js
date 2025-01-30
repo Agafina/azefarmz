@@ -23,6 +23,6 @@ router.post(
 router.get("/:userId", authMiddleware, getOrders);
 
 // Update the order status (only accessible by admin)
-router.put("/update-status", adminMiddleware, updateOrderStatus);
+router.put("/update-status", authMiddleware, adminMiddleware, updateOrderStatus);
 
 module.exports = router;

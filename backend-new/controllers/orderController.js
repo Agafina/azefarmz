@@ -51,7 +51,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     if (paymentIntent.status === "succeeded") {
       // Payment succeeded, update order status
       order.status = "Paid";
-      order.payment = true; // Mark payment as completed
+      order.paid = true; // Mark payment as completed
       await order.save();
 
       res.status(200).json({
