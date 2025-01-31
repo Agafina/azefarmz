@@ -4,7 +4,7 @@ import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import LoginPopUp from "./components/LoginPopup/LoginPopUp";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
@@ -12,14 +12,16 @@ import Products from "./components/Products/Products";
 import ShopOnlinePage from "./pages/ShopOnline/ShopOnline";
 import AboutPage from "./pages/About/About";
 import ContactPage from "./components/Contact/Contact";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { i18n } = useTranslation();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const languageInURL = location.pathname.split("/")[1];
@@ -39,12 +41,25 @@ function App() {
     }
   }, [location, navigate, i18n]);
 
+  useEffect(() => {
+    if (!user && !showLogin) {
+      setShowLogin(true);
+    }
+  }, [user, showLogin]);
+
   return (
     <>
+      <ToastContainer
+        closeButton={false}
+        draggable={true}
+        autoClose={3000}
+        position="top-right"
+      />
+
       {showLogin && <LoginPopUp setShowLogin={setShowLogin} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
-        
+
         <Routes>
           <Route path="/:lang" element={<Home />} />
           <Route path="/:lang/about-us" element={<AboutPage />} />

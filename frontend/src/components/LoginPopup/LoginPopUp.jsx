@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./LoginPopUp.css";
 import { assets } from "../../assets/assets";
-import { StoreContext } from "../../context/StoreContext";
-import axios from "axios"
+import { AuthContext } from "../../context/AuthContext"; // Import the AuthContext
 function LoginPopUp({ setShowLogin }) {
-  const { url, setToken } = useContext(StoreContext)
+  const { login, register, error } = useContext(AuthContext); // Get login and register from context
   const [currentState, setCurrentState] = useState("Login");
   const [data, setData] = useState({
     name: "",
@@ -18,28 +17,23 @@ function LoginPopUp({ setShowLogin }) {
     setData((data) => ({ ...data, [name]: value }));
   };
 
-  const  onLogin = async(event) => {
-    event.preventDefault()
-    let newUrl = url;
-    if(currentState === "Login"){
-      newUrl += "/api/user/login"
-    }else{
-      newUrl += "/api/user/register"
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    if (currentState === "Login") {
+      // Call the login function from the AuthContext
+      await login(data.email, data.password);
+    } else {
+      // Call the register function from the AuthContext
+      await register(data.name, data.email, data.password);
     }
 
-    const response = await axios.post(newUrl, data);
-    if(response.data.success){
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token)
-      setShowLogin(false)
-    }else{
-      alert(response.data.mssg)
-    }
-  }
+    setShowLogin(false); // Close the login popup after login/register
+  };
 
   return (
     <div className="login-popup">
-      <form action="" onSubmit={onLogin} className="login-popup-container">
+      <form action="" onSubmit={onSubmit} className="login-popup-container">
         <div className="login-popup-title">
           <h2>{currentState}</h2>
           <img
@@ -80,13 +74,14 @@ function LoginPopUp({ setShowLogin }) {
             required
           />
         </div>
+        <div className="login-popup-condition">
+          <input type="checkbox" required />
+          <p>By continuing, I agree to the terms and conditions</p>
+        </div>
+        {error && <div className="error-message">{error}</div>}
         <button type="submit">
           {currentState === "Sign up" ? "Create Account" : "Login"}
         </button>
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>By continuing, i agree to the terms and conditions</p>
-        </div>
         {currentState === "Login" ? (
           <p>
             Create a new account?{" "}

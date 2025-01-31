@@ -6,10 +6,17 @@ const {
 
 // Create a new order
 const createOrder = async (req, res) => {
-  const { user, items, amount, deliveryAddress } = req.body;
+  console.log("Received headers:", req.headers); // Log the incoming data
+  console.log("Received body:", req.body); // Log the incoming data
+  const { user, items, amount, address } = req.body;
+  const deliveryAddress = address
+  console.log("Received order data:", { user, items, amount, deliveryAddress }); // Log the incoming data
+
   try {
     // 1. Create payment intent
-    const paymentIntent = await createPaymentIntent(amount); // Pass the amount for payment
+    console.log("Creating payment intent with amount:", amount); // Log amount being used to create payment intent
+    const paymentIntent = await createPaymentIntent(Math.round(amount * 100)); // Pass the amount for payment
+    console.log("Payment intent created:", paymentIntent); // Log the created payment intent
 
     // 2. Create a new order and save the paymentIntentId
     const newOrder = new orderModel({
@@ -20,7 +27,9 @@ const createOrder = async (req, res) => {
       paymentIntentId: paymentIntent.id, // Save the paymentIntentId with the order
     });
 
+    console.log("Saving new order:", newOrder); // Log the order being saved
     await newOrder.save();
+    console.log("Order saved successfully:", newOrder); // Log after order is saved successfully
 
     // 3. Return the clientSecret and paymentIntentId to the frontend
     res.status(201).json({
@@ -30,11 +39,17 @@ const createOrder = async (req, res) => {
       clientSecret: paymentIntent.client_secret, // Send the clientSecret for frontend payment confirmation
       paymentIntentId: paymentIntent.id, // Send the paymentIntentId for later verification
     });
+    console.log("Response sent with order details and paymentIntentId"); // Log when response is sent to frontend
   } catch (error) {
-    console.error("Error creating order:", error);
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error creating order:", error); // Log any error that occurs
+    res.status(500).json({
+      success: false,
+      message: error.message || "An error occurred while creating the order.",
+    });
+    console.error("Error response sent:", error.message); // Log error message on failure
   }
 };
+
 
 // Verify Payment Status and Update Order Status
 const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
@@ -47,6 +62,13 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     // 2. Find the order by paymentIntentId
     const order = await orderModel.findOne({ paymentIntentId });
 
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found.",
+      });
+    }
+
     // 3. Check the payment status and update the order
     if (paymentIntent.status === "succeeded") {
       // Payment succeeded, update order status
@@ -56,7 +78,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
 
       res.status(200).json({
         success: true,
-        message: "Payment successful and order updated",
+        message: "Payment successful and order updated.",
         order,
       });
     } else {
@@ -66,13 +88,16 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
 
       res.status(200).json({
         success: false,
-        message: "Payment failed",
+        message: "Payment failed.",
         order,
       });
     }
   } catch (error) {
     console.error("Error verifying payment status:", error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message || "An error occurred while verifying payment.",
+    });
   }
 };
 
@@ -86,9 +111,10 @@ const getOrders = async (req, res) => {
     res.status(200).json({ success: true, orders });
   } catch (error) {
     console.error("Error fetching orders:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to retrieve orders" });
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve orders.",
+    });
   }
 };
 
@@ -103,14 +129,15 @@ const updateOrderStatus = async (req, res) => {
     );
     res.status(200).json({
       success: true,
-      message: "Order status updated",
+      message: "Order status updated.",
       order: updatedOrder,
     });
   } catch (error) {
     console.error("Error updating order status:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to update order status" });
+    res.status(500).json({
+      success: false,
+      message: "Failed to update order status.",
+    });
   }
 };
 

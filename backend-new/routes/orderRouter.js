@@ -10,7 +10,7 @@ const authMiddleware = require("../middlewares/auth");
 const adminMiddleware = require("../middlewares/admin");
 
 // Create a new order
-router.post("/create", authMiddleware, createOrder);
+router.post("/create", createOrder);
 
 // Verify payment and update order status
 router.post(

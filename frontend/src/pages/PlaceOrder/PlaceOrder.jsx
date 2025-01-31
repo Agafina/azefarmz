@@ -1,98 +1,113 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
-import axios from "axios";
+import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
+import { OrderContext } from "../../context/OrderContext"; // Import OrderContext
 import { useNavigate } from "react-router-dom";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"; // Import Stripe hooks
+
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems, url } =
-    useContext(StoreContext);
-  const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+  const { getTotalCartAmount, cartItems } = useContext(StoreContext);
+  const { user } = useContext(AuthContext); // Access user data from AuthContext
+  const { createOrder } = useContext(OrderContext); // Access createOrder from OrderContext
+  const navigate = useNavigate();
+
+  const [address, setAddress] = useState({
     street: "",
     city: "",
     state: "",
     zipcode: "",
     country: "",
-    phone: "",
   });
 
+  // Stripe hooks
+  const stripe = useStripe();
+  const elements = useElements();
+  const [cardError, setCardError] = useState(null); // To handle Stripe CardElement errors
+
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData((data) => ({ ...data, [name]: value }));
+    const { name, value } = event.target;
+    setAddress((prev) => ({ ...prev, [name]: value }));
   };
 
-  const placeOrder = async(event) => {
+  const placeOrder = async (event) => {
     event.preventDefault();
-    let orderItems = [];
-    food_list.map((item) => {
-      if (cartItems[item._id] > 0) {
-        let itemInfo = item;
-        itemInfo["quantity"] = cartItems[item._id];
-        orderItems.push(itemInfo);
+
+    if (!user) {
+      alert("User not authenticated. Please log in.");
+      return;
+    }
+
+    const orderItems = Object.values(cartItems).map((item) => ({
+      productId: item._id,
+      quantity: item.quantity,
+    }));
+
+    const orderData = {
+      user: user._id, // Send user ID
+      address,
+      items: orderItems,
+      amount: getTotalCartAmount() + 2, // Including delivery fee
+    };
+
+    console.log("Order Data being sent:", orderData); // Log the data to check if it's correct
+
+    try {
+      // Use the createOrder function from the OrderContext to place the order
+      const response = await createOrder(orderData);
+
+      if (response.success) {
+        // Capture the paymentIntentId and clientSecret from the response
+        const { paymentIntentId, clientSecret } = response;
+
+        if (!stripe || !elements) {
+          console.log("Stripe.js has not yet loaded.");
+          return;
+        }
+
+        // Confirm the payment on the frontend using the clientSecret
+        const { error, paymentIntent } = await stripe.confirmCardPayment(
+          clientSecret,
+          {
+            payment_method: {
+              card: elements.getElement(CardElement), // Get the CardElement
+            },
+          }
+        );
+
+        if (error) {
+          setCardError(error.message); // Set the error message to display to the user
+          console.error("Payment failed:", error);
+        } else {
+          if (paymentIntent.status === "succeeded") {
+            // If payment is successful, redirect to the payment confirmation page
+            window.location.replace("/payment-success"); // You can customize this as needed
+          }
+        }
+      } else {
+        alert("Order Placement Failed");
       }
-    });
-    let orderData = {
-      address:data,
-      items:orderItems,
-      amount:getTotalCartAmount()+2,
-    }
-    let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}})
-    if(response.data.success){
-      const {session_url} = response.data;
-      window.location.replace(session_url);
-    }
-    else{
-      alert("Error");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("An error occurred. Please try again.");
     }
   };
-  const navigate = useNavigate()
-  useEffect(() =>{ 
-    if(!token){
-      navigate('/cart')
-      
-    }else if(getTotalCartAmount() ===0){
-      navigate('/cart')
+
+  useEffect(() => {
+    if (!user || getTotalCartAmount() === 0) {
+      navigate("/cart"); // Redirect to cart if user is not authenticated or cart is empty
     }
-  },[token])
+  }, [user, navigate, getTotalCartAmount]);
 
   return (
     <form className="place-order" onSubmit={placeOrder}>
       <div className="place-order-left">
-        <p className="title">Delivery information</p>
-        <div className="multi-fields">
-          <input
-            required
-            name="firstName"
-            onChange={onChangeHandler}
-            value={data.firstName}
-            type="text"
-            placeholder="First Name"
-          />
-          <input
-            required
-            name="lastName"
-            onChange={onChangeHandler}
-            value={data.lastName}
-            type="text"
-            placeholder="Last Name"
-          />
-        </div>
-        <input
-          required
-          name="email"
-          onChange={onChangeHandler}
-          value={data.email}
-          type="email"
-          placeholder="Email address"
-        />
+        <p className="title">Delivery Information</p>
         <input
           required
           name="street"
           onChange={onChangeHandler}
-          value={data.street}
+          value={address.street}
           type="text"
           placeholder="Street"
         />
@@ -101,7 +116,7 @@ const PlaceOrder = () => {
             required
             name="city"
             onChange={onChangeHandler}
-            value={data.city}
+            value={address.city}
             type="text"
             placeholder="City"
           />
@@ -109,7 +124,7 @@ const PlaceOrder = () => {
             required
             name="state"
             onChange={onChangeHandler}
-            value={data.state}
+            value={address.state}
             type="text"
             placeholder="State"
           />
@@ -119,48 +134,46 @@ const PlaceOrder = () => {
             required
             name="zipcode"
             onChange={onChangeHandler}
-            value={data.zipcode}
+            value={address.zipcode}
             type="text"
-            placeholder="zip code"
+            placeholder="Zip Code"
           />
           <input
             required
             name="country"
             onChange={onChangeHandler}
-            value={data.country}
+            value={address.country}
             type="text"
             placeholder="Country"
           />
         </div>
-        <input
-          required
-          name="phone"
-          onChange={onChangeHandler}
-          value={data.phone}
-          type="text"
-          placeholder="phone"
-        />
       </div>
+
       <div className="place-order-right">
         <div className="cart-total">
           <h2>Cart Total</h2>
-          <div className="">
+          <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>${getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <p>Delivery fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
+              <p>Delivery Fee</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount()}</b>
+              <b>
+                $
+                {getTotalCartAmount() === 0
+                  ? 0
+                  : (getTotalCartAmount() + 2.0).toFixed(2)}
+              </b>
             </div>
           </div>
-          <button type="submit">PROCEES TO PAYMENT</button>
+          <button type="submit">PROCEED TO PAYMENT</button>
         </div>
       </div>
     </form>
