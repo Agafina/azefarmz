@@ -26,20 +26,16 @@ const useAxios = () => {
         data: requestData ? JSON.stringify(requestData) : null,
       };
 
-      console.log("requestData", options.data)
+      console.log("requestData", options.data);
 
       // Perform the request using axios
       const response = await axios(`${backendUrl}/${url}`, options);
 
-      if (response.status === 200) {
-        setData(response.data);
-        if (method !== "GET") {
-          toast.success(response.data.message || "Request Successful");
-        }
-        return response.data;
-      } else {
-        throw new Error(response.data.message || "An error occurred");
+      setData(response.data);
+      if (method !== "GET") {
+        toast.success(response.data.message || "Request Successful");
       }
+      return response.data;
     } catch (error) {
       toast.error(error?.message || "An error occurred");
       setError(error?.message || "An error occurred");

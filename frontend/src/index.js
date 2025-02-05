@@ -12,9 +12,8 @@ import { OrderContextProvider } from "./context/OrderContext";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe(
-  "sk_test_51PI9O8DVsIqfAtOn8rl9nsa907dp9BFissmVOfaSICyJTU1wYRJax66O6MXqP1ivpO7TQNyHocbZQqtlLt11rRpm00RxDgLi7Z"
-);  
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

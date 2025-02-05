@@ -10,9 +10,7 @@ export const OrderContext = createContext();
 export const OrderContextProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
-  const { loading, data, fetchRequest } = useAxios(); // Use the custom useAxios hook
-
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const { loading, fetchRequest } = useAxios(); // Use the custom useAxios hook
 
   // Create a new order
   const createOrder = async (orderData) => {

@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
-import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
-import { OrderContext } from "../../context/OrderContext"; // Import OrderContext
-import { useNavigate } from "react-router-dom";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"; // Import Stripe hooks
+import { AuthContext } from "../../context/AuthContext";
+import { OrderContext } from "../../context/OrderContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, cartItems } = useContext(StoreContext);
-  const { user } = useContext(AuthContext); // Access user data from AuthContext
-  const { createOrder } = useContext(OrderContext); // Access createOrder from OrderContext
+  const { user } = useContext(AuthContext);
+  const { createOrder } = useContext(OrderContext);
   const navigate = useNavigate();
+  const location = useLocation(); 
 
   const [address, setAddress] = useState({
     street: "",
@@ -20,10 +21,18 @@ const PlaceOrder = () => {
     country: "",
   });
 
+  const [cardError, setCardError] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
   // Stripe hooks
   const stripe = useStripe();
   const elements = useElements();
-  const [cardError, setCardError] = useState(null); // To handle Stripe CardElement errors
+
+  useEffect(() => {
+    if (!user || getTotalCartAmount() === 0) {
+      navigate("/cart");
+    }
+  }, [user, navigate, getTotalCartAmount]);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -38,51 +47,56 @@ const PlaceOrder = () => {
       return;
     }
 
+    if (!stripe || !elements) {
+      console.error("Stripe.js has not loaded.");
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+    if (!cardElement) {
+      console.error("CardElement not found.");
+      return;
+    }
+
     const orderItems = Object.values(cartItems).map((item) => ({
       productId: item._id,
       quantity: item.quantity,
     }));
 
     const orderData = {
-      user: user._id, // Send user ID
+      user: user._id,
       address,
       items: orderItems,
       amount: getTotalCartAmount() + 2, // Including delivery fee
     };
 
-    console.log("Order Data being sent:", orderData); // Log the data to check if it's correct
-
+    setIsProcessing(true);
     try {
-      // Use the createOrder function from the OrderContext to place the order
       const response = await createOrder(orderData);
 
       if (response.success) {
-        // Capture the paymentIntentId and clientSecret from the response
-        const { paymentIntentId, clientSecret } = response;
+        const { clientSecret } = response;
 
-        if (!stripe || !elements) {
-          console.log("Stripe.js has not yet loaded.");
-          return;
-        }
-
-        // Confirm the payment on the frontend using the clientSecret
         const { error, paymentIntent } = await stripe.confirmCardPayment(
           clientSecret,
           {
             payment_method: {
-              card: elements.getElement(CardElement), // Get the CardElement
+              card: cardElement,
             },
           }
         );
 
         if (error) {
-          setCardError(error.message); // Set the error message to display to the user
+          setCardError(error.message);
           console.error("Payment failed:", error);
-        } else {
-          if (paymentIntent.status === "succeeded") {
-            // If payment is successful, redirect to the payment confirmation page
-            window.location.replace("/payment-success"); // You can customize this as needed
-          }
+          setIsProcessing(false);
+        } else if (paymentIntent.status === "succeeded") {
+          // Use current language from URL for redirection
+          const currentLang = location.pathname.split("/")[1] || "en";
+          // Navigate with language parameter and payment intent ID
+          navigate(
+            `/${currentLang}/payment-status?payment_intent=${paymentIntent.id}`
+          );
         }
       } else {
         alert("Order Placement Failed");
@@ -90,14 +104,10 @@ const PlaceOrder = () => {
     } catch (error) {
       console.error("Error placing order:", error);
       alert("An error occurred. Please try again.");
+    } finally {
+      setIsProcessing(false);
     }
   };
-
-  useEffect(() => {
-    if (!user || getTotalCartAmount() === 0) {
-      navigate("/cart"); // Redirect to cart if user is not authenticated or cart is empty
-    }
-  }, [user, navigate, getTotalCartAmount]);
 
   return (
     <form className="place-order" onSubmit={placeOrder}>
@@ -173,7 +183,16 @@ const PlaceOrder = () => {
               </b>
             </div>
           </div>
-          <button type="submit">PROCEED TO PAYMENT</button>
+
+          <div className="card-payment">
+            <p>Enter Payment Details</p>
+            <CardElement />
+            {cardError && <p className="error">{cardError}</p>}
+          </div>
+
+          <button type="submit" disabled={isProcessing}>
+            {isProcessing ? "Processing..." : "PROCEED TO PAYMENT"}
+          </button>
         </div>
       </div>
     </form>
