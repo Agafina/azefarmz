@@ -10,12 +10,12 @@ const adminMiddleware = require("../middlewares/admin");
 const authMiddleware = require("../middlewares/auth");
 
 // Add a new product (only accessible by admin)
-router.post("/add", authMiddleware, adminMiddleware, upload.single("image"), addProduct);
+router.post("/add", adminMiddleware, upload.single("image"), addProduct);
 
 // List all products
-router.get("/", authMiddleware, listProducts);
+router.get("/", listProducts);
 
 // Remove a product (only accessible by admin)
-router.delete("/remove", authMiddleware, adminMiddleware, removeProduct);
+router.delete("/remove", adminMiddleware, removeProduct);
 
 module.exports = router;

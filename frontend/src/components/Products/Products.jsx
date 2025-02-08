@@ -1,14 +1,19 @@
-import React, { useContext, useState } from "react";
 import "./Products.css";
-import { productCategories, products } from "../../assets/data";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { useTranslation } from "react-i18next"; // Import useTranslation
+import { useProductContext } from "../../context/ProductContext";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const { addToCart } = useContext(StoreContext);
+  const { products, categories } = useProductContext();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+  const productCategories = categories;
+
   const { t } = useTranslation(); // Initialize the translation hook
 
   // Filtered products based on category and search term
@@ -25,9 +30,7 @@ const Products = () => {
     <div className="products-section">
       <h2>{t("products.maintitle")}</h2> {/* Translate title */}
       <h1>{t("products.subtitle")}</h1> {/* Translate subtitle */}
-
       <br />
-
       {/* Categories Filter */}
       <div className="categories">
         <button
@@ -46,30 +49,32 @@ const Products = () => {
           </button>
         ))}
       </div>
-
       {/* Search Bar */}
       <div className="search-bar">
         <input
           type="text"
-          placeholder={t("products.searchPlaceholder")} 
+          placeholder={t("products.searchPlaceholder")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-
       {/* Products Grid */}
       <div className="products-grid">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.name} />
+              <img src={`${backendUrl}/images/${product.image}`} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
-              <p className="price">${product.price.toFixed(2)} {" "} {product.unit}</p>
+              <p className="price">
+                ${product.price.toFixed(2)} {product.unit}
+              </p>
               <div className="product-actions">
-               <div> <Link to={`/products/${product.id}`} className="details-link">
-                  {t("products.viewDetails")}
-                </Link>
+                <div>
+                  {" "}
+                  <Link to={`/products/${product.id}`} className="details-link">
+                    {t("products.viewDetails")}
+                  </Link>
                 </div>
                 <button onClick={() => addToCart(product)}>
                   {t("products.addToCart")}
@@ -78,10 +83,9 @@ const Products = () => {
             </div>
           ))
         ) : (
-          <p>{t("products.noProductsFound")}</p> 
+          <p>{t("products.noProductsFound")}</p>
         )}
       </div>
-
       {/* Call-to-Action */}
       <div className="products-cta">
         <p>{t("products.cta.text")}</p> {/* Translate CTA text */}
