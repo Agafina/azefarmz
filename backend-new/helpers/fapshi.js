@@ -1,9 +1,13 @@
+require("dotenv").config();
 const axios = require("axios");
-const baseUrl = "https://live.fapshi.com";
+const baseUrl = "https://sandbox.fapshi.com";
 const headers = {
-  apiuser: "replace_me_with_apiuser",
-  apikey: "replace_me_with_apikey",
+  apiuser: process.env.FAPSHI_API_USER,
+  apikey: process.env.FAPSHI_API_KEY,
 };
+
+console.log("API User:", headers.apiuser ? "Loaded ✅" : "Not Loaded ❌");
+console.log("API Key:", headers.apikey ? "Loaded ✅" : "Not Loaded ❌");
 
 module.exports = {
   /** 

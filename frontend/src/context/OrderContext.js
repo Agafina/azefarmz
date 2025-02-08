@@ -35,14 +35,15 @@ export const OrderContextProvider = ({ children }) => {
   };
 
   // Verify payment and update order status
-  const verifyPayment = async (paymentIntentId) => {
+  const verifyPayment = async (transId) => {
     try {
-      const response = await fetchRequest("api/orders/verify-payment", "POST", {
-        paymentIntentId,
-      });
+      const response = await fetchRequest(
+        `api/orders/verify-payment/${transId}`,
+        "GET"
+      );
       if (response.success) {
         toast.success("Payment successful and order updated");
-        return response; // Return updated order status
+        return response;
       } else {
         throw new Error(response.message || "Failed to verify payment");
       }

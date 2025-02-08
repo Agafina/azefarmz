@@ -19,6 +19,12 @@ const PlaceOrder = () => {
     country: "",
   });
 
+  const [paymentInfo, setPaymentInfo] = useState({
+    medium: "",
+    phone: "",
+    message: "",
+  });
+
   const [orderError, setOrderError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -30,7 +36,11 @@ const PlaceOrder = () => {
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setAddress((prev) => ({ ...prev, [name]: value }));
+    if (name in address) {
+      setAddress((prev) => ({ ...prev, [name]: value }));
+    } else {
+      setPaymentInfo((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const placeOrder = async (event) => {
@@ -51,20 +61,17 @@ const PlaceOrder = () => {
       address,
       items: orderItems,
       amount: getTotalCartAmount() + 2,
+      ...paymentInfo,
     };
 
     setIsProcessing(true);
     try {
       const response = await createOrder(orderData);
 
-      if (response.success) {
-        const { paymentUrl } = response;
-
-        // Redirect the user to the CinetPay payment URL
-        window.location.href = paymentUrl;
-      } else {
+      if (!response.success) {
         setOrderError("Order Placement Failed");
         setIsProcessing(false);
+        navigate(`/payment-status/${response.data.paymentata.transId}`)
       }
     } catch (error) {
       console.error("Error placing order:", error);
@@ -140,7 +147,7 @@ const PlaceOrder = () => {
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                XAF 
+                XAF
                 {getTotalCartAmount() === 0
                   ? 0
                   : (getTotalCartAmount() + 2.0).toFixed(2)}
@@ -148,8 +155,32 @@ const PlaceOrder = () => {
             </div>
           </div>
 
-          <div className="card-payment">
-            <p>Enter Payment Details</p>
+          <div className="payment-info">
+            <p className="title">Payment Information</p>
+            <select
+              required
+              name="medium"
+              onChange={onChangeHandler}
+              value={paymentInfo.medium}
+            >
+              <option value="">Select Payment Method</option>
+              <option value="mobile money">Mobile Money</option>
+              <option value="orange money">Orange Money</option>
+            </select>
+            <input
+              required
+              name="phone"
+              onChange={onChangeHandler}
+              value={paymentInfo.phone}
+              type="text"
+              placeholder="Phone Number"
+            />
+            <textarea
+              name="message"
+              onChange={onChangeHandler}
+              value={paymentInfo.message}
+              placeholder="Message (optional)"
+            />
             {orderError && <p className="error">{orderError}</p>}
           </div>
 

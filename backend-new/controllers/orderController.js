@@ -4,47 +4,52 @@ const { createPayment, verifyPayment } = require("../helpers/pay"); // Import th
 
 // Create a new order with Fapshi payment integration
 const createOrder = async (req, res) => {
-  console.log("Received headers:", req.headers);
-  console.log("Received body:", req.body);
-
   const { user, items, medium, amount, address, phone, message } = req.body;
   const deliveryAddress = address;
   const userId = user;
 
   try {
+    const foundUser = await userModel.findById(userId);
+    if (!foundUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const { name, email } = foundUser;
 
-        const foundUser = await userModel.findById(userId);
-        if (!foundUser) {
-          return res.status(404).json({
-            success: false,
-            message: "User not found",
-          });
-        }
-        const { name, email } = foundUser;
-
-        console.log("Received order data:", {
-          user,
-          items,
-          medium,
-          name,
-          email,
-          amount,
-          deliveryAddress,
-          phone,
-          userId,
-          message,
-        });
+    console.log("Received order data:", {
+      user,
+      items,
+      medium,
+      name,
+      email,
+      amount,
+      deliveryAddress,
+      phone,
+      userId,
+      message,
+    });
 
     // 1. Generate a unique transaction ID
     const externalId = `TX_${new Date().getTime()}`;
 
     // 2. Create payment using Fapshi
-    console.log("Creating payment with amount:", amount);
-    const paymentResponse = await createPayment(amount, phone, medium, name, email, userId, externalId, message);
-    console.log("Payment response:", paymentResponse);
+    const paymentResponse = await createPayment(
+      amount,
+      phone,
+      medium,
+      name,
+      email,
+      userId,
+      externalId,
+      message
+    );
 
     // 3. Extract required payment data
     const { transId } = paymentResponse;
+
+    console.log("Payment Response", paymentResponse)
 
     // 4. Create a new order with proper payment data
     const newOrder = new orderModel({
@@ -58,9 +63,7 @@ const createOrder = async (req, res) => {
       },
     });
 
-    console.log("Saving new order:", newOrder);
     await newOrder.save();
-    console.log("Order saved successfully:", newOrder);
 
     // 5. Return transaction ID to the frontend
     res.status(201).json({
@@ -69,7 +72,6 @@ const createOrder = async (req, res) => {
       order: newOrder,
       transactionId: transId,
     });
-    console.log("Response sent with order details and transaction ID");
   } catch (error) {
     console.error("Error creating order:", error);
     res.status(500).json({
@@ -80,13 +82,16 @@ const createOrder = async (req, res) => {
   }
 };
 
-
 // Verify Payment Status and Update Order Status using Fapshi
 const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
-  const { transactionId } = req.body; // Get transactionId sent from the frontend
+  const { transId } = req.params; // Get transactionId sent from the frontend
+
+  const transactionId = transId
+  console.log("Received transaction ID:", transactionId); // Log the transactionId to verify it's coming in
 
   try {
     // 1. Retrieve the payment status from Fapshi
+    console.log("Retrieving payment status for transaction ID:", transactionId);
     const paymentStatus = await verifyPayment(transactionId);
     console.log("Payment status:", paymentStatus); // Log payment status
 
@@ -96,6 +101,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     });
 
     if (!order) {
+      console.log("Order not found for transaction ID:", transactionId);
       return res.status(404).json({
         success: false,
         message: "Order not found.",
@@ -105,6 +111,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     // 3. Check the payment status and update the order
     if (paymentStatus.status === "SUCCESSFUL") {
       // Payment succeeded, update order status
+      console.log("Payment successful, updating order status...");
       order.status = "SUCCESSFUL";
       order.paid = true; // Mark payment as completed
       await order.save();
@@ -116,11 +123,12 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
       });
     } else {
       // Payment failed, update order status
+      console.log("Payment failed, updating order status...");
       order.status = paymentStatus.status;
       await order.save();
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Payment not completed.",
         order,
       });
@@ -136,7 +144,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
 
 // Get all orders for a user
 const getOrders = async (req, res) => {
-  const { userId } = req.params; // Get the user ID from the URL params
+  const { userId } = req.params;
   try {
     const orders = await orderModel
       .find({ user: userId })

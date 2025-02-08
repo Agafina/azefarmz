@@ -71,7 +71,7 @@ function App() {
           <Route path="/:lang/order" element={<PlaceOrder />} />
           <Route path="/:lang/verify" element={<Verify />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
-          <Route path="/:lang/payment-status" element={<PaymentStatus />} />
+          <Route path="/:lang/payment-status/:transId" element={<PaymentStatus />} />
         </Routes>
       </div>
       <Footer />
