@@ -34,9 +34,31 @@ const orderSchema = new mongoose.Schema(
       zip: String,
       country: String,
     },
-    paymentIntentId: {
-      type: String,
-      required: false,
+    paymentData: {
+      paymentUrl: {
+        type: String,
+        required: false,
+      },
+      status: {
+        type: String,
+        default: "Pending",
+      },
+      paymentMethod: {
+        type: String,
+        required: false,
+      },
+      operatorId: {
+        type: String,
+        required: false,
+      },
+      paymentDate: {
+        type: Date,
+        required: false,
+      },
+      fundAvailabilityDate: {
+        type: Date,
+        required: false,
+      },
     },
     paid: {
       type: Boolean,

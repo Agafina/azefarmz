@@ -3,15 +3,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { AuthContext } from "../../context/AuthContext";
 import { OrderContext } from "../../context/OrderContext";
-import { useLocation, useNavigate } from "react-router-dom";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, cartItems } = useContext(StoreContext);
   const { user } = useContext(AuthContext);
   const { createOrder } = useContext(OrderContext);
   const navigate = useNavigate();
-  const location = useLocation(); 
 
   const [address, setAddress] = useState({
     street: "",
@@ -21,12 +19,8 @@ const PlaceOrder = () => {
     country: "",
   });
 
-  const [cardError, setCardError] = useState(null);
+  const [orderError, setOrderError] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-
-  // Stripe hooks
-  const stripe = useStripe();
-  const elements = useElements();
 
   useEffect(() => {
     if (!user || getTotalCartAmount() === 0) {
@@ -47,17 +41,6 @@ const PlaceOrder = () => {
       return;
     }
 
-    if (!stripe || !elements) {
-      console.error("Stripe.js has not loaded.");
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
-      console.error("CardElement not found.");
-      return;
-    }
-
     const orderItems = Object.values(cartItems).map((item) => ({
       productId: item._id,
       quantity: item.quantity,
@@ -67,7 +50,7 @@ const PlaceOrder = () => {
       user: user._id,
       address,
       items: orderItems,
-      amount: getTotalCartAmount() + 2, // Including delivery fee
+      amount: getTotalCartAmount() + 2,
     };
 
     setIsProcessing(true);
@@ -75,36 +58,17 @@ const PlaceOrder = () => {
       const response = await createOrder(orderData);
 
       if (response.success) {
-        const { clientSecret } = response;
+        const { paymentUrl } = response;
 
-        const { error, paymentIntent } = await stripe.confirmCardPayment(
-          clientSecret,
-          {
-            payment_method: {
-              card: cardElement,
-            },
-          }
-        );
-
-        if (error) {
-          setCardError(error.message);
-          console.error("Payment failed:", error);
-          setIsProcessing(false);
-        } else if (paymentIntent.status === "succeeded") {
-          // Use current language from URL for redirection
-          const currentLang = location.pathname.split("/")[1] || "en";
-          // Navigate with language parameter and payment intent ID
-          navigate(
-            `/${currentLang}/payment-status?payment_intent=${paymentIntent.id}`
-          );
-        }
+        // Redirect the user to the CinetPay payment URL
+        window.location.href = paymentUrl;
       } else {
-        alert("Order Placement Failed");
+        setOrderError("Order Placement Failed");
+        setIsProcessing(false);
       }
     } catch (error) {
       console.error("Error placing order:", error);
-      alert("An error occurred. Please try again.");
-    } finally {
+      setOrderError("An error occurred. Please try again.");
       setIsProcessing(false);
     }
   };
@@ -165,18 +129,18 @@ const PlaceOrder = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount().toFixed(2)}</p>
+              <p>XAF {getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 2.0}</p>
+              <p>XAF {getTotalCartAmount() === 0 ? 0 : 2.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                $
+                XAF 
                 {getTotalCartAmount() === 0
                   ? 0
                   : (getTotalCartAmount() + 2.0).toFixed(2)}
@@ -186,8 +150,7 @@ const PlaceOrder = () => {
 
           <div className="card-payment">
             <p>Enter Payment Details</p>
-            <CardElement />
-            {cardError && <p className="error">{cardError}</p>}
+            {orderError && <p className="error">{orderError}</p>}
           </div>
 
           <button type="submit" disabled={isProcessing}>

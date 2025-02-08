@@ -1,66 +1,78 @@
 const orderModel = require("../models/Order");
-const {
-  createPaymentIntent,
-  verifyPaymentIntent,
-} = require("../helpers/stripe"); // Import the Stripe helper functions
+const { createPayment, verifyPayment } = require("../helpers/pay"); // Import the Stripe helper functions
 
-// Create a new order
+// Create a new order with CinetPay payment integration
 const createOrder = async (req, res) => {
-  console.log("Received headers:", req.headers); // Log the incoming data
-  console.log("Received body:", req.body); // Log the incoming data
+  console.log("Received headers:", req.headers);
+  console.log("Received body:", req.body);
+
   const { user, items, amount, address } = req.body;
-  const deliveryAddress = address
-  console.log("Received order data:", { user, items, amount, deliveryAddress }); // Log the incoming data
+  const deliveryAddress = address;
+  console.log("Received order data:", { user, items, amount, deliveryAddress });
 
   try {
-    // 1. Create payment intent
-    console.log("Creating payment intent with amount:", amount); // Log amount being used to create payment intent
-    const paymentIntent = await createPaymentIntent(Math.round(amount * 100)); // Pass the amount for payment
-    console.log("Payment intent created:", paymentIntent); // Log the created payment intent
+    // 1. Generate a unique transaction ID
+    const transactionId = `TX_${new Date().getTime()}`;
 
-    // 2. Create a new order and save the paymentIntentId
+    // 2. Create payment using CinetPay
+    console.log("Creating payment with amount:", amount);
+    const paymentResponse = await createPayment(amount, transactionId);
+    console.log("Payment response:", paymentResponse);
+
+    // 3. Extract required payment data
+    const { payment_token, payment_url } = paymentResponse.data || {};
+
+    // 4. Create a new order with proper payment data
     const newOrder = new orderModel({
       user,
       items,
       amount,
       deliveryAddress,
-      paymentIntentId: paymentIntent.id, // Save the paymentIntentId with the order
+      paymentData: {
+        paymentUrl: payment_url, // Save the payment URL
+        paymentToken: payment_token, // Save the payment token
+        operatorId: transactionId, // Save the transaction ID
+        status: "Pending", // Default payment status
+      },
     });
 
-    console.log("Saving new order:", newOrder); // Log the order being saved
+    console.log("Saving new order:", newOrder);
     await newOrder.save();
-    console.log("Order saved successfully:", newOrder); // Log after order is saved successfully
+    console.log("Order saved successfully:", newOrder);
 
-    // 3. Return the clientSecret and paymentIntentId to the frontend
+    // 5. Return the payment URL and token to the frontend
     res.status(201).json({
       success: true,
       message: "Order created successfully",
       order: newOrder,
-      clientSecret: paymentIntent.client_secret, // Send the clientSecret for frontend payment confirmation
-      paymentIntentId: paymentIntent.id, // Send the paymentIntentId for later verification
+      paymentUrl: payment_url,
+      paymentToken: payment_token,
+      transactionId,
     });
-    console.log("Response sent with order details and paymentIntentId"); // Log when response is sent to frontend
+    console.log("Response sent with order details and payment URL");
   } catch (error) {
-    console.error("Error creating order:", error); // Log any error that occurs
+    console.error("Error creating order:", error);
     res.status(500).json({
       success: false,
       message: error.message || "An error occurred while creating the order.",
     });
-    console.error("Error response sent:", error.message); // Log error message on failure
+    console.error("Error response sent:", error.message);
   }
 };
 
-
-// Verify Payment Status and Update Order Status
+// Verify Payment Status and Update Order Status using CinetPay
 const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
-  const { paymentIntentId } = req.body; // Get paymentIntentId sent from the frontend
+  const { transactionId } = req.body; // Get transactionId sent from the frontend
 
   try {
-    // 1. Retrieve the payment intent status
-    const paymentIntent = await verifyPaymentIntent(paymentIntentId); // Verify payment status
+    // 1. Retrieve the payment status from CinetPay
+    const paymentStatus = await verifyPayment(transactionId);
+    console.log("Payment status:", paymentStatus); // Log payment status
 
-    // 2. Find the order by paymentIntentId
-    const order = await orderModel.findOne({ paymentIntentId });
+    // 2. Find the order by transactionId
+    const order = await orderModel.findOne({
+      "paymentData.operator_id": transactionId,
+    });
 
     if (!order) {
       return res.status(404).json({
@@ -70,7 +82,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     }
 
     // 3. Check the payment status and update the order
-    if (paymentIntent.status === "succeeded") {
+    if (paymentStatus.status === "ACCEPTED") {
       // Payment succeeded, update order status
       order.status = "Paid";
       order.paid = true; // Mark payment as completed

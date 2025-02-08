@@ -27,9 +27,9 @@ const Cart = () => {
             <div className="cart-items-title cart-items-item">
               <img src={item.image} alt={item.name} />
               <p>{item.name}</p>
-              <p>${item.price.toFixed(2)}</p>
+              <p>XAF {item.price.toFixed(2)}</p>
               <p>{item.quantity}</p>
-              <p>${(item.price * item.quantity).toFixed(2)}</p>
+              <p>XAF {(item.price * item.quantity).toFixed(2)}</p>
               <div className="cart-adjust">
                 <span
                   onClick={() => removeFromCart(item._id, 1)}
@@ -54,18 +54,18 @@ const Cart = () => {
           <div className="">
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount().toFixed(2)}</p>
+              <p>XAF {getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 2.0}</p>
+              <p>XAF {getTotalCartAmount() === 0 ? 0 : 2.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                $
+                XAF 
                 {getTotalCartAmount() === 0
                   ? 0
                   : (getTotalCartAmount() + 2.0).toFixed(2)}
