@@ -1,26 +1,50 @@
 const orderModel = require("../models/Order");
+const userModel = require("../models/User");
 const { createPayment, verifyPayment } = require("../helpers/pay"); // Import the Stripe helper functions
 
-// Create a new order with CinetPay payment integration
+// Create a new order with Fapshi payment integration
 const createOrder = async (req, res) => {
   console.log("Received headers:", req.headers);
   console.log("Received body:", req.body);
 
-  const { user, items, amount, address } = req.body;
+  const { user, items, medium, amount, address, phone, message } = req.body;
   const deliveryAddress = address;
-  console.log("Received order data:", { user, items, amount, deliveryAddress });
+  const userId = user;
 
   try {
-    // 1. Generate a unique transaction ID
-    const transactionId = `TX_${new Date().getTime()}`;
 
-    // 2. Create payment using CinetPay
+        const foundUser = await userModel.findById(userId);
+        if (!foundUser) {
+          return res.status(404).json({
+            success: false,
+            message: "User not found",
+          });
+        }
+        const { name, email } = foundUser;
+
+        console.log("Received order data:", {
+          user,
+          items,
+          medium,
+          name,
+          email,
+          amount,
+          deliveryAddress,
+          phone,
+          userId,
+          message,
+        });
+
+    // 1. Generate a unique transaction ID
+    const externalId = `TX_${new Date().getTime()}`;
+
+    // 2. Create payment using Fapshi
     console.log("Creating payment with amount:", amount);
-    const paymentResponse = await createPayment(amount, transactionId);
+    const paymentResponse = await createPayment(amount, phone, medium, name, email, userId, externalId, message);
     console.log("Payment response:", paymentResponse);
 
     // 3. Extract required payment data
-    const { payment_token, payment_url } = paymentResponse.data || {};
+    const { transId } = paymentResponse;
 
     // 4. Create a new order with proper payment data
     const newOrder = new orderModel({
@@ -29,10 +53,8 @@ const createOrder = async (req, res) => {
       amount,
       deliveryAddress,
       paymentData: {
-        paymentUrl: payment_url, // Save the payment URL
-        paymentToken: payment_token, // Save the payment token
-        operatorId: transactionId, // Save the transaction ID
-        status: "Pending", // Default payment status
+        transId: transId, // Save the transaction ID
+        status: "PENDING", // Default payment status
       },
     });
 
@@ -40,16 +62,14 @@ const createOrder = async (req, res) => {
     await newOrder.save();
     console.log("Order saved successfully:", newOrder);
 
-    // 5. Return the payment URL and token to the frontend
+    // 5. Return transaction ID to the frontend
     res.status(201).json({
       success: true,
       message: "Order created successfully",
       order: newOrder,
-      paymentUrl: payment_url,
-      paymentToken: payment_token,
-      transactionId,
+      transactionId: transId,
     });
-    console.log("Response sent with order details and payment URL");
+    console.log("Response sent with order details and transaction ID");
   } catch (error) {
     console.error("Error creating order:", error);
     res.status(500).json({
@@ -60,18 +80,19 @@ const createOrder = async (req, res) => {
   }
 };
 
-// Verify Payment Status and Update Order Status using CinetPay
+
+// Verify Payment Status and Update Order Status using Fapshi
 const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
   const { transactionId } = req.body; // Get transactionId sent from the frontend
 
   try {
-    // 1. Retrieve the payment status from CinetPay
+    // 1. Retrieve the payment status from Fapshi
     const paymentStatus = await verifyPayment(transactionId);
     console.log("Payment status:", paymentStatus); // Log payment status
 
     // 2. Find the order by transactionId
     const order = await orderModel.findOne({
-      "paymentData.operator_id": transactionId,
+      "paymentData.transId": transactionId,
     });
 
     if (!order) {
@@ -82,9 +103,9 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     }
 
     // 3. Check the payment status and update the order
-    if (paymentStatus.status === "ACCEPTED") {
+    if (paymentStatus.status === "SUCCESSFUL") {
       // Payment succeeded, update order status
-      order.status = "Paid";
+      order.status = "SUCCESSFUL";
       order.paid = true; // Mark payment as completed
       await order.save();
 
@@ -95,12 +116,12 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
       });
     } else {
       // Payment failed, update order status
-      order.status = "Failed";
+      order.status = paymentStatus.status;
       await order.save();
 
       res.status(200).json({
         success: false,
-        message: "Payment failed.",
+        message: "Payment not completed.",
         order,
       });
     }
@@ -130,32 +151,8 @@ const getOrders = async (req, res) => {
   }
 };
 
-// Update the order status
-const updateOrderStatus = async (req, res) => {
-  const { orderId, status } = req.body;
-  try {
-    const updatedOrder = await orderModel.findByIdAndUpdate(
-      orderId,
-      { status },
-      { new: true }
-    );
-    res.status(200).json({
-      success: true,
-      message: "Order status updated.",
-      order: updatedOrder,
-    });
-  } catch (error) {
-    console.error("Error updating order status:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to update order status.",
-    });
-  }
-};
-
 module.exports = {
   createOrder,
   verifyPaymentAndUpdateOrderStatus,
   getOrders,
-  updateOrderStatus,
 };

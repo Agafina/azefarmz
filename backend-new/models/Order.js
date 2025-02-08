@@ -35,27 +35,19 @@ const orderSchema = new mongoose.Schema(
       country: String,
     },
     paymentData: {
-      paymentUrl: {
-        type: String,
-        required: false,
-      },
       status: {
         type: String,
         default: "Pending",
       },
-      paymentMethod: {
+      medium: {
         type: String,
         required: false,
       },
-      operatorId: {
+      transId: {
         type: String,
         required: false,
       },
-      paymentDate: {
-        type: Date,
-        required: false,
-      },
-      fundAvailabilityDate: {
+      dateInitiated: {
         type: Date,
         required: false,
       },

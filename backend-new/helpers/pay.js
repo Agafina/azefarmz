@@ -1,33 +1,40 @@
-const CINETPAY = require("./cinetpay");
+const FAPSHI = require("./fapshi");
 require("dotenv").config();
 
-const cinetpay = new CINETPAY(
-  process.env.CINETPAY_API_KEY,
-  Number(process.env.CINETPAY_SITE_ID),
-  process.env.CINETPAY_NOTIFY_URL
-);
-
-// Create Payment
+// Create Payment using Fapshi's directPay
 const createPayment = async (
   amount,
-  transactionId
+  phone,
+  medium,
+  name,
+  email,
+  userId,
+  externalId,
+  message
 ) => {
   try {
-    const paymentResponse = await cinetpay.pay(
+    const paymentData = {
       amount,
-      transactionId
-    );
+      phone,
+      medium,
+      name,
+      email,
+      userId,
+      externalId,
+      message,
+    };
+    const paymentResponse = await FAPSHI.directPay(paymentData);
     return paymentResponse;
   } catch (error) {
     throw new Error("Error creating payment: " + error.message);
   }
 };
 
-// Verify Payment
+// Verify Payment using Fapshi's paymentStatus
 const verifyPayment = async (transactionId) => {
   try {
-    const verificationResponse = await cinetpay.checkPayStatus(transactionId);
-    return verificationResponse.data;
+    const verificationResponse = await FAPSHI.paymentStatus(transactionId);
+    return verificationResponse;
   } catch (error) {
     throw new Error("Error verifying payment: " + error.message);
   }
