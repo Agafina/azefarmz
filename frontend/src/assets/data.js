@@ -367,7 +367,7 @@ export const products = [
     _id: "64b6f87a2c4f3a9b6a0e4d1o",
     name: "Eucalyptus Essential Oils",
     description:
-    "Natural essential oils extracted from eucalyptus, perfect for relaxation.",
+      "Natural essential oils extracted from eucalyptus, perfect for relaxation.",
     price: 1900,
     category: "Eucalyptus",
     unit: "100ml",
@@ -378,7 +378,7 @@ export const products = [
     _id: "64b6f87a2c4f3a9b6a0e4d1p",
     name: "Handcrafted Furniture",
     description:
-    "Beautifully handcrafted furniture made from sustainable eucalyptus wood.",
+      "Beautifully handcrafted furniture made from sustainable eucalyptus wood.",
     price: 9900,
     category: "Eucalyptus",
     unit: "per item",
@@ -428,4 +428,57 @@ export const team = {
       image: "https://i.pravatar.cc/150?img=47",
     },
   ],
+};
+
+export const sustainability = {
+  title: "sustainability.title",
+  description: "sustainability.description",
+  sections: {
+    environmental: {
+      title: "sustainability.sections.environmental.title",
+      content: [
+        "sustainability.sections.environmental.content.0",
+        "sustainability.sections.environmental.content.1",
+        "sustainability.sections.environmental.content.2",
+        "sustainability.sections.environmental.content.3",
+        "sustainability.sections.environmental.content.4",
+      ],
+    },
+    economic: {
+      title: "sustainability.sections.economic.title",
+      content: [
+        "sustainability.sections.economic.content.0",
+        "sustainability.sections.economic.content.1",
+        "sustainability.sections.economic.content.2",
+      ],
+    },
+    social: {
+      title: "sustainability.sections.social.title",
+      content: [
+        "sustainability.sections.social.content.0",
+        "sustainability.sections.social.content.1",
+        "sustainability.sections.social.content.2",
+        "sustainability.sections.social.content.3",
+        "sustainability.sections.social.content.4",
+      ],
+    },
+  },
+  benefits: {
+    title: "sustainability.title",
+    list: [
+      "sustainability.benefits.list.0",
+      "sustainability.benefits.list.1",
+      "sustainability.benefits.list.2",
+      "sustainability.benefits.list.3",
+    ],
+  },
+  cta: {
+     title: "sustainability.cta.title",
+     content: "sustainability.cta.content",
+     button: "sustainability.cta.button",
+     },
+  contact: {
+    email: "sustainability.contact.email",
+    website: "sustainability.contact.website",
+  },
 };

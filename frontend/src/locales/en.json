@@ -193,5 +193,57 @@
   "shopOnlineHeader": {
     "title": "Bring the Farm to Your Doorstep!",
     "description": "Browse our online store to purchase fresh produce and value-added products. Experience the goodness of farm-fresh products delivered with care!"
+  },
+  "sustainability": {
+    "title": "Sustainability in Agriculture",
+    "description": "At Aze Farms, we are committed to promoting sustainable agricultural practices that ensure food security, environmental health, and economic viability for future generations. Sustainable agriculture balances the needs of people, planet, and profit by integrating eco-friendly farming techniques, resource efficiency, and community engagement.",
+    "sections": {
+      "environmental": {
+        "title": "Protecting the Environment and Climate",
+        "content": [
+          "Soil Health & Conservation: Practices like crop rotation, cover cropping, composting, and reduced tillage help maintain soil fertility, prevent erosion, and support biodiversity.",
+          "Water Management: Drip irrigation, rainwater harvesting, and soil moisture monitoring help reduce water waste and protect freshwater resources.",
+          "Integrated Pest Management (IPM): Minimizing reliance on chemical pesticides by utilizing natural predators, crop diversity, and targeted biological controls reduces environmental impact.",
+          "Biodiversity & Crop Diversity: Growing a variety of crops and maintaining natural habitats enhances ecosystem resilience and improves soil health.",
+          "Climate-Smart Practices: Techniques such as agroforestry, conservation tillage, and carbon sequestration help mitigate climate change impacts while enhancing farm productivity."
+        ]
+      },
+      "economic": {
+        "title": "Using Resources in a Way That Supports Economic Vitality",
+        "content": [
+          "Renewable Energy & Resource Efficiency: Integrating solar, wind, and bioenergy reduces reliance on fossil fuels and decreases greenhouse gas emissions.",
+          "Sustainable Livestock Management: Rotational grazing, organic feed, and humane animal welfare practices contribute to healthier ecosystems and higher-quality agricultural products.",
+          "Efficient Water Use: Implementing water-saving techniques ensures long-term viability for farms and reduces costs."
+        ]
+      },
+      "social": {
+        "title": "Ensuring Social Equity and Creating Healthy Communities",
+        "content": [
+          "Supporting Local Economies: Sustainable farming helps strengthen local economies by supporting small-scale farmers and promoting fair trade.",
+          "Food Security & Resilience: Sustainable practices improve food security and enhance resilience to environmental changes.",
+          "Community Engagement & Education: Providing farmers and consumers with resources, knowledge, and support fosters a more sustainable food system.",
+          "Sustainable Eating: Encouraging consumers to choose locally sourced, seasonal, and organic foods supports sustainable farming practices and reduces environmental impact.",
+          "Sustainable Feeding: Implementing responsible feeding practices for livestock, including the use of organic and non-GMO feed, ensures animal health and environmental sustainability."
+        ]
+      }
+    },
+    "benefits": {
+      "title": "Sustainable farming practices help:",
+      "list": [
+        "Preserve natural resources for future generations",
+        "Reduce greenhouse gas emissions and combat climate change",
+        "Support local economies and small-scale farmers",
+        "Improve food security and resilience to environmental changes"
+      ]
+    },
+    "cta": {
+      "title": "Join the Movement!",
+      "content": " Connect with us to stay informed about the latest advancements in sustainable agriculture and act toward a more resilient food system.",
+      "button": "Connect Now"
+    },
+    "contact": {
+      "email": "info@azefarms.com",
+      "website": "http://www.azefarms.com/"
+    }
   }
 }

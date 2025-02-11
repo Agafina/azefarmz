@@ -1,0 +1,160 @@
+const orderModel = require("../models/Order");
+const userModel = require("../models/User");
+const { createPayment, verifyPayment } = require("../helpers/pay"); // Import Fapshi helper functions
+const {
+  createPaymentIntent,
+  verifyPaymentIntent,
+} = require("../helpers/stripe"); // Import Stripe helper functions
+
+// Create a new order with Fapshi or Stripe payment integration
+const createOrder = async (req, res) => {
+  const { user, items, medium, amount, address, phone, message } = req.body;
+  const deliveryAddress = address;
+  const userId = user;
+
+  try {
+    const foundUser = await userModel.findById(userId);
+    if (!foundUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const { name, email } = foundUser;
+
+    console.log("Received order data:", {
+      user,
+      items,
+      medium,
+      name,
+      email,
+      amount,
+      deliveryAddress,
+      phone,
+      userId,
+      message,
+    });
+
+    let paymentResponse, transId;
+
+    if (medium === "card payment") {
+      // Use Stripe for card payments
+      const paymentIntent = await createPaymentIntent(amount);
+      transId = paymentIntent.id;
+      paymentResponse = paymentIntent;
+    } else {
+      // Use Fapshi for mobile money payments
+      const externalId = `TX_${new Date().getTime()}`;
+      paymentResponse = await createPayment(
+        amount,
+        phone,
+        medium,
+        name,
+        email,
+        userId,
+        externalId,
+        message
+      );
+      transId = paymentResponse.transId;
+    }
+
+    console.log("Payment Response", paymentResponse);
+
+    const newOrder = new orderModel({
+      user,
+      items,
+      amount,
+      deliveryAddress,
+      paymentData: {
+        transId,
+        status: "PENDING",
+        medium,
+      },
+    });
+
+    await newOrder.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Order created successfully",
+      order: newOrder,
+      transactionId: transId,
+      paymentResponse,
+    });
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message || "An error occurred while creating the order.",
+    });
+  }
+};
+
+// Verify Payment Status and Update Order Status
+const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
+  const { transId, medium } = req.params;
+
+  console.log("Received transaction ID:", transId, "Medium:", medium);
+
+  try {
+    let paymentStatus;
+    if (medium === "card payment") {
+      // Verify Stripe payment
+      paymentStatus = await verifyPaymentIntent(transId);
+      paymentStatus = {
+        status: paymentStatus.status === "succeeded" ? "SUCCESSFUL" : "FAILED",
+      };
+    } else {
+      // Verify Fapshi payment
+      paymentStatus = await verifyPayment(transId);
+    }
+
+    console.log("Payment status:", paymentStatus);
+
+    const order = await orderModel.findOne({ "paymentData.transId": transId });
+    if (!order) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found." });
+    }
+
+    order.status = paymentStatus.status;
+    order.paid = paymentStatus.status === "SUCCESSFUL";
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Payment verified and order updated.",
+      order,
+    });
+  } catch (error) {
+    console.error("Error verifying payment status:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message || "An error occurred while verifying payment.",
+    });
+  }
+};
+
+// Get all orders for a user
+const getOrders = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const orders = await orderModel
+      .find({ user: userId })
+      .populate("items.product");
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve orders.",
+    });
+  }
+};
+
+module.exports = {
+  createOrder,
+  verifyPaymentAndUpdateOrderStatus,
+  getOrders,
+};

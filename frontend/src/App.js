@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
+import Sustainability from "./pages/Sustainability/Sustainability";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -70,6 +71,7 @@ function App() {
           <Route path="/:lang/cart" element={<Cart />} />
           <Route path="/:lang/order" element={<PlaceOrder />} />
           <Route path="/:lang/verify" element={<Verify />} />
+          <Route path="/:lang/sustainability" element={<Sustainability />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
           <Route path="/:lang/payment-status/:transId" element={<PaymentStatus />} />
         </Routes>

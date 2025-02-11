@@ -67,7 +67,7 @@ const Products = () => {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <p className="price">
-                ${product.price.toFixed(2)} {product.unit}
+                {product.price} XAF / {product.unit} 
               </p>
               <div className="product-actions">
                 <div>

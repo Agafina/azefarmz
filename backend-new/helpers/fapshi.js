@@ -1,6 +1,6 @@
 require("dotenv").config();
 const axios = require("axios");
-const baseUrl = "https://sandbox.fapshi.com";
+const baseUrl = process.env.FAPSHI_LIVE_URL;
 const headers = {
   apiuser: process.env.FAPSHI_API_USER,
   apikey: process.env.FAPSHI_API_KEY,

@@ -193,5 +193,57 @@
   "shopOnlineHeader": {
     "title": "Apportez la ferme à votre porte!",
     "description": "Parcourez notre boutique en ligne pour acheter des produits frais et des produits à valeur ajoutée. Découvrez la qualité des produits frais de la ferme livrés avec soin!"
+  },
+  "sustainability": {
+    "title": "Durabilité en Agriculture",
+    "description": "Chez Aze Farms, nous nous engageons à promouvoir des pratiques agricoles durables garantissant la sécurité alimentaire, la santé environnementale et la viabilité économique pour les générations futures. L'agriculture durable équilibre les besoins des personnes, de la planète et du profit en intégrant des techniques agricoles éco-responsables, l'efficacité des ressources et l'engagement communautaire.",
+    "sections": {
+      "environmental": {
+        "title": "Protéger l'Environnement et le Climat",
+        "content": [
+          "Santé et conservation des sols : Les pratiques comme la rotation des cultures, l'engrais vert, le compostage et le travail réduit du sol permettent de maintenir la fertilité, prévenir l'érosion et soutenir la biodiversité.",
+          "Gestion de l'eau : L'irrigation goutte-à-goutte, la collecte des eaux de pluie et la surveillance de l'humidité du sol réduisent le gaspillage d'eau et protègent les ressources en eau douce.",
+          "Gestion intégrée des ravageurs (IPM) : Réduction de l'utilisation des pesticides chimiques en favorisant les prédateurs naturels, la diversité des cultures et les contrôles biologiques ciblés pour minimiser l'impact environnemental.",
+          "Biodiversité et diversité des cultures : Cultiver une variété de cultures et maintenir des habitats naturels améliore la résilience des écosystèmes et la santé des sols.",
+          "Pratiques intelligentes face au climat : Des techniques comme l'agroforesterie, le travail de conservation du sol et la séquestration du carbone atténuent les effets du changement climatique tout en améliorant la productivité agricole."
+        ]
+      },
+      "economic": {
+        "title": "Utilisation des Ressources pour une Viabilité Économique",
+        "content": [
+          "Énergie renouvelable et efficacité des ressources : L'intégration de l'énergie solaire, éolienne et bioénergétique réduit la dépendance aux combustibles fossiles et diminue les émissions de gaz à effet de serre.",
+          "Gestion durable de l'élevage : Le pâturage en rotation, l'alimentation biologique et le bien-être animal favorisent des écosystèmes plus sains et des produits agricoles de meilleure qualité.",
+          "Utilisation efficace de l'eau : La mise en place de techniques d'économie d'eau garantit la viabilité à long terme des exploitations agricoles et réduit les coûts."
+        ]
+      },
+      "social": {
+        "title": "Assurer l'Équité Sociale et Créer des Communautés Saines",
+        "content": [
+          "Soutien aux économies locales : L'agriculture durable renforce les économies locales en soutenant les petits agriculteurs et en promouvant le commerce équitable.",
+          "Sécurité alimentaire et résilience : Les pratiques durables améliorent la sécurité alimentaire et la résilience face aux changements environnementaux.",
+          "Engagement communautaire et éducation : Fournir aux agriculteurs et aux consommateurs des ressources, des connaissances et un soutien pour un système alimentaire plus durable.",
+          "Alimentation durable : Encourager les consommateurs à choisir des aliments locaux, de saison et biologiques pour soutenir les pratiques agricoles durables et réduire l'impact environnemental.",
+          "Alimentation responsable des animaux : L'utilisation d'aliments biologiques et sans OGM garantit la santé animale et la durabilité environnementale."
+        ]
+      }
+    },
+    "benefits": {
+      "title": "Les pratiques agricoles durables aident :",
+      "list": [
+        "Préserver les ressources naturelles pour les générations futures",
+        "Réduire les émissions de gaz à effet de serre et lutter contre le changement climatique",
+        "Soutenir les économies locales et les petits agriculteurs",
+        "Améliorer la sécurité alimentaire et la résilience face aux changements environnementaux"
+      ]
+    },
+    "cta": {
+      "title": "Rejoignez le Mouvement !",
+      "content": "Connectez-vous avec nous pour rester informé des dernières avancées en agriculture durable et agir pour un système alimentaire plus résilient.",
+      "button": "Se connecter maintenant"
+    },
+    "contact": {
+      "email": "info@azefarms.com",
+      "website": "http://www.azefarms.com/"
+    }
   }
 }
