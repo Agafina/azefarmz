@@ -4,7 +4,7 @@ import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import LoginPopUp from "./components/LoginPopup/LoginPopUp";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
@@ -43,11 +43,14 @@ function App() {
     }
   }, [location, navigate, i18n]);
 
+  const currentPath = location.pathname.split("/").slice(2).join("/"); // Removes "/:lang"
+  const protectedRoutes = useMemo(() => ["order", "myorders", "cart", "payment-status"], []);
+
   useEffect(() => {
-    if (!user && !showLogin) {
+    if (!user && !showLogin && protectedRoutes.includes(currentPath)) {
       setShowLogin(true);
     }
-  }, [user, showLogin]);
+  }, [user, showLogin, currentPath, protectedRoutes]);
 
   return (
     <>
@@ -73,7 +76,10 @@ function App() {
           <Route path="/:lang/verify" element={<Verify />} />
           <Route path="/:lang/sustainability" element={<Sustainability />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
-          <Route path="/:lang/payment-status/:transId" element={<PaymentStatus />} />
+          <Route
+            path="/:lang/payment-status/:transId"
+            element={<PaymentStatus />}
+          />
         </Routes>
       </div>
       <Footer />

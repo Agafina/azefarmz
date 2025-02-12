@@ -20,6 +20,7 @@ export const navbar = {
       id: "contact-us",
       external: true,
     },
+    { name: "navbarItems.myorders", path: "/myorders", id: "my-orders" },
   ],
   profile: [
     { name: "profile.orders", path: "/myorders", id: "orders" },
@@ -116,6 +117,7 @@ export const footer = {
   footerLinks: [
     { name: "footer.footerLinks.home", path: "/" },
     { name: "footer.footerLinks.aboutUs", path: "/about-us" },
+    { name: "footer.footerLinks.sustainability", path: "/sustainability" },
     { name: "footer.footerLinks.products", path: "/products" },
     { name: "footer.footerLinks.shop", path: "/shop" },
     { name: "footer.footerLinks.privacyPolicy", path: "/privacy-policy" },
@@ -473,10 +475,10 @@ export const sustainability = {
     ],
   },
   cta: {
-     title: "sustainability.cta.title",
-     content: "sustainability.cta.content",
-     button: "sustainability.cta.button",
-     },
+    title: "sustainability.cta.title",
+    content: "sustainability.cta.content",
+    button: "sustainability.cta.button",
+  },
   contact: {
     email: "sustainability.contact.email",
     website: "sustainability.contact.website",

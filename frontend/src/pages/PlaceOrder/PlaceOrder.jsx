@@ -60,18 +60,20 @@ const PlaceOrder = () => {
       user: user._id,
       address,
       items: orderItems,
-      amount: getTotalCartAmount() + 2,
+      amount: getTotalCartAmount(),
       ...paymentInfo,
     };
 
     setIsProcessing(true);
     try {
       const response = await createOrder(orderData);
+      console.log("Response", response)
 
       if (!response.success) {
         setOrderError("Order Placement Failed");
         setIsProcessing(false);
-        navigate(`/payment-status/${response.data.paymentata.transId}`)
+      } else {
+        navigate(`/payment-status/${response.order.paymentData.transId}`);
       }
     } catch (error) {
       console.error("Error placing order:", error);
@@ -141,7 +143,7 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>XAF {getTotalCartAmount() === 0 ? 0 : 2.0}</p>
+              <p>XAF {getTotalCartAmount() === 0 ? 0 : 0.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
@@ -150,7 +152,7 @@ const PlaceOrder = () => {
                 XAF
                 {getTotalCartAmount() === 0
                   ? 0
-                  : (getTotalCartAmount() + 2.0).toFixed(2)}
+                  : (getTotalCartAmount() + 0.0).toFixed(2)}
               </b>
             </div>
           </div>

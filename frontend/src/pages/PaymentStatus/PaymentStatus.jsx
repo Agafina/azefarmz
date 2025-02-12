@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Loader2,
@@ -16,16 +16,22 @@ import "./PaymentStatus.css";
 const PaymentStatus = () => {
   const { transId } = useParams();
   const navigate = useNavigate();
-  const { orders, verifyPayment, error, loading } = useContext(OrderContext);
-
-  // Find the order with matching transaction ID
-  const paymentData = orders?.find(
-    (order) => order.paymentData.transId === transId
-  )?.paymentData;
+  const { verifyPayment, error, loading } = useContext(OrderContext);
+  const [paymentData, setPaymentData] = useState(null);
+  const [amount, setAmount] = useState(null);
+const hasFetched = useRef(false);
 
   useEffect(() => {
-    verifyPayment(transId);
-  }, []);
+    if (!hasFetched.current && transId) {
+      hasFetched.current = true;
+      const fetchData = async () => {
+        const response = await verifyPayment(transId);
+        setPaymentData(response.order.paymentData);
+        setAmount(response.order.amount);
+      };
+      fetchData();
+    }
+  }, [transId, verifyPayment]); 
 
   const getStatusContent = () => {
     if (!paymentData) return null;
@@ -50,7 +56,7 @@ const PaymentStatus = () => {
         message:
           "Your payment request has been created. Please wait for the payment prompt.",
       },
-      success: {
+      successful: {
         icon: <CheckCircle2 className="status-icon success" />,
         title: "Payment Successful",
         message:
@@ -82,12 +88,7 @@ const PaymentStatus = () => {
 
         {(status === "pending" || status === "created") && (
           <div className="payment-details">
-            <p className="amount">
-              Amount: XAF{" "}
-              {orders
-                .find((order) => order.paymentData.transId === transId)
-                ?.amount.toFixed(2)}
-            </p>
+            <p className="amount">Amount: XAF {amount}</p>
             {paymentData.medium && (
               <div className="payment-method">
                 <span className="method-icon">
@@ -114,7 +115,7 @@ const PaymentStatus = () => {
           </div>
         )}
 
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={() => navigate("/myorders")}>
           <ArrowLeft size={16} />
           Back to Orders
         </button>
@@ -136,7 +137,7 @@ const PaymentStatus = () => {
       <div className="payment-status-container error">
         <XCircle className="error-icon" />
         <p className="error-message">{error}</p>
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={() => navigate("/myoders")}>
           <ArrowLeft size={16} />
           Back to Orders
         </button>
@@ -149,7 +150,7 @@ const PaymentStatus = () => {
       <div className="payment-status-container error">
         <AlertCircle className="error-icon" />
         <p className="error-message">Payment not found</p>
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={() => navigate("/myorders")}>
           <ArrowLeft size={16} />
           Back to Orders
         </button>

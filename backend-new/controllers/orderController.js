@@ -112,7 +112,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     if (paymentStatus.status === "SUCCESSFUL") {
       // Payment succeeded, update order status
       console.log("Payment successful, updating order status...");
-      order.status = "SUCCESSFUL";
+      order.paymentData.status = "SUCCESSFUL";
       order.paid = true; // Mark payment as completed
       await order.save();
 
@@ -124,7 +124,7 @@ const verifyPaymentAndUpdateOrderStatus = async (req, res) => {
     } else {
       // Payment failed, update order status
       console.log("Payment failed, updating order status...");
-      order.status = paymentStatus.status;
+      order.paymentData.status = paymentStatus.status;
       await order.save();
 
       res.status(200).json({

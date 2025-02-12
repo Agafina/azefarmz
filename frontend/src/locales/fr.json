@@ -12,7 +12,8 @@
     "aboutUs": "À propos ",
     "products": "Produits",
     "shop": "Magasin",
-    "contact": "Contact"
+    "contact": "Contact",
+    "myorders": "Mes commandes"
   },
   "profile": {
     "orders": "Commandes",
@@ -62,7 +63,8 @@
       "products": "Produits",
       "shop": "Magasin",
       "privacyPolicy": "Politique de confidentialité",
-      "terms": "Termes et conditions"
+      "terms": "Termes et conditions",
+      "sustainability": "Durabilité de l'agriculture"
     }
   },
   "contactInfo": {

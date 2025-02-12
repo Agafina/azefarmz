@@ -12,7 +12,8 @@
     "aboutUs": "About Us",
     "products": "Products",
     "shop": "Shop",
-    "contact": "Contact"
+    "contact": "Contact",
+    "myorders": "My Orders"
   },
   "profile": {
     "orders": "Orders",
@@ -62,6 +63,7 @@
       "products": "Products",
       "shop": "Shop",
       "privacyPolicy": "Privacy Policy",
+      "sustainability": "Sustainability of Agriculture",
       "terms": "Terms & Conditions"
     }
   },

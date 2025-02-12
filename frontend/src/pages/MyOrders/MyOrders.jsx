@@ -21,9 +21,13 @@ const MyOrders = () => {
 
   const getStatusClass = (status) => {
     const statusClasses = {
+      created: "status-pending",
       pending: "status-pending",
       processing: "status-processing",
-      delivered: "status-delivered",
+      successful: "status-delivered",
+      accepted: "status-delivered",
+      expired: "status-cancelled",
+      failed: "status-cancelled",
       cancelled: "status-cancelled",
     };
     return `status-badge ${
@@ -93,8 +97,10 @@ const MyOrders = () => {
                   <tr className="order-row">
                     <td>#{order._id.slice(-6)}</td>
                     <td>
-                      <span className={getStatusClass(order.status)}>
-                        {order.status}
+                      <span
+                        className={getStatusClass(order.paymentData.status)}
+                      >
+                        {order.paymentData.status}
                       </span>
                     </td>
                     <td className="hide-mobile">{order.items.length} items</td>
