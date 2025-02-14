@@ -33,21 +33,22 @@ const Products = () => {
       <br />
       {/* Categories Filter */}
       <div className="categories">
-        <button
-          className={selectedCategory === "All" ? "active" : ""}
-          onClick={() => setSelectedCategory("All")}
-        >
-          {t("All")}
-        </button>
-        {productCategories.map((category) => (
-          <button
-            key={category}
-            className={selectedCategory === category ? "active" : ""}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
+      <button
+  className={selectedCategory === "All" ? "active" : ""}
+  onClick={() => setSelectedCategory("All")}
+>
+  {t("All")}
+</button>
+{productCategories.map((category) => (
+  <button
+    key={category}
+    className={selectedCategory === category ? "active" : ""}
+    onClick={() => setSelectedCategory(category)}
+  >
+    {category}
+  </button>
+))}
+
       </div>
       {/* Search Bar */}
       <div className="search-bar">
