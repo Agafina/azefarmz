@@ -80,7 +80,7 @@ function App() {
             element={<PaymentStatus />}
           />
           <Route path="/:lang/reset-password" element={<ResetPassword />} />
-          <Route path="/:lang/login" element={<LoginPopUp />} />
+          <Route path="/:lang/login" element={<LoginPopUp setShowLogin={setShowLogin}/>} />
         </Routes>
       </div>
       <Footer />
