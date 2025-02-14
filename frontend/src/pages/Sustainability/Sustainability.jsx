@@ -63,7 +63,7 @@ const Sustainability = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="cta-section">
+        <div className="ct-section">
           <h3>{t(sustainability.cta.title)}</h3>
           <p>{t(sustainability.cta.content)}</p>
           <a href={t(sustainability.contact.website)} className="cta-button">

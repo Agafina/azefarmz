@@ -1,7 +1,7 @@
 .language-switcher {
   display: inline-block;
   position: relative;
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 5px 10px;
+  padding:5px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #4CAF50;

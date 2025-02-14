@@ -220,11 +220,11 @@ export const ctaContent = {
   title: "cta.title",
   description: "cta.description",
   buttons: [
-    {
-      text: "cta.buttons.shopOnline.text",
-      link: "/shop",
-      style: "primary",
-    },
+    // {
+    //   text: "cta.buttons.shopOnline.text",
+    //   link: "/shop",
+    //   style: "primary",
+    // },
     {
       text: "cta.buttons.exploreProducts.text",
       link: "/products",

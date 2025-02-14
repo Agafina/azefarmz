@@ -11,7 +11,7 @@ const CTA = () => {
       <div className="cta-content">
         <h2>{t("cta.shopCTA.title")}</h2> {/* Translate title */}
         <p>{t("cta.shopCTA.description")}</p> {/* Translate description */}
-        <Link to="/products" className="cta-button">
+        <Link to="/products" className="ca-button">
           {t("cta.shopCTA.buttonText")} {/* Translate button text */}
         </Link>
       </div>

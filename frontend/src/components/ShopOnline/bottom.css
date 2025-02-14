@@ -19,7 +19,7 @@
   margin-bottom: 25px;
 }
 
-.cta-button {
+.ca-button {
   display: inline-block;
   background-color: red;
   color: #fff;
@@ -28,6 +28,7 @@
   font-weight: bold;
   padding: 15px 30px;
   transition: opacity 0.3s, transform 0.3s;
+  border-radius: 25px;
 }
 
 .cta-button:hover {
