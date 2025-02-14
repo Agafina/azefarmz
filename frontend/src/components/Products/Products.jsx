@@ -1,8 +1,9 @@
-import { Link, Search } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { useProductContext } from "../../context/ProductContext";
-import { useContext, useState } from "react";
-import { StoreContext } from "../../context/StoreContext";
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
+import { useTranslation } from 'react-i18next';
+import { useProductContext } from '../../context/ProductContext';
+import { Search } from 'lucide-react';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
