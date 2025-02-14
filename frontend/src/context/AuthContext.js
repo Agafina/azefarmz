@@ -91,6 +91,51 @@ export const AuthContextProvider = ({ children }) => {
     dispatch({ type: "LOGOUT" });
   };
 
+  // Forgot Password function
+  const forgotPassword = async (email) => {
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/user/forgot-password`,
+        { email }
+      );
+      if (response.data.success) {
+        return { success: true, message: response.data.mssg };
+      } else {
+        dispatch({ type: "SET_ERROR", payload: response.data.mssg });
+      }
+    } catch (error) {
+      console.error("Error sending reset password request:", error);
+      dispatch({
+        type: "SET_ERROR",
+        payload: "Failed to send password reset email. Please try again.",
+      });
+    }
+  };
+
+  // Reset Password function
+  const resetPassword = async (token, newPassword) => {
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/user/reset-password`,
+        {
+          token,
+          newPassword,
+        }
+      );
+      if (response.data.success) {
+        return { success: true, message: response.data.mssg };
+      } else {
+        dispatch({ type: "SET_ERROR", payload: response.data.mssg });
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      dispatch({
+        type: "SET_ERROR",
+        payload: "Failed to reset password. Please try again.",
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -99,6 +144,8 @@ export const AuthContextProvider = ({ children }) => {
         login,
         register,
         logout,
+        forgotPassword,
+        resetPassword,
       }}
     >
       {children}

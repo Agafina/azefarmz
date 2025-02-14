@@ -377,6 +377,8 @@
     "login": "Login",
     "signup": "Sign Up",
     "fullName": "Full Name",
+    "resetPassword": "Reset Password",
+    "backToLogin": "Back To Login",
     "email": "Email",
     "password": "Password",
     "forgotPassword": "Forgot password?",
@@ -385,5 +387,14 @@
     "processing": "Processing...",
     "loginButton": "Login",
     "createAccount": "Create Account"
+  },
+  "resetpassword": {
+    "title": "Reset Your Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Reset Password",
+    "processing": "Processing...",
+    "passwordMismatch": "Passwords do not match.",
+    "success": "Your password has been successfully reset! Redirecting to login..."
   }
 }

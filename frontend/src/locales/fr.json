@@ -378,11 +378,22 @@
     "fullName": "Nom complet",
     "email": "E-mail",
     "password": "Mot de passe",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "backToLogin": "Retour à la connexion",
     "forgotPassword": "Mot de passe oublié?",
     "termsAgreement": "J'accepte les",
     "terms": "Conditions générales",
     "processing": "En cours...",
     "loginButton": "Se connecter",
     "createAccount": "Créer un compte"
+  },
+  "resetpassword": {
+    "title": "Réinitialisez votre mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "submit": "Réinitialiser le mot de passe",
+    "processing": "Traitement...",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "success": "Votre mot de passe a été réinitialisé avec succès ! Redirection vers la connexion..."
   }
 }

@@ -16,6 +16,7 @@ import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Sustainability from "./pages/Sustainability/Sustainability";
+import ResetPassword from "./components/reset-password/ResetPassword";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -78,6 +79,8 @@ function App() {
             path="/:lang/payment-status/:transId"
             element={<PaymentStatus />}
           />
+          <Route path="/:lang/reset-password" element={<ResetPassword />} />
+          <Route path="/:lang/login" element={<LoginPopUp />} />
         </Routes>
       </div>
       <Footer />

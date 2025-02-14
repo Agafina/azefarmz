@@ -5,10 +5,14 @@ import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 function LoginPopUp({ setShowLogin }) {
-  const { login, register, error, logout } = useContext(AuthContext);
-  const { t } = useTranslation(); // Initialize translation function
+  const { login, register, error, logout, forgotPassword } =
+    useContext(AuthContext);
+  const { t } = useTranslation();
+
   const [activeTab, setActiveTab] = useState("login");
   const [loading, setLoading] = useState(false);
+  const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -24,7 +28,9 @@ function LoginPopUp({ setShowLogin }) {
     event.preventDefault();
     setLoading(true);
     try {
-      if (activeTab === "login") {
+      if (forgotPasswordMode) {
+        await forgotPassword(data.email);
+      } else if (activeTab === "login") {
         await login(data.email, data.password);
       } else {
         await register(data.name, data.email, data.password);
@@ -51,27 +57,32 @@ function LoginPopUp({ setShowLogin }) {
         >
           <X />
         </button>
+
         <div className="tabs">
-          <button
-            className={`tab ${activeTab === "login" ? "active" : ""}`}
-            onClick={() => setActiveTab("login")}
-            disabled={loading}
-          >
-            {t("loginpopup.login")} {/* Use translation key for Login */}
-          </button>
-          <button
-            className={`tab ${activeTab === "signup" ? "active" : ""}`}
-            onClick={() => setActiveTab("signup")}
-            disabled={loading}
-          >
-            {t("loginpopup.signup")} {/* Use translation key for Sign Up */}
-          </button>
+          {!forgotPasswordMode && (
+            <>
+              <button
+                className={`tab ${activeTab === "login" ? "active" : ""}`}
+                onClick={() => setActiveTab("login")}
+                disabled={loading}
+              >
+                {t("loginpopup.login")}
+              </button>
+              <button
+                className={`tab ${activeTab === "signup" ? "active" : ""}`}
+                onClick={() => setActiveTab("signup")}
+                disabled={loading}
+              >
+                {t("loginpopup.signup")}
+              </button>
+            </>
+          )}
         </div>
+
         <form onSubmit={onSubmit} className="login-form">
-          {activeTab === "signup" && (
+          {!forgotPasswordMode && activeTab === "signup" && (
             <div className="form-group">
-              <label htmlFor="name">{t("loginpopup.fullName")}</label>{" "}
-              {/* Full Name label */}
+              <label htmlFor="name">{t("loginpopup.fullName")}</label>
               <input
                 type="text"
                 id="name"
@@ -83,8 +94,9 @@ function LoginPopUp({ setShowLogin }) {
               />
             </div>
           )}
+
           <div className="form-group">
-            <label htmlFor="email">{t("loginpopup.email")}</label> {/* Email label */}
+            <label htmlFor="email">{t("loginpopup.email")}</label>
             <input
               type="email"
               id="email"
@@ -95,42 +107,68 @@ function LoginPopUp({ setShowLogin }) {
               disabled={loading}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">{t("loginpopup.password")}</label>{" "}
-            {/* Password label */}
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={data.password}
-              onChange={onChangeHandler}
-              required
-              disabled={loading}
-            />
-          </div>
-          {activeTab === "login" && (
-            <div className="forgot-password">
-              <a href="#">{t("loginpopup.forgotPassword")}</a> {/* Forgot password */}
+
+          {!forgotPasswordMode && (
+            <div className="form-group">
+              <label htmlFor="password">{t("loginpopup.password")}</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={data.password}
+                onChange={onChangeHandler}
+                required
+                disabled={loading}
+              />
             </div>
           )}
-          {activeTab === "signup" && (
+
+          {activeTab === "login" && !forgotPasswordMode && (
+            <div className="forgot-password">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setForgotPasswordMode(true);
+                }}
+              >
+                {t("loginpopup.forgotPassword")}
+              </a>
+            </div>
+          )}
+
+          {activeTab === "signup" && !forgotPasswordMode && (
             <div className="terms-checkbox">
               <input type="checkbox" id="terms" required disabled={loading} />
               <label htmlFor="terms">
-                {t("loginpopup.termsAgreement")} <a href="#">{t("loginpopup.terms")}</a>
-              </label>{" "}
-              {/* Terms and Conditions */}
+                {t("loginpopup.termsAgreement")}
+                <a href="#">{t("loginpopup.terms")}</a>
+              </label>
             </div>
           )}
+
           <button type="submit" className="submit-button" disabled={loading}>
             {loading
-              ? t("loginpopup.processing") // Translation for Processing...
+              ? t("loginpopup.processing")
+              : forgotPasswordMode
+              ? t("loginpopup.resetPassword") // Translation for Reset Password
               : activeTab === "login"
-              ? t("loginpopup.loginButton") // Translation for Login button
-              : t("loginpopup.createAccount")}{" "}
-            {/* Translation for Create Account */}
+              ? t("loginpopup.loginButton")
+              : t("loginpopup.createAccount")}
           </button>
+
+          {forgotPasswordMode && (
+            <button
+              type="button"
+              className="back-button"
+              onClick={() => setForgotPasswordMode(false)}
+              disabled={loading}
+            >
+              {t("loginpopup.backToLogin")}
+            </button>
+          )}
         </form>
+
         {error && <p className="error-message">{error}</p>}
       </div>
     </div>
