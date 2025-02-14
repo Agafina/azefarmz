@@ -367,5 +367,23 @@
     "subjectTooLong": "Subject must be at most 100 characters.",
     "messageTooShort": "Message must be at least 10 characters.",
     "messageTooLong": "Message must be at most 1000 characters."
+  },
+  "usernav": {
+    "logout": "Logout",
+    "myOrders": "My Orders",
+    "settings": "Settings"
+  },
+  "loginpopup": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "fullName": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "termsAgreement": "I agree to the",
+    "terms": "Terms and Conditions",
+    "processing": "Processing...",
+    "loginButton": "Login",
+    "createAccount": "Create Account"
   }
 }

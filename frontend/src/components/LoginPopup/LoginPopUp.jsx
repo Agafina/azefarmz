@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import "./LoginPopUp.css";
-import { assets } from "../../assets/assets";
-import { AuthContext } from "../../context/AuthContext"; // Import the AuthContext
+import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 function LoginPopUp({ setShowLogin }) {
-  const { login, register, error } = useContext(AuthContext); // Get login and register from context
-  const [currentState, setCurrentState] = useState("Login");
+  const { login, register, error, logout } = useContext(AuthContext);
+  const { t } = useTranslation(); // Initialize translation function
+  const [activeTab, setActiveTab] = useState("login");
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -12,88 +16,123 @@ function LoginPopUp({ setShowLogin }) {
   });
 
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData((data) => ({ ...data, [name]: value }));
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    if (currentState === "Login") {
-      // Call the login function from the AuthContext
-      await login(data.email, data.password);
-    } else {
-      // Call the register function from the AuthContext
-      await register(data.name, data.email, data.password);
+    setLoading(true);
+    try {
+      if (activeTab === "login") {
+        await login(data.email, data.password);
+      } else {
+        await register(data.name, data.email, data.password);
+      }
+      if (!error) {
+        setShowLogin(false);
+      } else {
+        logout();
+      }
+    } catch (err) {
+      console.error("Authentication error:", err);
+    } finally {
+      setLoading(false);
     }
-
-    setShowLogin(false); // Close the login popup after login/register
   };
 
   return (
-    <div className="login-popup">
-      <form action="" onSubmit={onSubmit} className="login-popup-container">
-        <div className="login-popup-title">
-          <h2>{currentState}</h2>
-          <img
-            onClick={() => {
-              setShowLogin(false);
-            }}
-            src={assets.cross_icon}
-            alt=""
-          />
-        </div>
-        <div className="login-popup-input">
-          {currentState === "Login" ? (
-            <></>
-          ) : (
-            <input
-              type="text"
-              onChange={onChangeHandler}
-              value={data.name}
-              placeholder="Your name"
-              name="name"
-              required
-            />
-          )}
-          <input
-            onChange={onChangeHandler}
-            value={data.email}
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            required
-          />
-          <input
-            onChange={onChangeHandler}
-            value={data.password}
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
-        </div>
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>By continuing, I agree to the terms and conditions</p>
-        </div>
-        {error && <div className="error-message">{error}</div>}
-        <button type="submit">
-          {currentState === "Sign up" ? "Create Account" : "Login"}
+    <div className="login-popup-overlay">
+      <div className="login-popup-container">
+        <button
+          className="close-button"
+          onClick={() => setShowLogin(false)}
+          disabled={loading}
+        >
+          <X />
         </button>
-        {currentState === "Login" ? (
-          <p>
-            Create a new account?{" "}
-            <span onClick={() => setCurrentState("Sign up")}>Click here</span>
-          </p>
-        ) : (
-          <p>
-            Already have an account?{" "}
-            <span onClick={() => setCurrentState("Login")}>Login here</span>
-          </p>
-        )}
-      </form>
+        <div className="tabs">
+          <button
+            className={`tab ${activeTab === "login" ? "active" : ""}`}
+            onClick={() => setActiveTab("login")}
+            disabled={loading}
+          >
+            {t("loginpopup.login")} {/* Use translation key for Login */}
+          </button>
+          <button
+            className={`tab ${activeTab === "signup" ? "active" : ""}`}
+            onClick={() => setActiveTab("signup")}
+            disabled={loading}
+          >
+            {t("loginpopup.signup")} {/* Use translation key for Sign Up */}
+          </button>
+        </div>
+        <form onSubmit={onSubmit} className="login-form">
+          {activeTab === "signup" && (
+            <div className="form-group">
+              <label htmlFor="name">{t("loginpopup.fullName")}</label>{" "}
+              {/* Full Name label */}
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={data.name}
+                onChange={onChangeHandler}
+                required
+                disabled={loading}
+              />
+            </div>
+          )}
+          <div className="form-group">
+            <label htmlFor="email">{t("loginpopup.email")}</label> {/* Email label */}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={data.email}
+              onChange={onChangeHandler}
+              required
+              disabled={loading}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">{t("loginpopup.password")}</label>{" "}
+            {/* Password label */}
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={data.password}
+              onChange={onChangeHandler}
+              required
+              disabled={loading}
+            />
+          </div>
+          {activeTab === "login" && (
+            <div className="forgot-password">
+              <a href="#">{t("loginpopup.forgotPassword")}</a> {/* Forgot password */}
+            </div>
+          )}
+          {activeTab === "signup" && (
+            <div className="terms-checkbox">
+              <input type="checkbox" id="terms" required disabled={loading} />
+              <label htmlFor="terms">
+                {t("loginpopup.termsAgreement")} <a href="#">{t("loginpopup.terms")}</a>
+              </label>{" "}
+              {/* Terms and Conditions */}
+            </div>
+          )}
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading
+              ? t("loginpopup.processing") // Translation for Processing...
+              : activeTab === "login"
+              ? t("loginpopup.loginButton") // Translation for Login button
+              : t("loginpopup.createAccount")}{" "}
+            {/* Translation for Create Account */}
+          </button>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 }

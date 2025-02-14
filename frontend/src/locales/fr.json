@@ -366,5 +366,23 @@
     "subjectTooLong": "Le sujet doit comporter au maximum 100 caractères.",
     "messageTooShort": "Le message doit comporter au moins 10 caractères.",
     "messageTooLong": "Le message doit comporter au maximum 1000 caractères."
+  },
+  "usernav": {
+    "logout": "Se déconnecter",
+    "myOrders": "Mes commandes",
+    "settings": "Paramètres"
+  },
+  "loginpopup": {
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "fullName": "Nom complet",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "termsAgreement": "J'accepte les",
+    "terms": "Conditions générales",
+    "processing": "En cours...",
+    "loginButton": "Se connecter",
+    "createAccount": "Créer un compte"
   }
 }
