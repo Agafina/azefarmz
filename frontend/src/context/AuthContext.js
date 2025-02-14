@@ -26,9 +26,17 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const user = Cookies.get("aze_app_user");
     if (user) {
-      dispatch({ type: "LOGIN", payload: JSON.parse(user) });
+      try {
+        const parsedUser = JSON.parse(user);
+        dispatch({ type: "LOGIN", payload: parsedUser });
+      } catch (error) {
+        console.error("Failed to parse user data:", error);
+        // Handle the error appropriately, maybe clear the corrupt cookie
+        Cookies.remove("aze_app_user"); // Optional: remove the invalid cookie
+      }
     }
   }, []);
+  
 
   // Backend URL from the .env.local file
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
