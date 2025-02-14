@@ -86,7 +86,7 @@ const Cart = () => {
           </button>
         </div>
 
-        {/* Promo Code Section */}
+        {/* Promo Code Section 
         <div className="cart-promocode">
           <div className="">
             <p>{t("cart.promoCodeMessage")}</p>
@@ -95,7 +95,7 @@ const Cart = () => {
               <button>{t("cart.submit")}</button>
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
