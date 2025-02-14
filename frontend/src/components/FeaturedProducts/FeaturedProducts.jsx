@@ -18,7 +18,7 @@ const FeaturedProducts = () => {
             <h3>{t(product.name)}</h3> {/* Translate product name */}
             <p>{t(product.description)}</p>{" "}
             {/* Translate product description */}
-            <Link to={product.link} className="product-link">
+            <Link to={"/products"} className="product-link">
               {t("cta.exploreNow")} {/* Translate "Explore Now" CTA */}
             </Link>
           </div>

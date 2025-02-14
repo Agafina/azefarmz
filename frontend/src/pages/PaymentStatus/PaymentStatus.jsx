@@ -11,15 +11,17 @@ import {
   Phone,
 } from "lucide-react";
 import { OrderContext } from "../../context/OrderContext";
+import { useTranslation } from "react-i18next";
 import "./PaymentStatus.css";
 
 const PaymentStatus = () => {
   const { transId } = useParams();
   const navigate = useNavigate();
   const { verifyPayment, error, loading } = useContext(OrderContext);
+  const { t } = useTranslation();
   const [paymentData, setPaymentData] = useState(null);
   const [amount, setAmount] = useState(null);
-const hasFetched = useRef(false);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     if (!hasFetched.current && transId) {
@@ -31,7 +33,7 @@ const hasFetched = useRef(false);
       };
       fetchData();
     }
-  }, [transId, verifyPayment]); 
+  }, [transId, verifyPayment]);
 
   const getStatusContent = () => {
     if (!paymentData) return null;
@@ -39,40 +41,31 @@ const hasFetched = useRef(false);
     const statusConfigs = {
       pending: {
         icon: <Clock className="status-icon pending" />,
-        title: "Payment Pending",
-        message:
-          "Your payment is being processed. Please complete the payment on your device.",
-        instructions: [
-          "1. Wait for the payment prompt on your phone or Dial",
-          "2. Select option 1 for My Account",
-          "3. Enter your Mobile Money or Orange Money PIN",
-          "4. Select option 1 to approve payment",
-          `5. Enter reference: ${transId.slice(-6)}`,
-        ],
+        title: t("payment.pending.title"),
+        message: t("payment.pending.message"),
+        instructions: t("payment.pending.instructions", {
+          ref: transId.slice(-6),
+        }).split("\n"),
       },
       created: {
         icon: <Loader2 className="status-icon loading" />,
-        title: "Payment Initiated",
-        message:
-          "Your payment request has been created. Please wait for the payment prompt.",
+        title: t("payment.created.title"),
+        message: t("payment.created.message"),
       },
       successful: {
         icon: <CheckCircle2 className="status-icon success" />,
-        title: "Payment Successful",
-        message:
-          "Your payment has been successfully processed. Thank you for your purchase!",
+        title: t("payment.successful.title"),
+        message: t("payment.successful.message"),
       },
       failed: {
         icon: <XCircle className="status-icon failed" />,
-        title: "Payment Failed",
-        message:
-          "We couldn't process your payment. Please try again or contact support.",
+        title: t("payment.failed.title"),
+        message: t("payment.failed.message"),
       },
       expired: {
         icon: <AlertCircle className="status-icon expired" />,
-        title: "Payment Expired",
-        message:
-          "This payment request has expired. Please create a new payment.",
+        title: t("payment.expired.title"),
+        message: t("payment.expired.message"),
       },
     };
 
@@ -88,7 +81,7 @@ const hasFetched = useRef(false);
 
         {(status === "pending" || status === "created") && (
           <div className="payment-details">
-            <p className="amount">Amount: XAF {amount}</p>
+            <p className="amount">{t("payment.amount", { amount })}</p>
             {paymentData.medium && (
               <div className="payment-method">
                 <span className="method-icon">
@@ -98,7 +91,9 @@ const hasFetched = useRef(false);
                     <Phone className="method-icon-svg" />
                   )}
                 </span>
-                <span>{paymentData.medium}</span>
+                <span>
+                  {t("payment.payment_method", { method: paymentData.medium })}
+                </span>
               </div>
             )}
           </div>
@@ -106,7 +101,7 @@ const hasFetched = useRef(false);
 
         {status === "pending" && config.instructions && (
           <div className="payment-instructions">
-            <h3>Payment Instructions:</h3>
+            <h3>{t("payment.instructions_title")}</h3>
             <ul>
               {config.instructions.map((instruction, index) => (
                 <li key={index}>{instruction}</li>
@@ -117,7 +112,7 @@ const hasFetched = useRef(false);
 
         <button className="back-button" onClick={() => navigate("/myorders")}>
           <ArrowLeft size={16} />
-          Back to Orders
+          {t("payment.back_to_orders")}
         </button>
       </div>
     );
@@ -127,7 +122,7 @@ const hasFetched = useRef(false);
     return (
       <div className="payment-status-container loading">
         <Loader2 className="loading-spinner" />
-        <p>Checking payment status...</p>
+        <p>{t("payment.checking_status")}</p>
       </div>
     );
   }
@@ -137,9 +132,9 @@ const hasFetched = useRef(false);
       <div className="payment-status-container error">
         <XCircle className="error-icon" />
         <p className="error-message">{error}</p>
-        <button className="back-button" onClick={() => navigate("/myoders")}>
+        <button className="back-button" onClick={() => navigate("/myorders")}>
           <ArrowLeft size={16} />
-          Back to Orders
+          {t("payment.back_to_orders")}
         </button>
       </div>
     );
@@ -149,10 +144,10 @@ const hasFetched = useRef(false);
     return (
       <div className="payment-status-container error">
         <AlertCircle className="error-icon" />
-        <p className="error-message">Payment not found</p>
+        <p className="error-message">{t("payment.not_found")}</p>
         <button className="back-button" onClick={() => navigate("/myorders")}>
           <ArrowLeft size={16} />
-          Back to Orders
+          {t("payment.back_to_orders")}
         </button>
       </div>
     );

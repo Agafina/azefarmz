@@ -40,10 +40,13 @@
       "value": "Republic of Cameroon"
     },
     "form": {
-      "name": "Your Name",
-      "email": "Your Email",
+      "title": "Get in Touch",
+      "name": "Full Name",
+      "subject": "Subject",
+      "email": "Email Address",
       "message": "Your Message",
-      "submit": "Submit"
+      "submit": "Send Message",
+      "sending": "Sending..."
     },
     "followUs": "Follow Us"
   },
@@ -85,9 +88,10 @@
       "value": "Republic of Cameroon"
     },
     "form": {
-      "name": "Your Name",
-      "email": "Your Email",
-      "message": "Your Message"
+      "name": "Full Name",
+      "subject": "Subject",
+      "email": "Email Address",
+      "message": "Message"
     }
   },
   "introduction": {
@@ -247,5 +251,121 @@
       "email": "info@azefarms.com",
       "website": "http://www.azefarms.com/"
     }
+  },
+  "payment": {
+    "pending": {
+      "title": "Payment Pending",
+      "message": "Your payment is being processed. Please complete the payment on your device.",
+      "instructions": [
+        "1. Wait for the payment prompt on your phone or Dial",
+        "2. Select option 1 for My Account",
+        "3. Enter your Mobile Money or Orange Money PIN",
+        "4. Select option 1 to approve payment",
+        "5. Enter reference: {ref}"
+      ]
+    },
+    "created": {
+      "title": "Payment Initiated",
+      "message": "Your payment request has been created. Please wait for the payment prompt."
+    },
+    "successful": {
+      "title": "Payment Successful",
+      "message": "Your payment has been successfully processed. Thank you for your purchase!"
+    },
+    "failed": {
+      "title": "Payment Failed",
+      "message": "We couldn't process your payment. Please try again or contact support."
+    },
+    "expired": {
+      "title": "Payment Expired",
+      "message": "This payment request has expired. Please create a new payment."
+    },
+    "checking_status": "Checking payment status...",
+    "not_found": "Payment not found",
+    "back_to_orders": "Back to Orders",
+    "amount": "Amount: XAF {amount}",
+    "instructions_title": "Payment Instructions:",
+    "payment_method": "Payment Method: {method}"
+  },
+  "myorders": {
+    "loadingOrders": "Loading orders...",
+    "myOrders": "My Orders",
+    "viewAndTrackOrders": "View and track all your orders in one place",
+    "refreshing": "Refreshing...",
+    "refreshOrders": "Refresh Orders",
+    "orderId": "Order ID",
+    "status": "Status",
+    "items": "Items",
+    "amount": "Amount",
+    "deliveryAddress": "Delivery Address",
+    "actions": "Actions",
+    "hideDetails": "Hide Details",
+    "viewDetails": "View Details",
+    "paymentInformation": "Payment Information",
+    "paymentStatus": "Payment Status",
+    "paymentMethod": "Payment Method",
+    "transactionId": "Transaction ID",
+    "clickToCheckPaymentStatus": "Click to check payment status",
+    "paymentDate": "Payment Date",
+    "noOrdersFound": "No orders found",
+    "firstOrderMessage": "When you make your first order, it will appear here.",
+    "firstOrderLink": "Buy Now.",
+    "created": "Created",
+    "pending": "Pending",
+    "processing": "Processing",
+    "successful": "Successful",
+    "accepted": "Accepted",
+    "expired": "Expired",
+    "failed": "Failed",
+    "cancelled": "Cancelled"
+  },
+  "placeorder": {
+    "deliveryInformation": "Delivery Information",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "zipcode": "Zip Code",
+    "country": "Country",
+    "cartTotal": "Cart Total",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "total": "Total",
+    "paymentInformation": "Payment Information",
+    "selectPaymentMethod": "Select Payment Method",
+    "mobileMoney": "Mobile Money",
+    "orangeMoney": "Orange Money",
+    "phoneNumber": "Phone Number",
+    "messageOptional": "Message (optional)",
+    "processing": "Processing...",
+    "proceedToPayment": "PROCEED TO PAYMENT",
+    "orderPlacementFailed": "Order Placement Failed",
+    "errorOccurred": "An error occurred. Please try again.",
+    "userNotAuthenticated": "User not authenticated. Please log in.",
+    "checkoutTitle": "Checkout",
+    "orderSummary": "Order Summary"
+  },
+  "cart": {
+    "items": "Items",
+    "title": "Title",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "adjust": "Adjust",
+    "cartTotal": "Cart Total",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "proceedToCheckout": "Proceed to Checkout",
+    "promoCodeMessage": "If you have a promo code, enter it here:",
+    "promoCodePlaceholder": "Promo code",
+    "submit": "Submit"
+  },
+  "contactvalidation": {
+    "nameTooShort": "Name must be at least 2 characters.",
+    "nameTooLong": "Name must be at most 50 characters.",
+    "invalidEmail": "Please enter a valid email address.",
+    "subjectTooShort": "Subject must be at least 3 characters.",
+    "subjectTooLong": "Subject must be at most 100 characters.",
+    "messageTooShort": "Message must be at least 10 characters.",
+    "messageTooLong": "Message must be at most 1000 characters."
   }
 }

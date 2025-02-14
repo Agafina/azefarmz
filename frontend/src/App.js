@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { useState, useEffect, useContext, useMemo } from "react";
 import LoginPopUp from "./components/LoginPopup/LoginPopUp";
-import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import Products from "./components/Products/Products";
 import ShopOnlinePage from "./pages/ShopOnline/ShopOnline";
@@ -73,7 +72,6 @@ function App() {
           <Route path="/:lang/shop" element={<ShopOnlinePage />} />
           <Route path="/:lang/cart" element={<Cart />} />
           <Route path="/:lang/order" element={<PlaceOrder />} />
-          <Route path="/:lang/verify" element={<Verify />} />
           <Route path="/:lang/sustainability" element={<Sustainability />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
           <Route

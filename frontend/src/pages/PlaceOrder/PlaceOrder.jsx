@@ -4,8 +4,11 @@ import { StoreContext } from "../../context/StoreContext";
 import { AuthContext } from "../../context/AuthContext";
 import { OrderContext } from "../../context/OrderContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const PlaceOrder = () => {
+  const { t } = useTranslation();
   const { getTotalCartAmount, cartItems } = useContext(StoreContext);
   const { user } = useContext(AuthContext);
   const { createOrder } = useContext(OrderContext);
@@ -47,7 +50,7 @@ const PlaceOrder = () => {
     event.preventDefault();
 
     if (!user) {
-      alert("User not authenticated. Please log in.");
+      toast(t("placeorder.userNotAuthenticated"));
       return;
     }
 
@@ -67,131 +70,161 @@ const PlaceOrder = () => {
     setIsProcessing(true);
     try {
       const response = await createOrder(orderData);
-      console.log("Response", response)
 
       if (!response.success) {
-        setOrderError("Order Placement Failed");
+        setOrderError((response.message));
         setIsProcessing(false);
       } else {
         navigate(`/payment-status/${response.order.paymentData.transId}`);
       }
     } catch (error) {
       console.error("Error placing order:", error);
-      setOrderError("An error occurred. Please try again.");
+      setOrderError(t("placeorder.errorOccurred"));
       setIsProcessing(false);
     }
   };
 
-  return (
-    <form className="place-order" onSubmit={placeOrder}>
-      <div className="place-order-left">
-        <p className="title">Delivery Information</p>
+  const renderInputField = (name, value, placeholder, type = "text") => {
+    return (
+      <div className="form-floating-field">
         <input
           required
-          name="street"
+          id={name}
+          name={name}
           onChange={onChangeHandler}
-          value={address.street}
-          type="text"
-          placeholder="Street"
+          value={value}
+          type={type}
+          placeholder=" "
         />
-        <div className="multi-fields">
-          <input
-            required
-            name="city"
-            onChange={onChangeHandler}
-            value={address.city}
-            type="text"
-            placeholder="City"
-          />
-          <input
-            required
-            name="state"
-            onChange={onChangeHandler}
-            value={address.state}
-            type="text"
-            placeholder="State"
-          />
-        </div>
-        <div className="multi-fields">
-          <input
-            required
-            name="zipcode"
-            onChange={onChangeHandler}
-            value={address.zipcode}
-            type="text"
-            placeholder="Zip Code"
-          />
-          <input
-            required
-            name="country"
-            onChange={onChangeHandler}
-            value={address.country}
-            type="text"
-            placeholder="Country"
-          />
-        </div>
+        <label htmlFor={name}>{placeholder}</label>
       </div>
+    );
+  };
 
-      <div className="place-order-right">
-        <div className="cart-total">
-          <h2>Cart Total</h2>
-          <div>
-            <div className="cart-total-details">
-              <p>Subtotal</p>
-              <p>XAF {getTotalCartAmount().toFixed(2)}</p>
+  return (
+    <div className="place-order-container">
+      <h1 className="page-title">{t("placeorder.checkoutTitle")}</h1>
+
+      <form className="place-order" onSubmit={placeOrder}>
+        <div className="place-order-left">
+          <div className="section-card">
+            <h2 className="section-title">
+              {t("placeorder.deliveryInformation")}
+            </h2>
+
+            {renderInputField("street", address.street, t("placeorder.street"))}
+
+            <div className="multi-fields">
+              {renderInputField("city", address.city, t("placeorder.city"))}
+              {renderInputField("state", address.state, t("placeorder.state"))}
             </div>
-            <hr />
-            <div className="cart-total-details">
-              <p>Delivery Fee</p>
-              <p>XAF {getTotalCartAmount() === 0 ? 0 : 0.0}</p>
-            </div>
-            <hr />
-            <div className="cart-total-details">
-              <b>Total</b>
-              <b>
-                XAF
-                {getTotalCartAmount() === 0
-                  ? 0
-                  : (getTotalCartAmount() + 0.0).toFixed(2)}
-              </b>
+
+            <div className="multi-fields">
+              {renderInputField(
+                "zipcode",
+                address.zipcode,
+                t("placeorder.zipcode")
+              )}
+              {renderInputField(
+                "country",
+                address.country,
+                t("placeorder.country")
+              )}
             </div>
           </div>
+        </div>
 
-          <div className="payment-info">
-            <p className="title">Payment Information</p>
-            <select
-              required
-              name="medium"
-              onChange={onChangeHandler}
-              value={paymentInfo.medium}
+        <div className="place-order-right">
+          <div className="section-card cart-total">
+            <h2 className="section-title">{t("placeorder.orderSummary")}</h2>
+
+            <div className="cart-total-content">
+              <div className="cart-total-details">
+                <p>{t("placeorder.subtotal")}</p>
+                <p>XAF {getTotalCartAmount().toFixed(2)}</p>
+              </div>
+              <hr />
+              <div className="cart-total-details">
+                <p>{t("placeorder.deliveryFee")}</p>
+                <p>XAF {getTotalCartAmount() === 0 ? 0 : 0.0}</p>
+              </div>
+              <hr />
+              <div className="cart-total-details total-row">
+                <p>{t("placeorder.total")}</p>
+                <p>
+                  XAF{" "}
+                  {getTotalCartAmount() === 0
+                    ? 0
+                    : (getTotalCartAmount() + 0.0).toFixed(2)}
+                </p>
+              </div>
+            </div>
+
+            <div className="payment-info">
+              <h2 className="section-title">
+                {t("placeorder.paymentInformation")}
+              </h2>
+
+              <div className="form-floating-field select-field">
+                <select
+                  required
+                  id="medium"
+                  name="medium"
+                  onChange={onChangeHandler}
+                  value={paymentInfo.medium}
+                >
+                  <option value="" disabled></option>
+                  <option value="mobile money">
+                    {t("placeorder.mobileMoney")}
+                  </option>
+                  <option value="orange money">
+                    {t("placeorder.orangeMoney")}
+                  </option>
+                </select>
+                <label htmlFor="medium">
+                  {t("placeorder.selectPaymentMethod")}
+                </label>
+              </div>
+
+              {renderInputField(
+                "phone",
+                paymentInfo.phone,
+                t("placeorder.phoneNumber")
+              )}
+
+              <div className="form-floating-field textarea-field">
+                <textarea
+                  id="message"
+                  name="message"
+                  onChange={onChangeHandler}
+                  value={paymentInfo.message}
+                  placeholder=" "
+                />
+                <label htmlFor="message">
+                  {t("placeorder.messageOptional")}
+                </label>
+              </div>
+
+              {orderError && <p className="error">{orderError}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isProcessing}
             >
-              <option value="">Select Payment Method</option>
-              <option value="mobile money">Mobile Money</option>
-              <option value="orange money">Orange Money</option>
-            </select>
-            <input
-              required
-              name="phone"
-              onChange={onChangeHandler}
-              value={paymentInfo.phone}
-              type="text"
-              placeholder="Phone Number"
-            />
-            <textarea
-              name="message"
-              onChange={onChangeHandler}
-              value={paymentInfo.message}
-              placeholder="Message (optional)"
-            />
-            {orderError && <p className="error">{orderError}</p>}
+              {isProcessing ? (
+                <>
+                  <span className="spinner"></span> {t("placeorder.processing")}
+                </>
+              ) : (
+                t("placeorder.proceedToPayment")
+              )}
+            </button>
           </div>
-
-          <button type="submit" disabled={isProcessing}>
-            {isProcessing ? "Processing..." : "PROCEED TO PAYMENT"}
-          </button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

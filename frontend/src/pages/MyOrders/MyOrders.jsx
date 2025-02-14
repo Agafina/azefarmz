@@ -3,8 +3,10 @@ import "./MyOrders.css";
 import { AuthContext } from "../../context/AuthContext";
 import { OrderContext } from "../../context/OrderContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const MyOrders = () => {
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
   const { orders, fetchOrders, loading, error } = useContext(OrderContext);
   const [isFetching, setIsFetching] = useState(false);
@@ -43,7 +45,7 @@ const MyOrders = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p>Loading orders...</p>
+        <p>{t("myorders.loadingOrders")}</p>
       </div>
     );
   }
@@ -51,7 +53,7 @@ const MyOrders = () => {
   if (error) {
     return (
       <div className="error-container">
-        <p className="error-message">{error}</p>
+        <p className="error-message">{t(error)}</p>
       </div>
     );
   }
@@ -64,17 +66,15 @@ const MyOrders = () => {
     <div className="orders-container">
       <div className="orders-header">
         <div>
-          <h1 className="orders-title">My Orders</h1>
-          <p className="orders-subtitle">
-            View and track all your orders in one place
-          </p>
+          <h1 className="orders-title">{t("myorders.myOrders")}</h1>
+          <p className="orders-subtitle">{t("myorders.viewAndTrackOrders")}</p>
         </div>
         <button
           className={`refresh-button ${isFetching ? "loading" : ""}`}
           onClick={handleFetchOrders}
           disabled={isFetching}
         >
-          {isFetching ? "Refreshing..." : "Refresh Orders"}
+          {isFetching ? t("myorders.refreshing") : t("myorders.refreshOrders")}
         </button>
       </div>
 
@@ -83,12 +83,12 @@ const MyOrders = () => {
           <table className="orders-table">
             <thead>
               <tr>
-                <th>Order ID</th>
-                <th>Status</th>
-                <th className="hide-mobile">Items</th>
-                <th>Amount</th>
-                <th className="hide-tablet">Delivery Address</th>
-                <th>Actions</th>
+                <th>{t("myorders.orderId")}</th>
+                <th>{t("myorders.status")}</th>
+                <th className="hide-mobile">{t("myorders.items")}</th>
+                <th>{t("myorders.amount")}</th>
+                <th className="hide-tablet">{t("myorders.deliveryAddress")}</th>
+                <th>{t("myorders.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -100,10 +100,12 @@ const MyOrders = () => {
                       <span
                         className={getStatusClass(order.paymentData.status)}
                       >
-                        {order.paymentData.status}
+                        {t(order.paymentData.status)}
                       </span>
                     </td>
-                    <td className="hide-mobile">{order.items.length} items</td>
+                    <td className="hide-mobile">
+                      {order.items.length} {t("myorders.items")}
+                    </td>
                     <td>XAF {order.amount.toFixed(2)}</td>
                     <td className="hide-tablet">
                       {order.deliveryAddress.city},{" "}
@@ -119,8 +121,8 @@ const MyOrders = () => {
                         }
                       >
                         {expandedOrder === order._id
-                          ? "Hide Details"
-                          : "View Details"}
+                          ? t("myorders.hideDetails")
+                          : t("myorders.viewDetails")}
                       </button>
                     </td>
                   </tr>
@@ -129,7 +131,7 @@ const MyOrders = () => {
                       <td colSpan="6">
                         <div className="details-content">
                           <div className="details-section">
-                            <h4>Delivery Address</h4>
+                            <h4>{t("myorders.deliveryAddress")}</h4>
                             <p>{order.deliveryAddress.street}</p>
                             <p>
                               {order.deliveryAddress.city},{" "}
@@ -138,27 +140,33 @@ const MyOrders = () => {
                             <p>{order.deliveryAddress.country}</p>
                           </div>
                           <div className="details-section">
-                            <h4>Payment Information</h4>
+                            <h4>{t("myorders.paymentInformation")}</h4>
                             <div className="payment-info">
                               <p>
-                                <span className="label">Payment Status:</span>
+                                <span className="label">
+                                  {t("myorders.paymentStatus")}:
+                                </span>
                                 <span
                                   className={getStatusClass(
                                     order.paymentData.status
                                   )}
                                 >
-                                  {order.paymentData.status}
+                                  {t(order.paymentData.status)}
                                 </span>
                               </p>
                               {order.paymentData.medium && (
                                 <p>
-                                  <span className="label">Payment Method:</span>
+                                  <span className="label">
+                                    {t("myorders.paymentMethod")}:
+                                  </span>
                                   {order.paymentData.medium}
                                 </p>
                               )}
                               {order.paymentData.transId && (
                                 <p>
-                                  <span className="label">Transaction ID:</span>
+                                  <span className="label">
+                                    {t("myorders.transactionId")}:
+                                  </span>
                                   <span
                                     className="transaction-link"
                                     onClick={() =>
@@ -166,36 +174,25 @@ const MyOrders = () => {
                                         order.paymentData.transId
                                       )
                                     }
-                                    title="Click to check payment status"
+                                    title={t(
+                                      "myorders.clickToCheckPaymentStatus"
+                                    )}
                                   >
                                     {order.paymentData.transId}
                                     <div className="tooltip">
-                                      Click to check payment status
+                                      {t("myorders.clickToCheckPaymentStatus")}
                                     </div>
                                   </span>
                                 </p>
                               )}
                               {order.paymentData.dateInitiated && (
                                 <p>
-                                  <span className="label">Payment Date:</span>
+                                  <span className="label">
+                                    {t("myorders.paymentDate")}:
+                                  </span>
                                   {formatDate(order.paymentData.dateInitiated)}
                                 </p>
                               )}
-                              <p>
-                                <span className="label">Payment Status:</span>
-                                {order.paid ? "Paid" : "Not Paid"}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="details-section">
-                            <h4>Order Items</h4>
-                            <div className="items-list">
-                              {order.items.map((item) => (
-                                <div key={item.productId} className="item">
-                                  <span>{item._id}</span>
-                                  <span>x {item.quantity}</span>
-                                </div>
-                              ))}
                             </div>
                           </div>
                         </div>
@@ -209,8 +206,13 @@ const MyOrders = () => {
         </div>
       ) : (
         <div className="empty-state">
-          <h3>No orders found</h3>
-          <p>When you make your first order, it will appear here.</p>
+          <h3>{t("myorders.noOrdersFound")}</h3>
+          <p>
+            {t("myorders.firstOrderMessage")}{" "}
+            <a href="/products" className="transaction-link">
+              {t("myorders.firstOrderLink")}
+            </a>
+          </p>
         </div>
       )}
     </div>
