@@ -3,12 +3,13 @@ import Header from "../../components/Header/Header";
 import "./Home.css";
 import CTA from "../../components/CTA/CTA";
 import Products from "../../components/Products/Products";
+import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 const Home = () => {
   return (
     <div>
       <Header />
       
-      <Products />
+      <FeaturedProducts />
       {/* <Introduction /> */}
       {/* <ShopOnlinePage /> */}
       <CTA />
