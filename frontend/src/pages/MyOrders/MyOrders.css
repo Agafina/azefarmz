@@ -283,7 +283,7 @@
 /* Add these styles to your existing MyOrders.css file */
 
 .transaction-link {
-  color: #0066cc;
+  color: #36bc36;
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -292,7 +292,7 @@
 }
 
 .transaction-link:hover {
-  color: #0052a3;
+  color: #28a745;
 }
 
 .transaction-link .tooltip {

@@ -46,10 +46,19 @@ const createOrder = async (req, res) => {
       message
     );
 
+
+
     // 3. Extract required payment data
     const { transId } = paymentResponse;
 
     console.log("Payment Response", paymentResponse)
+
+    if(paymentResponse.statusCode === 400) {
+      return res.status(500).json({
+        success: false,
+        message: paymentResponse.message || "An error occurred while creating the order.",
+      });
+    }
 
     // 4. Create a new order with proper payment data
     const newOrder = new orderModel({

@@ -1,0 +1,92 @@
+.floating-field-container {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.floating-field {
+  position: relative;
+}
+
+.floating-input {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Adjust height for textarea */
+textarea.floating-input {
+  height: auto;
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Special styling for select */
+select.floating-input {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+}
+
+.floating-input:focus {
+  outline: none;
+  border-color: #36bc36;
+  box-shadow: 0 0 0 1px rgba(74, 144, 226, 0.25);
+}
+
+.floating-input.has-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 1px rgba(231, 76, 60, 0.25);
+}
+
+.floating-field label {
+  position: absolute;
+  left: 0.75rem;
+  top: 1rem;
+  font-size: 1rem;
+  color: #666;
+  background-color: #fff;
+  padding: 0 0.25rem;
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.floating-input:focus ~ label,
+.floating-input.occupied ~ label,
+label.floating {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
+  color: #36bc36;
+  transform: translateY(-50%);
+}
+
+.floating-input.has-error ~ label {
+  color: #e74c3c;
+}
+
+.floating-input::placeholder {
+  color: transparent;
+}
+
+.required-mark {
+  color: #e74c3c;
+}
+
+.input-error {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s;
+}

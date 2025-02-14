@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Cart = () => {
+  const { t } = useTranslation();
   const { cartItems, removeFromCart, getTotalCartAmount, addToCart } =
     useContext(StoreContext);
   const navigate = useNavigate();
@@ -13,19 +16,19 @@ const Cart = () => {
       {/* Cart Items */}
       <div className="cart-items">
         <div className="cart-items-title">
-          <p className="itemName">Items</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Total</p>
-          <p>Adjust</p>
+          <p className="itemName">{t("cart.items")}</p>
+          <p>{t("cart.title")}</p>
+          <p>{t("cart.price")}</p>
+          <p>{t("cart.quantity")}</p>
+          <p>{t("cart.total")}</p>
+          <p>{t("cart.adjust")}</p>
         </div>
         <br />
         <hr />
         {Object.values(cartItems).map((item) => (
           <div key={item._id}>
             <div className="cart-items-title cart-items-item">
-              <img src={item.image} alt={item.name} />
+              <img src={`${backendUrl}/images/${item.image}`} alt={item.name} />
               <p>{item.name}</p>
               <p>XAF {item.price.toFixed(2)}</p>
               <p>{item.quantity}</p>
@@ -37,7 +40,10 @@ const Cart = () => {
                 >
                   -
                 </span>
-                <span onClick={() => addToCart(item, 1)} className="adjust-btn adjust-plus">
+                <span
+                  onClick={() => addToCart(item, 1)}
+                  className="adjust-btn adjust-plus"
+                >
                   +
                 </span>
               </div>
@@ -50,25 +56,25 @@ const Cart = () => {
       {/* Cart Summary */}
       <div className="cart-bottom">
         <div className="cart-total">
-          <h2>Cart Total</h2>
+          <h2>{t("cart.cartTotal")}</h2>
           <div className="">
             <div className="cart-total-details">
-              <p>Subtotal</p>
+              <p>{t("cart.subtotal")}</p>
               <p>XAF {getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <p>Delivery fee</p>
-              <p>XAF {getTotalCartAmount() === 0 ? 0 : 2.0}</p>
+              <p>{t("cart.deliveryFee")}</p>
+              <p>XAF {getTotalCartAmount() === 0 ? 0 : 0.0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <b>Total</b>
+              <b>{t("cart.total")}</b>
               <b>
-                XAF 
+                XAF
                 {getTotalCartAmount() === 0
                   ? 0
-                  : (getTotalCartAmount() + 2.0).toFixed(2)}
+                  : (getTotalCartAmount() + 0.0).toFixed(2)}
               </b>
             </div>
           </div>
@@ -76,17 +82,17 @@ const Cart = () => {
             onClick={() => navigate("/order")}
             disabled={getTotalCartAmount() === 0}
           >
-            PROCEED TO CHECKOUT
+            {t("cart.proceedToCheckout")}
           </button>
         </div>
 
         {/* Promo Code Section */}
         <div className="cart-promocode">
           <div className="">
-            <p>If you have a promo code, enter it here:</p>
+            <p>{t("cart.promoCodeMessage")}</p>
             <div className="cart-promocode-input">
-              <input type="text" placeholder="Promo code" />
-              <button>Submit</button>
+              <input type="text" placeholder={t("cart.promoCodePlaceholder")} />
+              <button>{t("cart.submit")}</button>
             </div>
           </div>
         </div>

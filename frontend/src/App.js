@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { useState, useEffect, useContext, useMemo } from "react";
 import LoginPopUp from "./components/LoginPopup/LoginPopUp";
-import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import Products from "./components/Products/Products";
 import ShopOnlinePage from "./pages/ShopOnline/ShopOnline";
@@ -17,6 +16,7 @@ import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Sustainability from "./pages/Sustainability/Sustainability";
+import ResetPassword from "./components/reset-password/ResetPassword";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -73,13 +73,14 @@ function App() {
           <Route path="/:lang/shop" element={<ShopOnlinePage />} />
           <Route path="/:lang/cart" element={<Cart />} />
           <Route path="/:lang/order" element={<PlaceOrder />} />
-          <Route path="/:lang/verify" element={<Verify />} />
           <Route path="/:lang/sustainability" element={<Sustainability />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
           <Route
             path="/:lang/payment-status/:transId"
             element={<PaymentStatus />}
           />
+          <Route path="/:lang/reset-password" element={<ResetPassword />} />
+          <Route path="/:lang/login" element={<LoginPopUp />} />
         </Routes>
       </div>
       <Footer />

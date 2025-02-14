@@ -6,12 +6,17 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  display: grid;
+  place-items: center;
+
 }
 
 .status-icon {
   width: 64px;
   height: 64px;
   margin-bottom: 20px;
+  display: grid;
+  place-self: center;
 }
 
 .status-icon.pending {

@@ -40,10 +40,13 @@
       "value": "République du Cameroun"
     },
     "form": {
-      "name": "Votre nom",
-      "email": "Votre email",
+      "title": "Nous Contacter",
+      "name": "Nom complet",
+      "subject": "Sujet",
+      "email": "Adresse e-mail",
       "message": "Votre message",
-      "submit": "Soumettre"
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours..."
     },
     "followUs": "Suivez-nous"
   },
@@ -247,5 +250,150 @@
       "email": "info@azefarms.com",
       "website": "http://www.azefarms.com/"
     }
+  },
+  "payment": {
+    "pending": {
+      "title": "Paiement en attente",
+      "message": "Votre paiement est en cours de traitement. Veuillez finaliser le paiement sur votre appareil.",
+      "instructions": [
+        "1. Attendez l'invite de paiement sur votre téléphone ou composez le numéro",
+        "2. Sélectionnez l'option 1 pour Mon Compte",
+        "3. Entrez votre code PIN Mobile Money ou Orange Money",
+        "4. Sélectionnez l'option 1 pour approuver le paiement",
+        "5. Entrez la référence : {ref}"
+      ]
+    },
+    "created": {
+      "title": "Paiement initié",
+      "message": "Votre demande de paiement a été créée. Veuillez attendre l'invite de paiement."
+    },
+    "successful": {
+      "title": "Paiement réussi",
+      "message": "Votre paiement a été traité avec succès. Merci pour votre achat !"
+    },
+    "failed": {
+      "title": "Échec du paiement",
+      "message": "Nous n'avons pas pu traiter votre paiement. Veuillez réessayer ou contacter le support."
+    },
+    "expired": {
+      "title": "Paiement expiré",
+      "message": "Cette demande de paiement a expiré. Veuillez créer un nouveau paiement."
+    },
+    "checking_status": "Vérification du statut du paiement...",
+    "not_found": "Paiement non trouvé",
+    "back_to_orders": "Retour aux commandes",
+    "amount": "Montant : XAF {amount}",
+    "instructions_title": "Instructions de paiement :",
+    "payment_method": "Méthode de paiement : {method}"
+  },
+  "myorders": {
+    "loadingOrders": "Chargement des commandes...",
+    "myOrders": "Mes commandes",
+    "viewAndTrackOrders": "Visualisez et suivez toutes vos commandes en un seul endroit",
+    "refreshing": "Actualisation...",
+    "refreshOrders": "Actualiser les commandes",
+    "orderId": "ID de commande",
+    "status": "Statut",
+    "items": "Articles",
+    "amount": "Montant",
+    "deliveryAddress": "Adresse de livraison",
+    "actions": "Actions",
+    "hideDetails": "Masquer les détails",
+    "viewDetails": "Voir les détails",
+    "paymentInformation": "Informations de paiement",
+    "paymentStatus": "Statut du paiement",
+    "paymentMethod": "Méthode de paiement",
+    "transactionId": "ID de transaction",
+    "clickToCheckPaymentStatus": "Cliquez pour vérifier l'état du paiement",
+    "paymentDate": "Date de paiement",
+    "noOrdersFound": "Aucune commande trouvée",
+    "firstOrderMessage": "Lorsque vous passerez votre première commande, elle apparaîtra ici.",
+    "firstOrderLink": "Acheter maintenant.",
+    "created": "Créé",
+    "pending": "En attente",
+    "processing": "En cours de traitement",
+    "successful": "Réussi",
+    "accepted": "Accepté",
+    "expired": "Expiré",
+    "failed": "Échoué",
+    "cancelled": "Annulé"
+  },
+  "placeorder": {
+    "deliveryInformation": "Informations de livraison",
+    "street": "Rue",
+    "city": "Ville",
+    "state": "État",
+    "zipcode": "Code postal",
+    "country": "Pays",
+    "cartTotal": "Total du panier",
+    "subtotal": "Sous-total",
+    "deliveryFee": "Frais de livraison",
+    "total": "Total",
+    "paymentInformation": "Informations de paiement",
+    "selectPaymentMethod": "Sélectionnez une méthode de paiement",
+    "mobileMoney": "Mobile Money",
+    "orangeMoney": "Orange Money",
+    "phoneNumber": "Numéro de téléphone",
+    "messageOptional": "Message (optionnel)",
+    "processing": "Traitement en cours...",
+    "proceedToPayment": "PROCÉDER AU PAIEMENT",
+    "orderPlacementFailed": "Échec de la commande",
+    "errorOccurred": "Une erreur s'est produite. Veuillez réessayer.",
+    "userNotAuthenticated": "Utilisateur non authentifié. Veuillez vous connecter.",
+    "checkoutTitle": "Paiement",
+    "orderSummary": "Résumé de la commande"
+  },
+  "cart": {
+    "items": "Articles",
+    "title": "Titre",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "total": "Total",
+    "adjust": "Ajuster",
+    "cartTotal": "Total du panier",
+    "subtotal": "Sous-total",
+    "deliveryFee": "Frais de livraison",
+    "proceedToCheckout": "Passer à la caisse",
+    "promoCodeMessage": "Si vous avez un code promo, entrez-le ici :",
+    "promoCodePlaceholder": "Code promo",
+    "submit": "Soumettre"
+  },
+  "contactvalidation": {
+    "nameTooShort": "Le nom doit comporter au moins 2 caractères.",
+    "nameTooLong": "Le nom doit comporter au maximum 50 caractères.",
+    "invalidEmail": "Veuillez entrer une adresse e-mail valide.",
+    "subjectTooShort": "Le sujet doit comporter au moins 3 caractères.",
+    "subjectTooLong": "Le sujet doit comporter au maximum 100 caractères.",
+    "messageTooShort": "Le message doit comporter au moins 10 caractères.",
+    "messageTooLong": "Le message doit comporter au maximum 1000 caractères."
+  },
+  "usernav": {
+    "logout": "Se déconnecter",
+    "myOrders": "Mes commandes",
+    "settings": "Paramètres"
+  },
+  "loginpopup": {
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "fullName": "Nom complet",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "backToLogin": "Retour à la connexion",
+    "forgotPassword": "Mot de passe oublié?",
+    "termsAgreement": "J'accepte les",
+    "terms": "Conditions générales",
+    "processing": "En cours...",
+    "loginButton": "Se connecter",
+    "createAccount": "Créer un compte"
+  },
+  "resetpassword": {
+    "title": "Réinitialisez votre mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmez le mot de passe",
+    "submit": "Réinitialiser le mot de passe",
+    "processing": "Traitement...",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "success": "Votre mot de passe a été réinitialisé avec succès ! Redirection vers la connexion..."
   }
 }

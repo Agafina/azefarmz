@@ -106,7 +106,7 @@
 
 .cart-total button {
   color: white;
-  background-color: tomato;
+  background-color: #36bc36;
   width: max(15vw, 200px);
   padding: 12px 0;
   border-radius: 4px;
@@ -122,7 +122,7 @@
 }
 
 .cart-total button:hover:not(:disabled) {
-  background-color: #ff6347;
+  background-color: #28a745;
   transform: scale(1.05);
 }
 
