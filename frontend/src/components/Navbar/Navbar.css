@@ -94,6 +94,7 @@
 .search-bar .search-icon {
   position: absolute;
   right: 10px;
+  top: 10px;
   cursor: pointer;
 }
 
@@ -144,7 +145,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 1096px) {
+@media (max-width: 1226px) {
   .menu-toggle {
     display: block;
   }
@@ -174,6 +175,7 @@
     font-size: 12px;
   }
 }
+
 
 /* User Dropdown */
 .user-dropdown {
