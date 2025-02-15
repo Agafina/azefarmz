@@ -13,7 +13,8 @@
     "products": "Products",
     "shop": "Shop",
     "contact": "Contact",
-    "myorders": "My Orders"
+    "myorders": "My Orders",
+    "faqs": "FAQs/Support"
   },
   "profile": {
     "orders": "Orders",
@@ -401,5 +402,95 @@
     "processing": "Processing...",
     "passwordMismatch": "Passwords do not match.",
     "success": "Your password has been successfully reset! Redirecting to login..."
+  },
+  "pages": {
+    "faqs": {
+      "title": "Frequently Asked Questions",
+      "description": "Find answers to common questions about our products, sustainability practices, and services.",
+      "questions": [
+        {
+          "question": "Who is Aze Farms?",
+          "answer": "Aze Farms is a sustainable agricultural business based in Cameroon, dedicated to producing eco-friendly, high-quality farm products."
+        },
+        {
+          "question": "What products does Aze Farms offer?",
+          "answer": "Our products include honey, plantains, pineapples, cassava products, vegetables, palm oil, and eucalyptus-based goods."
+        },
+        {
+          "question": "How does Aze Farms practice sustainability?",
+          "answer": "We follow eco-friendly agricultural practices such as crop rotation, rainwater harvesting, integrated pest management, and renewable energy use."
+        },
+        {
+          "question": "Where does Aze Farms deliver?",
+          "answer": "We offer delivery services based on location availability. Please check our online store for details."
+        },
+        {
+          "question": "How can I contact Aze Farms?",
+          "answer": "You can reach us via email, phone, or social media."
+        },
+        {
+          "question": "Can I visit the farm?",
+          "answer": "Yes! We welcome visitors to learn about our sustainable farming practices. Contact us to schedule a tour."
+        }
+      ]
+    },
+    "termsConditions": {
+      "title": "Terms & Conditions",
+      "description": "Read our terms and conditions to understand the policies governing our website and services.",
+      "sections": [
+        {
+          "title": "Introduction",
+          "content": "Welcome to Aze Farms! By accessing our website and purchasing our products, you agree to comply with these terms and conditions."
+        },
+        {
+          "title": "Product Information",
+          "content": "All products are sourced directly from our farm and adhere to sustainable farming practices. Availability is subject to seasonal changes."
+        },
+        {
+          "title": "Orders & Payments",
+          "content": "Orders must be placed through our website. Payment must be completed before processing. We accept various secure payment methods."
+        },
+        {
+          "title": "Shipping & Delivery",
+          "content": "Delivery timelines vary by location and product availability. Customers will receive tracking details upon shipment."
+        },
+        {
+          "title": "Returns & Refunds",
+          "content": "Due to the perishable nature of our products, returns are only accepted for damaged or incorrect items. Refunds are processed within a set timeframe."
+        },
+        {
+          "title": "Sustainability Commitment",
+          "content": "Aze Farms is committed to eco-friendly agricultural practices, minimizing waste, and supporting local farmers."
+        },
+        {
+          "title": "Intellectual Property",
+          "content": "All website content, including text, images, and product descriptions, is the property of Aze Farms. Unauthorized use is prohibited."
+        },
+        {
+          "title": "Contact Information",
+          "content": "For inquiries, please contact us via email, phone, or social media."
+        }
+      ]
+    }
+  },
+  "cookies": {
+    "title": "Cookie Settings",
+    "message": "We use cookies to enhance your browsing experience and analyze our traffic. Please choose your preference below.",
+    "description": {
+      "necessary": "Essential cookies that enable core functionality of the website.",
+      "analytics": "Cookies that help us analyze how you use our website to improve your experience.",
+      "marketing": "Cookies used for marketing purposes to provide you with relevant offers."
+    },
+    "buttons": {
+      "learnMore": "Learn More",
+      "acceptAll": "Accept All",
+      "necessaryOnly": "Necessary Only",
+      "rejectAll": "Reject All"
+    },
+    "categories": {
+      "necessary": "Necessary",
+      "analytics": "Analytics",
+      "marketing": "Marketing"
+    }
   }
 }

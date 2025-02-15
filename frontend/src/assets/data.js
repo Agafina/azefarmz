@@ -20,6 +20,7 @@ export const navbar = {
       id: "contact-us",
       external: true,
     },
+    { name: "navbarItems.faqs", path: "/faqs", id: "faqs" },
   ],
   profile: [
     { name: "profile.orders", path: "/myorders", id: "orders" },
@@ -522,5 +523,76 @@ export const sustainability = {
   contact: {
     email: "sustainability.contact.email",
     website: "sustainability.contact.website",
+  },
+};
+
+export const pages = {
+  faqs: {
+    title: "pages.faqs.title",
+    description: "pages.faqs.description",
+    items: [
+      {
+        question: "pages.faqs.questions[0].question",
+        answer: "pages.faqs.questions[0].answer",
+      },
+      {
+        question: "pages.faqs.questions[1].question",
+        answer: "pages.faqs.questions[1].answer",
+      },
+      {
+        question: "pages.faqs.questions[2].question",
+        answer: "pages.faqs.questions[2].answer",
+      },
+      {
+        question: "pages.faqs.questions[3].question",
+        answer: "pages.faqs.questions[3].answer",
+      },
+      {
+        question: "pages.faqs.questions[4].question",
+        answer: "pages.faqs.questions[4].answer",
+      },
+      {
+        question: "pages.faqs.questions[5].question",
+        answer: "pages.faqs.questions[5].answer",
+      },
+    ],
+  },
+  termsConditions: {
+    title: "pages.termsConditions.title",
+    description: "pages.termsConditions.description",
+    sections: [
+      {
+        title: "pages.termsConditions.sections[0].title",
+        content: "pages.termsConditions.sections[0].content",
+      },
+      {
+        title: "pages.termsConditions.sections[1].title",
+        content: "pages.termsConditions.sections[1].content",
+      },
+      {
+        title: "pages.termsConditions.sections[2].title",
+        content: "pages.termsConditions.sections[2].content",
+      },
+      {
+        title: "pages.termsConditions.sections[3].title",
+        content: "pages.termsConditions.sections[3].content",
+      },
+      {
+        title: "pages.termsConditions.sections[4].title",
+        content: "pages.termsConditions.sections[4].content",
+      },
+      {
+        title: "pages.termsConditions.sections[5].title",
+        content: "pages.termsConditions.sections[5].content",
+      },
+      {
+        title: "pages.termsConditions.sections[6].title",
+        content: "pages.termsConditions.sections[6].content",
+      },
+      {
+        title: "pages.termsConditions.sections[7].title",
+        content: "pages.termsConditions.sections[7].content",
+      },
+    ],
   },
 };

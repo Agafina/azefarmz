@@ -1,0 +1,125 @@
+.terms-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.terms-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.terms-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.terms-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.terms-title h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.terms-icon {
+  width: 24px;
+  height: 24px;
+  color: #2563eb;
+}
+
+.terms-description {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.terms-content {
+  height: 600px;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.terms-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terms-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terms-content::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 3px;
+}
+
+/* Scroll shadows */
+.terms-content.shadow-top {
+  background: 
+    linear-gradient(white 30%, rgba(255, 255, 255, 0)),
+    linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.terms-sections {
+  padding: 1.5rem;
+}
+
+.terms-section {
+  margin-bottom: 2rem;
+}
+
+.terms-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.terms-section p {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.terms-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .terms-container {
+    margin: 1rem auto;
+  }
+  
+  .terms-content {
+    height: 500px;
+  }
+  
+  .terms-title h1 {
+    font-size: 1.25rem;
+  }
+  
+  .terms-section h2 {
+    font-size: 1.1rem;
+  }
+}

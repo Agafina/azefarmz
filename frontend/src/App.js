@@ -18,6 +18,9 @@ import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Sustainability from "./pages/Sustainability/Sustainability";
 import ResetPassword from "./components/reset-password/ResetPassword";
 import { StoreContext } from "./context/StoreContext";
+import TermsAndConditions from "./components/TermsAndConditions/TermsAndConditions";
+import FAQs from "./components/FAQS/FAQs";
+import CookieSettings from "./components/CookieSettings/CookieSettings";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -72,6 +75,7 @@ function App() {
       {showLogin && <LoginPopUp setShowLogin={setShowLogin} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
+        <CookieSettings />
 
         <Routes>
           <Route path="/:lang" element={<Home />} />
@@ -83,12 +87,14 @@ function App() {
           <Route path="/:lang/order" element={<PlaceOrder />} />
           <Route path="/:lang/sustainability" element={<Sustainability />} />
           <Route path="/:lang/myorders" element={<MyOrders />} />
+          <Route path="/:lang/faqs" element={<FAQs />} />
           <Route
             path="/:lang/payment-status/:transId"
             element={<PaymentStatus />}
           />
           <Route path="/:lang/reset-password" element={<ResetPassword />} />
           <Route path="/:lang/login" element={<LoginPopUp setShowLogin={setShowLogin}/>} />
+          <Route path="/:lang/terms" element={<TermsAndConditions />} />
         </Routes>
       </div>
       <Footer />

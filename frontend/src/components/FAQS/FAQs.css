@@ -1,0 +1,125 @@
+.faqs-container {
+  padding: 60px 8vw;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.faqs-title {
+  font-size: 2.5rem;
+  color: #49577e;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.faqs-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 40px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faqs-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.faq-question-button {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: #49577e;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.faq-question-button:hover {
+  background-color: #f5f5f5;
+}
+
+.question-text {
+  margin-right: 16px;
+  flex: 1;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-answer-wrapper.open {
+  max-height: 500px; /* Adjust based on your content */
+  transition: max-height 0.5s ease-in;
+}
+
+.faq-answer {
+  padding: 0 20px 20px;
+  color: #555;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faqs-container {
+    padding: 40px 4vw;
+  }
+
+  .faqs-title {
+    font-size: 2rem;
+  }
+
+  .faqs-description {
+    font-size: 1rem;
+  }
+
+  .faq-question-button {
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+
+  .faq-answer {
+    padding: 0 16px 16px;
+  }
+}
+
+/* Accessibility */
+.faq-question-button:focus {
+  outline: 2px solid #49577e;
+  outline-offset: -2px;
+}
+
+/* Add smooth transitions for icon rotation */
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
+}

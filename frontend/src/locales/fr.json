@@ -13,7 +13,8 @@
     "products": "Produits",
     "shop": "Magasin",
     "contact": "Contact",
-    "myorders": "Mes commandes"
+    "myorders": "Mes commandes",
+    "faqs": "FAQs/Support"
   },
   "profile": {
     "orders": "Commandes",
@@ -400,5 +401,94 @@
     "processing": "Traitement...",
     "passwordMismatch": "Les mots de passe ne correspondent pas.",
     "success": "Votre mot de passe a été réinitialisé avec succès ! Redirection vers la connexion..."
+  },
+  "pages": {
+    "faqs": {
+      "title": "Foire Aux Questions",
+      "description": "Trouvez des réponses aux questions courantes sur nos produits, nos pratiques de durabilité et nos services.",
+      "questions": [
+        {
+          "question": "Qui est Aze Farms ?",
+          "answer": "Aze Farms est une entreprise agricole durable basée au Cameroun, dédiée à la production de produits de haute qualité respectueux de l'environnement."
+        },
+        {
+          "question": "Quels produits propose Aze Farms ?",
+          "answer": "Nos produits comprennent du miel, des plantains, des ananas, des produits à base de manioc, des légumes, de l'huile de palme et des articles à base d'eucalyptus."
+        },
+        {
+          "question": "Comment Aze Farms pratique-t-il la durabilité ?",
+          "answer": "Nous suivons des pratiques agricoles écologiques telles que la rotation des cultures, la collecte des eaux de pluie, la gestion intégrée des ravageurs et l'utilisation des énergies renouvelables."
+        },
+        {
+          "question": "Où Aze Farms effectue-t-il ses livraisons ?",
+          "answer": "Nous proposons des services de livraison selon la disponibilité de votre emplacement. Veuillez consulter notre boutique en ligne pour plus de détails."
+        },
+        {
+          "question": "Comment puis-je contacter Aze Farms ?",
+          "answer": "Vous pouvez nous contacter par e-mail, téléphone ou via nos réseaux sociaux."
+        },
+        {
+          "question": "Puis-je visiter la ferme ?",
+          "answer": "Oui ! Nous accueillons les visiteurs souhaitant en apprendre davantage sur nos pratiques agricoles durables. Contactez-nous pour planifier une visite."
+        }
+      ]
+    },
+    "termsConditions": {
+      "title": "Conditions Générales",
+      "description": "Lisez nos conditions générales pour comprendre les règles qui régissent notre site et nos services.",
+      "sections": [
+        {
+          "title": "Introduction",
+          "content": "Bienvenue chez Aze Farms ! En accédant à notre site web et en achetant nos produits, vous acceptez de respecter ces conditions générales."
+        },
+        {
+          "title": "Informations sur les Produits",
+          "content": "Tous les produits proviennent directement de notre ferme et respectent des pratiques agricoles durables. Leur disponibilité varie en fonction des saisons."
+        },
+        {
+          "title": "Commandes et Paiements",
+          "content": "Les commandes doivent être passées via notre site web. Le paiement doit être effectué avant le traitement. Nous acceptons divers modes de paiement sécurisés."
+        },
+        {
+          "title": "Expédition et Livraison",
+          "content": "Les délais de livraison varient en fonction du lieu et de la disponibilité des produits. Les clients recevront un suivi de commande après l’expédition."
+        },
+        {
+          "title": "Retours et Remboursements",
+          "content": "En raison de la nature périssable de nos produits, les retours ne sont acceptés que pour les articles endommagés ou incorrects. Les remboursements seront traités dans un délai défini."
+        },
+        {
+          "title": "Engagement en Matière de Durabilité",
+          "content": "Aze Farms s'engage à adopter des pratiques agricoles écologiques, à minimiser les déchets et à soutenir les agriculteurs locaux."
+        },
+        {
+          "title": "Propriété Intellectuelle",
+          "content": "Tout le contenu du site, y compris les textes, images et descriptions de produits, est la propriété d'Aze Farms. Toute utilisation non autorisée est interdite."
+        },
+        {
+          "title": "Coordonnées",
+          "content": "Pour toute question, veuillez nous contacter par e-mail, téléphone ou via les réseaux sociaux."
+        }
+      ]
+    }
+  },
+  "cookies": {
+    "title": "Paramètres des Cookies",
+    "message": "Nous utilisons des cookies pour améliorer votre expérience de navigation et analyser notre trafic. Veuillez choisir vos préférences ci-dessous.",
+    "description": {
+      "necessary": "Cookies essentiels permettant les fonctionnalités de base du site web.",
+      "analytics": "Cookies qui nous aident à analyser votre utilisation du site pour améliorer votre expérience.",
+      "marketing": "Cookies utilisés à des fins marketing pour vous proposer des offres pertinentes."
+    },
+    "buttons": {
+      "acceptAll": "Tout Accepter",
+      "necessaryOnly": "Cookies Nécessaires",
+      "rejectAll": "Tout Refuser"
+    },
+    "categories": {
+      "necessary": "Nécessaire",
+      "analytics": "Analytique",
+      "marketing": "Marketing"
+    }
   }
 }
