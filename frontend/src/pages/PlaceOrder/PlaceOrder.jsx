@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const PlaceOrder = () => {
   const { t } = useTranslation();
-  const { getTotalCartAmount, cartItems } = useContext(StoreContext);
+  const { getTotalCartAmount, cartItems, clearCart } = useContext(StoreContext);
   const { user } = useContext(AuthContext);
   const { createOrder } = useContext(OrderContext);
   const navigate = useNavigate();
@@ -75,6 +75,7 @@ const PlaceOrder = () => {
         setOrderError((response.message));
         setIsProcessing(false);
       } else {
+        clearCart();
         navigate(`/payment-status/${response.order.paymentData.transId}`);
       }
     } catch (error) {

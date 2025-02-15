@@ -129,3 +129,23 @@ input[type="password"] {
   margin-top: 15px;
 }
 
+.resend-otp {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.resend-otp a {
+  color: #228b22;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #228b22;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+}

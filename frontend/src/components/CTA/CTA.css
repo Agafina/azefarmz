@@ -1,9 +1,26 @@
 .cta-section {
   text-align: center;
-  padding: 80px 20px;
-  margin: 60px 0;
+  padding: 100px 20px;
+  margin: 0;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.cta-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-section.light-bg {
+  background-color: #f8fff8;
+}
+
+.cta-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .cta-section h2 {
@@ -14,6 +31,8 @@
   position: relative;
   line-height: 1.2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateX(-50px);
 }
 
 .cta-section p {
@@ -24,6 +43,8 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0;
+  transform: translateX(50px);
 }
 
 .cta-buttons {
@@ -33,6 +54,7 @@
   align-items: center;
   position: relative;
   z-index: 1;
+  opacity: 0;
 }
 
 .cta-button {
@@ -55,17 +77,78 @@
   box-shadow: 0 4px 15px rgba(34, 139, 34, 0.3);
 }
 
-.cta-button.primary:hover {
-  background-color: #1a6f1a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(34, 139, 34, 0.4);
-}
-
 .cta-button.secondary {
   background-color: #ffffff;
   color: #228b22;
   border: 2px solid #228b22;
   box-shadow: 0 4px 15px rgba(34, 139, 34, 0.1);
+}
+
+/* Animations */
+.slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.bounce-on-hover:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hover effects */
+.cta-button.primary:hover {
+  background-color: #1a6f1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 139, 34, 0.4);
 }
 
 .cta-button.secondary:hover {
@@ -76,7 +159,7 @@
   box-shadow: 0 6px 20px rgba(34, 139, 34, 0.2);
 }
 
-/* Animation for buttons */
+/* Active state */
 .cta-button:active {
   transform: translateY(1px);
 }
@@ -85,7 +168,6 @@
 @media (max-width: 768px) {
   .cta-section {
     padding: 60px 16px;
-    margin: 40px 0;
   }
 
   .cta-section h2 {

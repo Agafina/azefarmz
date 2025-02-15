@@ -20,7 +20,6 @@ export const navbar = {
       id: "contact-us",
       external: true,
     },
-    { name: "navbarItems.myorders", path: "/myorders", id: "my-orders" },
   ],
   profile: [
     { name: "profile.orders", path: "/myorders", id: "orders" },
@@ -216,21 +215,62 @@ export const featuredProducts = [
   },
 ];
 
-export const ctaContent = {
-  title: "cta.title",
-  description: "cta.description",
-  buttons: [
-    // {
-    //   text: "cta.buttons.shopOnline.text",
-    //   link: "/shop",
-    //   style: "primary",
-    // },
-    {
-      text: "cta.buttons.exploreProducts.text",
-      link: "/products",
-      style: "secondary",
-    },
-  ],
+export const ctaContents = {
+  cta: {
+    title: "cta.title",
+    description: "cta.description",
+    buttons: [
+      {
+        text: "cta.buttons.exploreProducts.text",
+        link: "/products",
+        style: "secondary",
+      },
+    ],
+  },
+  contactCTA: {
+    title: "contactCTA.title",
+    description: "contactCTA.description",
+    buttons: [
+      {
+        text: "contactCTA.buttons.contactUs.text",
+        link: "/contact",
+        style: "primary",
+      },
+    ],
+  },
+  aboutCTA: {
+    title: "aboutCTA.title",
+    description: "aboutCTA.description",
+    buttons: [
+      {
+        text: "aboutCTA.buttons.learnMore.text",
+        link: "/about-us",
+        style: "secondary",
+      },
+    ],
+  },
+  sustainabilityCTA: {
+    title: "sustainabilityCTA.title",
+    description: "sustainabilityCTA.description",
+    buttons: [
+      {
+        text: "sustainabilityCTA.buttons.readMore.text",
+        link: "/sustainability",
+        style: "primary",
+      },
+    ],
+  },
+  default: {
+    title: "cta.title",
+    description: "cta.description",
+    buttons: [
+      {
+        text: "cta.buttons.exploreProducts.text",
+        link: "/products",
+        style: "secondary",
+      },
+    ],
+  },
 };
 
 export const productCategories = [

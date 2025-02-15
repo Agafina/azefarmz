@@ -5,7 +5,6 @@ const {
   verifyPaymentAndUpdateOrderStatus,
   getOrders,
 } = require("../controllers/orderController");
-const authMiddleware = require("../middlewares/auth"); 
 
 // Create a new order
 router.post("/create", createOrder);
@@ -18,8 +17,5 @@ router.get(
 
 // Get all orders for a specific user
 router.get("/:userId", getOrders);
-
-// Update the order status (only accessible by admin)
-//router.put("/update-status", authMiddleware, adminMiddleware, updateOrderStatus);
 
 module.exports = router;

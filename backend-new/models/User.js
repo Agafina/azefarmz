@@ -20,6 +20,16 @@ const userSchema = new mongoose.Schema(
       enum: ["client", "admin"],
       default: "client",
     },
+    isOTPVerified: {
+      type: Boolean,
+      default: false,
+    },
+    otp: {
+      type: String,
+    },
+    otpExpires: {
+      type: Date,
+    },
   },
   { minimize: false }
 );

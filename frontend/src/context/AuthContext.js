@@ -36,7 +36,6 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
   }, []);
-  
 
   // Backend URL from the .env.local file
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -144,6 +143,50 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  // Resend OTP function
+  const resendOTP = async (email) => {
+    try {
+      const response = await axios.post(`${backendUrl}/api/user/resend-otp`, {
+        email,
+      });
+      if (response.data.success) {
+        return { success: true, message: response.data.mssg };
+      } else {
+        dispatch({ type: "SET_ERROR", payload: response.data.mssg });
+      }
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+      dispatch({
+        type: "SET_ERROR",
+        payload: "Failed to resend OTP. Please try again.",
+      });
+    }
+  };
+
+  // Verify OTP function
+  const verifyOTP = async (email, otp) => {
+    try {
+      const response = await axios.post(`${backendUrl}/api/user/verify-otp`, {
+        email,
+        otp,
+      });
+      if (response.data.success) {
+        const user = { ...state.user, isOTPVerified: true };
+        Cookies.set("aze_app_user", JSON.stringify(user), { expires: 7 });
+        dispatch({ type: "LOGIN", payload: user });
+        return { success: true, message: response.data.mssg };
+      } else {
+        dispatch({ type: "SET_ERROR", payload: response.data.mssg });
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      dispatch({
+        type: "SET_ERROR",
+        payload: "Failed to verify OTP. Please try again.",
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -154,6 +197,8 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         forgotPassword,
         resetPassword,
+        resendOTP,
+        verifyOTP,
       }}
     >
       {children}

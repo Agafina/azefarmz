@@ -386,7 +386,12 @@
     "terms": "Terms and Conditions",
     "processing": "Processing...",
     "loginButton": "Login",
-    "createAccount": "Create Account"
+    "createAccount": "Create Account",
+    "enterOTP": "Enter OTP",
+    "verifyOTP": "Verify OTP",
+    "verifyOTPButton": "Verify",
+    "resendOTP": "Resend OTP",
+    "resendOTPIn": "Resend OTP in"
   },
   "resetpassword": {
     "title": "Reset Your Password",

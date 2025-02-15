@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import PaymentStatus from "./pages/PaymentStatus/PaymentStatus";
 import Sustainability from "./pages/Sustainability/Sustainability";
 import ResetPassword from "./components/reset-password/ResetPassword";
+import { StoreContext } from "./context/StoreContext";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -24,6 +25,13 @@ function App() {
   const location = useLocation();
   const { i18n } = useTranslation();
   const { user } = useContext(AuthContext);
+  const { clearCart } = useContext(StoreContext)
+
+  useEffect(() => {
+    if (!user) {
+      clearCart(); // Clears the cart when the user logs out
+    }
+  }, [user, clearCart]);
 
   useEffect(() => {
     const languageInURL = location.pathname.split("/")[1];

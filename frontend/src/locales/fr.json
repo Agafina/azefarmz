@@ -385,7 +385,12 @@
     "terms": "Conditions générales",
     "processing": "En cours...",
     "loginButton": "Se connecter",
-    "createAccount": "Créer un compte"
+    "createAccount": "Créer un compte",
+    "enterOTP": "Entrez l'OTP",
+    "verifyOTP": "Vérifier l'OTP",
+    "verifyOTPButton": "Vérifier",
+    "resendOTP": "Renvoyer l'OTP",
+    "resendOTPIn": "Renvoyer l'OTP dans"
   },
   "resetpassword": {
     "title": "Réinitialisez votre mot de passe",

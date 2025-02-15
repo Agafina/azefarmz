@@ -57,6 +57,7 @@ const Navbar = ({ setShowLogin }) => {
             className={`menu-item ${menu === item.id ? "active" : ""}`}
             onClick={() => {
               setMenu(item.id);
+              setIsMenuOpen(false);
               if (item.external) {
                 window.location.href = item.path;
               } else {
@@ -67,12 +68,53 @@ const Navbar = ({ setShowLogin }) => {
             {t(item.name)}
           </li>
         ))}
-        <li className="language-switcher">
+
+        {/* Language Switcher (Mobile Only) */}
+        <li className="menu-item mobile-only">
           <LanguageSwitcher />
         </li>
+
+        {/* User Dropdown or Sign In (Mobile Only) */}
+        {user ? (
+          <li className="menu-item mobile-only">
+            <div className="user-dropdown">
+              <button
+                className="user-dropdown-button"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                {user.name} <ChevronDown size={18} />
+              </button>
+              {dropdownOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/myorders" className="dropdown-item">
+                    {t("usernav.myOrders")}
+                  </Link>
+                  <Link to="/settings" className="dropdown-item">
+                    {t("usernav.settings")}
+                  </Link>
+                  <button onClick={logout} className="dropdown-item">
+                    {t("usernav.logout")}
+                  </button>
+                </div>
+              )}
+            </div>
+          </li>
+        ) : (
+          <li className="menu-item mobile-only">
+            <button
+              onClick={() => {
+                setShowLogin(true);
+                setIsMenuOpen(false);
+              }}
+              className="auth-button"
+            >
+              {t("auth.signIn")}
+            </button>
+          </li>
+        )}
       </ul>
 
-      {/* Navbar Right Section */}
+      {/* Navbar Right Section (Desktop) */}
       <div className="navbar-right">
         <LanguageSwitcher />
         <div className="search-bar">
@@ -82,7 +124,8 @@ const Navbar = ({ setShowLogin }) => {
           />
           <Search size={20} className="search-icon" />
         </div>
-        {/* Username Dropdown */}
+
+        {/* User Dropdown (Desktop) */}
         {user ? (
           <div className="user-dropdown">
             <button

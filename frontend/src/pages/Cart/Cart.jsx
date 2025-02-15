@@ -7,8 +7,13 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Cart = () => {
   const { t } = useTranslation();
-  const { cartItems, removeFromCart, getTotalCartAmount, addToCart } =
-    useContext(StoreContext);
+  const {
+    cartItems,
+    removeFromCart,
+    getTotalCartAmount,
+    addToCart,
+    clearCart,
+  } = useContext(StoreContext);
   const navigate = useNavigate();
 
   return (
@@ -78,14 +83,24 @@ const Cart = () => {
               </b>
             </div>
           </div>
-          <button
-            onClick={() => navigate("/order")}
-            disabled={getTotalCartAmount() === 0}
-          >
-            {t("cart.proceedToCheckout")}
-          </button>
-        </div>
 
+          {/* Buttons Section */}
+          <div className="cart-buttons">
+            <button
+              onClick={() => navigate("/order")}
+              disabled={getTotalCartAmount() === 0}
+            >
+              {t("cart.proceedToCheckout")}
+            </button>
+            <button
+              onClick={clearCart}
+              className="clear-cart-button"
+              disabled={getTotalCartAmount() === 0}
+            >
+              {t("cart.clearCart")}
+            </button>
+          </div>
+        </div>
         {/* Promo Code Section 
         <div className="cart-promocode">
           <div className="">
