@@ -492,5 +492,97 @@
       "analytics": "Analytics",
       "marketing": "Marketing"
     }
+  },
+  "metadata": {
+    "default": {
+      "title": "Aze Farms | Sustainable Agriculture & Farm-Fresh Products",
+      "description": "Discover farm-fresh, eco-friendly produce from Aze Farms. Committed to sustainability, quality, and community impact. Shop online today!",
+      "keywords": "Aze Farms, sustainable agriculture, farm-fresh produce, eco-friendly farming, organic food, honey, plantains, pineapples, cassava, palm oil",
+      "image": "/images/aze-farms-banner.jpg"
+    },
+    "home": {
+      "title": "Welcome to Aze Farms | Fresh & Sustainable",
+      "description": "Aze Farms offers premium, eco-friendly farm products. Experience sustainability and quality in every purchase.",
+      "keywords": "farm-fresh, sustainable food, organic, Aze Farms, eco-friendly agriculture",
+      "image": "/images/home-banner.jpg"
+    },
+    "about": {
+      "title": "About Us | Aze Farms",
+      "description": "Learn about Aze Farms, our mission for sustainability, and how we produce high-quality, eco-friendly agricultural products.",
+      "keywords": "about Aze Farms, sustainability, eco-friendly farming, farm history",
+      "image": "/images/about-banner.jpg"
+    },
+    "contact": {
+      "title": "Contact Us | Aze Farms",
+      "description": "Get in touch with Aze Farms for inquiries, partnerships, and customer support.",
+      "keywords": "contact Aze Farms, customer support, farm inquiries",
+      "image": "/images/contact-banner.jpg"
+    },
+    "products": {
+      "title": "Our Products | Aze Farms",
+      "description": "Explore our range of farm-fresh products including honey, plantains, pineapples, cassava, and more.",
+      "keywords": "organic products, fresh farm produce, buy farm products online",
+      "image": "/images/products-banner.jpg"
+    },
+    "shop": {
+      "title": "Shop Online | Aze Farms",
+      "description": "Buy fresh, organic farm products online. Secure checkout and nationwide delivery available.",
+      "keywords": "shop farm produce, buy online, fresh organic food",
+      "image": "/images/shop-banner.jpg"
+    },
+    "cart": {
+      "title": "Your Cart | Aze Farms",
+      "description": "Review your selected items and proceed to checkout for a seamless shopping experience.",
+      "keywords": "shopping cart, checkout, buy farm products",
+      "image": "/images/cart-banner.jpg"
+    },
+    "order": {
+      "title": "Place Your Order | Aze Farms",
+      "description": "Complete your purchase securely and enjoy farm-fresh products delivered to your doorstep.",
+      "keywords": "order farm products, checkout, secure payment",
+      "image": "/images/order-banner.jpg"
+    },
+    "myorders": {
+      "title": "My Orders | Aze Farms",
+      "description": "Track your orders and review past purchases with Aze Farms.",
+      "keywords": "order history, track orders, my orders",
+      "image": "/images/myorders-banner.jpg"
+    },
+    "faqs": {
+      "title": "FAQs & Support | Aze Farms",
+      "description": "Find answers to frequently asked questions about Aze Farms, our products, and sustainability efforts.",
+      "keywords": "FAQs, customer support, help center",
+      "image": "/images/faqs-banner.jpg"
+    },
+    "paymentStatus": {
+      "title": "Payment Status | Aze Farms",
+      "description": "Check the status of your payment transaction and ensure a successful purchase.",
+      "keywords": "payment status, transaction details, secure checkout",
+      "image": "/images/payment-status-banner.jpg"
+    },
+    "resetPassword": {
+      "title": "Reset Password | Aze Farms",
+      "description": "Securely reset your account password to regain access.",
+      "keywords": "reset password, account recovery, secure login",
+      "image": "/images/reset-password-banner.jpg"
+    },
+    "login": {
+      "title": "Login to Your Account | Aze Farms",
+      "description": "Sign in to manage your orders, track purchases, and shop fresh farm products online.",
+      "keywords": "login, sign in, farm shop account",
+      "image": "/images/login-banner.jpg"
+    },
+    "termsConditions": {
+      "title": "Terms & Conditions - Aze Farms",
+      "description": "Review our terms and conditions to understand your rights and responsibilities when using Aze Farms services.",
+      "keywords": "terms, conditions, policies, Aze Farms, legal",
+      "image": "/images/terms-banner.jpg"
+    },
+    "sustainability": {
+      "title": "Sustainability | Aze Farms",
+      "description": "Learn how Aze Farms is committed to sustainable farming practices that protect the environment and support local communities.",
+      "keywords": "sustainability, eco-friendly farming, green agriculture",
+      "image": "/images/sustainability-banner.jpg"
+    }
   }
 }

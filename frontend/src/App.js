@@ -21,6 +21,7 @@ import { StoreContext } from "./context/StoreContext";
 import TermsAndConditions from "./components/TermsAndConditions/TermsAndConditions";
 import FAQs from "./components/FAQS/FAQs";
 import CookieSettings from "./components/CookieSettings/CookieSettings";
+import Meta from "./Meta";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -28,7 +29,7 @@ function App() {
   const location = useLocation();
   const { i18n } = useTranslation();
   const { user } = useContext(AuthContext);
-  const { clearCart } = useContext(StoreContext)
+  const { clearCart } = useContext(StoreContext);
 
   useEffect(() => {
     if (!user) {
@@ -55,7 +56,10 @@ function App() {
   }, [location, navigate, i18n]);
 
   const currentPath = location.pathname.split("/").slice(2).join("/"); // Removes "/:lang"
-  const protectedRoutes = useMemo(() => ["order", "myorders", "cart", "payment-status"], []);
+  const protectedRoutes = useMemo(
+    () => ["order", "myorders", "cart", "payment-status"],
+    []
+  );
 
   useEffect(() => {
     if (!user && !showLogin && protectedRoutes.includes(currentPath)) {
@@ -78,23 +82,132 @@ function App() {
         <CookieSettings />
 
         <Routes>
-          <Route path="/:lang" element={<Home />} />
-          <Route path="/:lang/about-us" element={<AboutPage />} />
-          <Route path="/:lang/contact" element={<ContactPage />} />
-          <Route path="/:lang/products" element={<Products />} />
-          <Route path="/:lang/shop" element={<ShopOnlinePage />} />
-          <Route path="/:lang/cart" element={<Cart />} />
-          <Route path="/:lang/order" element={<PlaceOrder />} />
-          <Route path="/:lang/sustainability" element={<Sustainability />} />
-          <Route path="/:lang/myorders" element={<MyOrders />} />
-          <Route path="/:lang/faqs" element={<FAQs />} />
+          <Route
+            path="/:lang"
+            element={
+              <>
+                <Meta page="home" />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/about-us"
+            element={
+              <>
+                <Meta page="about" />
+                <AboutPage />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/contact"
+            element={
+              <>
+                <Meta page="contact" />
+                <ContactPage />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/products"
+            element={
+              <>
+                <Meta page="products" />
+                <Products />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/shop"
+            element={
+              <>
+                <Meta page="shop" />
+                <ShopOnlinePage />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/cart"
+            element={
+              <>
+                <Meta page="cart" />
+                <Cart />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/order"
+            element={
+              <>
+                <Meta page="order" />
+                <PlaceOrder />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/sustainability"
+            element={
+              <>
+                <Meta page="sustainability" />
+                <Sustainability />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/myorders"
+            element={
+              <>
+                <Meta page="myorders" />
+                <MyOrders />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/faqs"
+            element={
+              <>
+                <Meta page="faqs" />
+                <FAQs />
+              </>
+            }
+          />
           <Route
             path="/:lang/payment-status/:transId"
-            element={<PaymentStatus />}
+            element={
+              <>
+                <Meta page="paymentStatus" />
+                <PaymentStatus />
+              </>
+            }
           />
-          <Route path="/:lang/reset-password" element={<ResetPassword />} />
-          <Route path="/:lang/login" element={<LoginPopUp setShowLogin={setShowLogin}/>} />
-          <Route path="/:lang/terms" element={<TermsAndConditions />} />
+          <Route
+            path="/:lang/reset-password"
+            element={
+              <>
+                <Meta page="resetPassword" />
+                <ResetPassword />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/login"
+            element={
+              <>
+                <Meta page="login" />
+                <LoginPopUp setShowLogin={setShowLogin} />
+              </>
+            }
+          />
+          <Route
+            path="/:lang/terms"
+            element={
+              <>
+                <Meta page="termsConditions" />
+                <TermsAndConditions />
+              </>
+            }
+          />
         </Routes>
       </div>
       <Footer />

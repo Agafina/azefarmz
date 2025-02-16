@@ -490,5 +490,97 @@
       "analytics": "Analytique",
       "marketing": "Marketing"
     }
+  },
+  "metadata": {
+    "default": {
+      "title": "Aze Farms | Agriculture Durable et Produits Frais",
+      "description": "Découvrez des produits fermiers frais et écologiques d'Aze Farms. Engagés envers la durabilité, la qualité et l'impact communautaire. Achetez en ligne dès aujourd'hui !",
+      "keywords": "Aze Farms, agriculture durable, produits frais, alimentation biologique, huile de palme, miel, plantains, ananas, manioc",
+      "image": "/images/aze-farms-banner.jpg"
+    },
+    "home": {
+      "title": "Bienvenue chez Aze Farms | Fraîcheur et Durabilité",
+      "description": "Aze Farms propose des produits fermiers de qualité supérieure et respectueux de l'environnement. Découvrez le goût de la durabilité.",
+      "keywords": "produits bio, ferme durable, agriculture écologique, Aze Farms",
+      "image": "/images/home-banner.jpg"
+    },
+    "about": {
+      "title": "À Propos | Aze Farms",
+      "description": "Découvrez l'histoire et la mission d'Aze Farms pour une agriculture durable et des produits de haute qualité.",
+      "keywords": "Aze Farms, durabilité, histoire de la ferme",
+      "image": "/images/about-banner.jpg"
+    },
+    "contact": {
+      "title": "Contactez-nous | Aze Farms",
+      "description": "Contactez Aze Farms pour toute demande d'informations, partenariats ou assistance client.",
+      "keywords": "contact, support client, questions",
+      "image": "/images/contact-banner.jpg"
+    },
+    "products": {
+      "title": "Nos Produits | Aze Farms",
+      "description": "Découvrez notre gamme de produits frais incluant le miel, les plantains, les ananas et plus encore.",
+      "keywords": "produits biologiques, acheter produits fermiers",
+      "image": "/images/products-banner.jpg"
+    },
+    "shop": {
+      "title": "Achetez en Ligne | Aze Farms",
+      "description": "Commandez des produits fermiers biologiques en ligne. Paiement sécurisé et livraison rapide.",
+      "keywords": "achat en ligne, produits bio, ferme durable",
+      "image": "/images/shop-banner.jpg"
+    },
+    "cart": {
+      "title": "Votre Panier | Aze Farms",
+      "description": "Vérifiez vos articles et passez votre commande facilement.",
+      "keywords": "panier d'achat, commande, ferme bio",
+      "image": "/images/cart-banner.jpg"
+    },
+    "order": {
+      "title": "Passer Commande | Aze Farms",
+      "description": "Finalisez votre achat en toute sécurité et recevez vos produits fermiers directement chez vous.",
+      "keywords": "commande de produits fermiers, paiement sécurisé, livraison",
+      "image": "/images/order-banner.jpg"
+    },
+    "myorders": {
+      "title": "Mes Commandes | Aze Farms",
+      "description": "Suivez vos commandes et consultez votre historique d'achats avec Aze Farms.",
+      "keywords": "historique des commandes, suivi des achats",
+      "image": "/images/myorders-banner.jpg"
+    },
+    "faqs": {
+      "title": "FAQs & Support | Aze Farms",
+      "description": "Trouvez des réponses aux questions fréquemment posées sur Aze Farms, nos produits et nos pratiques durables.",
+      "keywords": "FAQs, support client, centre d'aide",
+      "image": "/images/faqs-banner.jpg"
+    },
+    "paymentStatus": {
+      "title": "Statut de Paiement | Aze Farms",
+      "description": "Vérifiez le statut de votre transaction et assurez-vous d'un achat réussi.",
+      "keywords": "statut de paiement, détails de transaction, paiement sécurisé",
+      "image": "/images/payment-status-banner.jpg"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le Mot de Passe | Aze Farms",
+      "description": "Réinitialisez en toute sécurité votre mot de passe pour accéder à votre compte.",
+      "keywords": "réinitialisation de mot de passe, récupération de compte, connexion sécurisée",
+      "image": "/images/reset-password-banner.jpg"
+    },
+    "login": {
+      "title": "Connexion à Votre Compte | Aze Farms",
+      "description": "Connectez-vous pour gérer vos commandes, suivre vos achats et commander des produits fermiers frais en ligne.",
+      "keywords": "connexion, identification, compte boutique fermière",
+      "image": "/images/login-banner.jpg"
+    },
+    "termsConditions": {
+      "title": "Conditions Générales - Aze Farms",
+      "description": "Consultez nos conditions générales pour comprendre vos droits et responsabilités lors de l'utilisation des services d'Aze Farms.",
+      "keywords": "conditions, termes, politiques, Aze Farms, juridique",
+      "image": "/images/terms-banner.jpg"
+    },
+    "sustainability": {
+      "title": "Durabilité | Aze Farms",
+      "description": "Découvrez comment Aze Farms s'engage à adopter des pratiques agricoles durables pour protéger l'environnement et soutenir les communautés locales.",
+      "keywords": "durabilité, agriculture écologique, pratiques vertes",
+      "image": "/images/sustainability-banner.jpg"
+    }
   }
 }

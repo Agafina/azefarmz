@@ -8,18 +8,21 @@ import "./i18n";
 import { AuthContextProvider } from "./context/AuthContext";
 import { OrderContextProvider } from "./context/OrderContext";
 import { ProductProvider } from "./context/ProductContext";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <AuthContextProvider>
-      <OrderContextProvider>
-        <StoreContextProvider>
-          <ProductProvider>
-            <App />
-          </ProductProvider>
-        </StoreContextProvider>
-      </OrderContextProvider>
-    </AuthContextProvider>
-  </BrowserRouter>
+  <HelmetProvider>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <OrderContextProvider>
+          <StoreContextProvider>
+            <ProductProvider>
+              <App />
+            </ProductProvider>
+          </StoreContextProvider>
+        </OrderContextProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
+  </HelmetProvider>
 );
