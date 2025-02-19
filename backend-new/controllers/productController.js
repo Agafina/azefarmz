@@ -3,13 +3,14 @@ const fs = require("fs");
 
 // Add Product
 const addProduct = async (req, res) => {
-  let image_filename = `${req.file.filename}`; // Assuming image is uploaded via `multer` middleware
+  let image_filename = `${req.file.filename}`;
   const product = new productModel({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     unit: req.body.unit,
     category: req.body.category,
+    stock: req.body.stock,
     image: image_filename,
   });
 

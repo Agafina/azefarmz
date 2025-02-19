@@ -168,8 +168,62 @@ const getOrders = async (req, res) => {
   }
 };
 
+
+// Get all orders (Admin/General)
+const getAllOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find().populate("user", "name email");
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.error("Error fetching all orders:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve orders.",
+    });
+  }
+};
+
+// Update order status
+const updateOrderStatus = async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  try {
+    const order = await orderModel.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found.",
+      });
+    }
+
+    order.paymentData.status = status;
+
+    if (status === "SUCCESSFUL") {
+      order.paid = true;
+    }
+
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Order status updated successfully.",
+      order,
+    });
+  } catch (error) {
+    console.error("Error updating order status:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update order status.",
+    });
+  }
+};
+
 module.exports = {
   createOrder,
   verifyPaymentAndUpdateOrderStatus,
   getOrders,
+  getAllOrders,
+  updateOrderStatus,
 };
