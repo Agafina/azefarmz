@@ -10,6 +10,7 @@ const Add = () => {
     price: "",
     stock: 0,
     description: "",
+    unit: "",
     image: null,
   });
 
@@ -52,6 +53,10 @@ const Add = () => {
       newErrors.stock = "Stock quantity is required";
     } else if (isNaN(formData.stock) || parseInt(formData.stock) < 0) {
       newErrors.stock = "Please enter a valid stock quantity";
+    }
+
+    if (!formData.unit.trim()) {
+      newErrors.unit = "Unit is required (e.g., per item, 500g, 1kg)";
     }
 
     if (!formData.description.trim()) {
@@ -123,9 +128,17 @@ const Add = () => {
       // Here you would normally send the data to your backend
       console.log("Form Data:", formData);
 
-      await addProduct(formData);
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("category", formData.category);
+      formDataToSend.append("price", formData.price);
+      formDataToSend.append("stock", formData.stock);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("unit", formData.unit);
+      formDataToSend.append("image", formData.image);
 
-      toast.success("Product added successfully!");
+      await addProduct(formDataToSend);
+
       // Reset form
       setFormData({
         name: "",
@@ -133,6 +146,7 @@ const Add = () => {
         price: "",
         stock: "",
         description: "",
+        unit: "",
         image: null,
       });
       setImagePreview(null);
@@ -205,7 +219,7 @@ const Add = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Price (USD)
+                Price (XAF)
               </label>
               <input
                 type="number"
@@ -225,6 +239,28 @@ const Add = () => {
                 </p>
               )}
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Unit (e.g., per item, 500g, 1kg)
+            </label>
+            <input
+              type="text"
+              name="unit"
+              value={formData.unit}
+              onChange={handleInputChange}
+              className={`w-full px-3 py-2 border rounded-md ${
+                errors.unit ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-green-500`}
+              placeholder="Enter unit"
+            />
+            {errors.unit && (
+              <p className="mt-1 text-sm text-red-500 flex items-center">
+                <AlertCircle size={16} className="mr-1" />
+                {errors.unit}
+              </p>
+            )}
           </div>
 
           {/* Stock */}

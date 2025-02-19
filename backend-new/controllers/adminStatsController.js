@@ -15,14 +15,14 @@ const getAdminStats = async (req, res) => {
 
     // Get total number of successful payments
     const successfulPayments = await orderModel.countDocuments({
-      status: "Paid",
+      paid: true,
     });
 
     // Get Total Revenue (sum of all paid orders for current month)
     const totalRevenueData = await orderModel.aggregate([
       {
         $match: {
-          status: "Paid",
+          paid: true,
           createdAt: { $gte: moment().startOf("month").toDate() },
         },
       },
@@ -36,7 +36,7 @@ const getAdminStats = async (req, res) => {
     const lastMonthRevenueData = await orderModel.aggregate([
       {
         $match: {
-          status: "Paid",
+          paid: true,
           createdAt: {
             $gte: moment().subtract(1, "months").startOf("month").toDate(),
             $lt: moment().subtract(1, "months").endOf("month").toDate(),

@@ -10,20 +10,27 @@ const useAxios = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const fetchRequest = async (url, method = "GET", requestData = null) => {
+  const fetchRequest = async (url, method = "GET", requestData = null, isFormData = false) => {
     setLoading(true); // Set loading state to true
     try {
       // Retrieve the token from cookies
       let token = Cookies.get("token");
 
+      // Set headers
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      // Do not manually set Content-Type for FormData
+      if (!isFormData) {
+        headers["Content-Type"] = "application/json";
+      }
+
       // Set headers with token for authorization
       const options = {
         method: method.toUpperCase(),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        data: requestData ? JSON.stringify(requestData) : null,
+        headers,
+        data: isFormData ? requestData : JSON.stringify(requestData),
       };
 
       console.log("requestData", options.data);
@@ -33,7 +40,7 @@ const useAxios = () => {
 
       setData(response.data);
       if (method !== "GET") {
-        toast.success(response.data.message || "Request Successful");
+        toast.success(response.data.message);
       }
       return response.data;
     } catch (error) {

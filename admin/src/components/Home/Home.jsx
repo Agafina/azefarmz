@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ShoppingCart,
   Package,
@@ -17,6 +17,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useAdminStats } from "../../context/AdminStatsContext";
+import { useProductContext } from "../../context/ProductContext";
+import { useOrderContext } from "../../context/OrderContext";
+import { formatDistanceToNow } from "date-fns";
 
 const salesData = [
   { name: "Jan", sales: 4000 },
@@ -29,8 +32,21 @@ const salesData = [
 
 const Home = () => {
   const { stats, loading, error } = useAdminStats();
+  const { products } = useProductContext();
+  const { orders, fetchOrders } = useOrderContext();
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const recentOrders = orders
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 3);
+
+  const lowstockproducts = products.filter((p) => p.stock < 15);
+
   if (loading || error) {
-    return <>Error or Loading</>
+    return <>Error or Loading</>;
   }
   return (
     <div className="space-y-6">
@@ -57,9 +73,12 @@ const Home = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-gray-500 text-sm">Active Orders</p>
-              <h3 className="text-2xl font-semibold text-gray-800 mt-1">{stats.totalOrders}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mt-1">
+                {stats.totalOrders}
+              </h3>
               <span className="text-blue-500 text-sm flex items-center mt-2">
-                <Package size={16} className="mr-1" /> Processing {stats.activeOrders}
+                <Package size={16} className="mr-1" /> Processing{" "}
+                {stats.activeOrders}
               </span>
             </div>
             <div className="bg-blue-100 p-3 rounded-lg">
@@ -72,9 +91,12 @@ const Home = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-gray-500 text-sm">Products in Stock</p>
-              <h3 className="text-2xl font-semibold text-gray-800 mt-1">{stats.totalProducts}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mt-1">
+                {stats.totalProducts}
+              </h3>
               <span className="text-orange-500 text-sm flex items-center mt-2">
-                <AlertCircle size={16} className="mr-1" /> {stats.lowStock} Low Stock
+                <AlertCircle size={16} className="mr-1" /> {stats.lowStock} Low
+                Stock
               </span>
             </div>
             <div className="bg-orange-100 p-3 rounded-lg">
@@ -91,7 +113,8 @@ const Home = () => {
                 {stats.totalUsers}
               </h3>
               <span className="text-purple-500 text-sm flex items-center mt-2">
-                <Users size={16} className="mr-1" /> +{stats.percentageIncrease}% This Month
+                <Users size={16} className="mr-1" /> +{stats.percentageIncrease}
+                % This Month
               </span>
             </div>
             <div className="bg-purple-100 p-3 rounded-lg">
@@ -134,11 +157,20 @@ const Home = () => {
       {/* Recent Activity and Low Stock */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            Recent Orders
-          </h2>
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
+              Recent Orders
+            </h2>
+            <a
+              href="/orders"
+              className="text-blue-600 hover:text-blue-800 font-medium px-3 py-1 border border-blue-600 rounded-md transition duration-200 hover:bg-blue-50"
+            >
+              Visit Orders
+            </a>
+          </div>
+
           <div className="space-y-4">
-            {[1, 2, 3].map((item) => (
+            {recentOrders.map((item) => (
               <div
                 key={item}
                 className="flex items-center justify-between border-b pb-4"
@@ -149,16 +181,25 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">
-                      Order #{Math.floor(Math.random() * 1000)}
+                      Order #{item._id.slice(-4)}
                     </p>
                     <p className="text-sm text-gray-500">
-                      Organic Fertilizer x2
+                      {item.items.map((prod) => (
+                        <span key={prod._id}>
+                          {prod.quantity}X{" "}
+                          {products.find((p) => (p._id = prod._id)).name}
+                        </span>
+                      ))}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium text-gray-800">$89.99</p>
-                  <p className="text-sm text-gray-500">2 mins ago</p>
+                  <p className="font-medium text-gray-800">XAF {item.amount}</p>
+                  <p className="text-sm text-gray-500">
+                    {formatDistanceToNow(new Date(item.createdAt), {
+                      addSuffix: true,
+                    })}
+                  </p>
                 </div>
               </div>
             ))}
@@ -170,7 +211,7 @@ const Home = () => {
             Low Stock Alert
           </h2>
           <div className="space-y-4">
-            {[1, 2, 3].map((item) => (
+            {lowstockproducts.map((item) => (
               <div
                 key={item}
                 className="flex items-center justify-between border-b pb-4"
@@ -180,8 +221,10 @@ const Home = () => {
                     <AlertCircle className="text-orange-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-800">Organic Seeds</p>
-                    <p className="text-sm text-gray-500">Only 5 units left</p>
+                    <p className="font-medium text-gray-800">{item.name}</p>
+                    <p className="text-sm text-gray-500">
+                      Only {item.stock} units left
+                    </p>
                   </div>
                 </div>
                 <button className="px-3 py-1 text-sm text-green-600 border border-green-600 rounded-md hover:bg-green-50">

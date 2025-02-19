@@ -6,7 +6,7 @@ const Settings = () => {
   const [formData, setFormData] = useState({
     storeName: "My E-commerce Store",
     email: "admin@store.com",
-    currency: "USD",
+    currency: "XAF",
     language: "English",
     timezone: "GMT",
     theme: "light",
@@ -171,6 +171,7 @@ const Settings = () => {
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               disabled={!isEditing}
             >
+              <option value="XAF">XAF</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
               <option value="GBP">GBP</option>

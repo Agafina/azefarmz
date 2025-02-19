@@ -45,14 +45,17 @@ export const ProductProvider = ({ children }) => {
       const response = await fetchRequest(
         "api/products/add",
         "POST",
-        productData
+        productData,
+        true
       );
       if (response.success) {
+        console.log(response)
         toast.success("Product added successfully");
         fetchProducts(); // Refresh products
         return response;
       } else {
-        throw new Error(response.message || "Failed to add product");
+        console.log(response)
+        throw new Error(response.mssg.message || "Failed to add product");
       }
     } catch (error) {
       console.error("Error adding product:", error);
